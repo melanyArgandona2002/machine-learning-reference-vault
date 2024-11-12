@@ -7,7 +7,7 @@
   ],
   version: "v0.1.",
   authors: (
-    (name: "Rolando Lora", email: "rolando.lora@fundacion-jala.org"),
+    (name: "Melany Argandoña", email: "melany.argandona@fundacion-jala.org"),
   ),
   abstract: [
     This is a collection of notes and thoughts that I've been taking while learning about machine learning.
@@ -15,10 +15,51 @@
   ],
   doc,
 )
+= Day 1: First Assessment
 
-= Supervised Learning
+1. Given the following matrices:
 
-== Linear Regression Notes
+#figure(
+  image("./images/matrix.jpeg", width: 100%)
+)
+
+#pagebreak()
+
+2. Write the functions that correspond to the following charts.
+
+#figure(
+  image("./images/ecuation.jpeg", width: 80%)
+)
+
+#pagebreak()
+
+= Week 1: Introduction to Machine Learning
+
+== Section 2: Supervised vs. Unsupervised Machine Learning
+
+=== Video 1: What is machine learning?
+#emph([
+  "A field of study that gives computers the ability to learn without being explicitly programmed."
+])
+
+#h(1fr) — Arthur Samuel.
+
+The more opportunities you give a learning algorithm, the better its performance will be.
+
+#text(weight: "bold")[Types of learning]
+
+The two main types of learning are:
+
+#text(weight: "bold")[Supervised learning:] This is the most widely used type of learning in applications, experiencing rapid advancements and innovation.
+
+#text(weight: "bold")[Unsupervised learning:] This method is used for finding hidden patterns in data without labeled examples.
+
+#text(weight: "bold")[Learning Algorithms]
+
+The most commonly used types of learning algorithms today are:
+Supervised learning, Unsupervised learning and Recommender systems
+
+=== Video 2: Supervised learning part 1
 
 To recap, simple linear regression with one variable is given by:
 
