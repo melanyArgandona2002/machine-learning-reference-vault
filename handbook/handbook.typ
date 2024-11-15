@@ -57,9 +57,137 @@ The two main types of learning are:
 #text(weight: "bold")[Learning Algorithms]
 
 The most commonly used types of learning algorithms today are:
-Supervised learning, Unsupervised learning and Recommender systems
+Supervised learning, Unsupervised learning and Recommender systems.
 
 === Video 2: Supervised learning part 1
+#text(weight: "bold")[Supervised Learning]
+Algorithms that learn mappings from X to Y or from input to output.
+
+#figure(
+  image("./images/c1_w1_s2_v02_input_output.png" )
+)
+
+You provide the algorithm with examples from which it learns.  
+It includes correct answers: the correct label.
+
+#text(weight: "bold")[Examples Supervised Learning]
+
+First, the model is trained with examples of inputs X and the correct answers (labels).  
+Once the model has learned pairs of input (x) and output (y), it can take a new input X that it hasn’t seen before and attempt to provide the appropriate corresponding output.
+
+#figure(
+  image("./images/c1_w1_s2_v02_examples_input_output.png" ),
+  caption: [
+    Examples of type supervised learning.
+  ]
+)
+
+Example:
+
+The x-axis represents the size of the house in square feet, and the y-axis represents the price based on the size of the house in thousands of dollars. A friend wants to know how much his 750-square-foot house is worth.  
+The algorithm will first check if a straight line can be drawn through most of the data points, which suggests the house could be worth $dollar$ 150,000. However, to get a more precise answer, it might use a curve instead of a line, estimating the house to be worth $dollar$  200,000. 
+
+#figure(
+  image("./images/c1_w1_s2_v02_example_price_house.png" ),
+  caption: [
+    Examples of type supervised learning using a stimation price of house.
+  ]
+)
+
+The algorithm systematically chooses the line, curve, or other fitting shape that best matches the data.
+
+The previous example uses a specific type of supervised learning called #text(weight: "bold")[Regression] .
+
+ #text(weight: "bold")[Regression] : Predicting a number from an infinite number of possible numbers, like housing prices in the example, which could be 150,000, 70,000, 183,000, or any other intermediate number.
+
+=== Video 3: Supervised learning part 2
+
+ #text(weight: "bold")[Classification] : Predicts categories, which may not be numerical. It predicts a small, limited set of possible output categories.
+
+ Maps input x to output Y, where the algorithm learns from the "correct answers."
+ 
+ If the categories are numerical, there will never be an intermediate value. For example, if we have 1 and 2, a result of 1.5 will never appear.
+ 
+ The input values may consist of one or more variables to predict the output.
+
+Example:
+
+The example aims to classify whether a tumor is benign or malignant. The x-axis represents the first category, which would be tumor size, and the y-axis represents the patients' age, with only two values representing malignant (x) or benign (o). 
+
+#figure(
+  image("./images/c1_w1_s2_v03_example_cancer.png" ),
+  caption: [
+    Examples of type supervised learning using a detect cancer.
+  ]
+)
+
+
+Classification differs from regression because it attempts to predict from a small number of possible outcomes or categories, while regression tries to predict any number, an infinite set of possibilities.
+
+The learning algorithm can find a boundary that separates malignant from benign tumors. The algorithm must decide how to draw a boundary line across the data points. This helps doctors determine whether a tumor is benign or malignant.
+
+The two main types of supervised learning are  #text(weight: "bold")[Regression] and  #text(weight: "bold")[Classification] .
+
+=== Video 4: Unsupervised learning part 1
+
+#figure(
+  image("./images/c1_w1_s2_v04_cancer_Example.png" ),
+  caption: [
+    Examples of type supervised learning using a detect cancer.
+  ]
+)
+
+In unsupervised learning, each example was associated with an output label, like benign or malignant, shown by circles and crosses.
+
+If we receive data not associated with any output label, let’s say we’re given data on patients, their tumor sizes, and ages. But we don’t know if the tumor was benign or malignant, so the dataset looks like the example on the right.  
+We aren’t asked to diagnose if a tumor is benign or malignant because no labels are provided. 
+
+In this dataset, our task is to find some structure or pattern or simply something interesting in the data.
+
+Therefore, we might decide there are two distinct groups. This type of unsupervised learning is called a 
+#text(weight: "bold")[clustering algorithm] .
+
+#text(weight: "bold")[Unsupervised Learning] : The algorithm is not supervised.
+
+Instead of giving a correct answer for each input, we ask the algorithm to discover on its own what might be interesting or what patterns or structures may be in this dataset.
+
+The algorithm might determine that the data can be assigned to two different groups or clusters.
+
+Example:
+
+Many companies have enormous customer databases and can use this data to automatically group customers into different market segments to serve them more effectively.
+
+#figure(
+  image("./images/c1_w1_s2_v04_example_IA.png" ),
+  caption: [
+    Examples of type supervised learning using a detect cancer.
+  ]
+)
+
+Market segmentation found a few distinct groups of people. The primary motivation of one group is to gain knowledge to develop their skills. Another group is primarily motivated by career advancement. And another group wants to keep up with the impact of AI on their field of work.
+
+#text(weight: "bold")[Clustering algorithm:] A type of unsupervised learning algorithm that takes unlabeled data and automatically tries to group it into clusters.
+
+=== Video 5: Unsupervised learning part 2
+
+#text(weight: "bold")[Reminder from the previous video:]
+
+#text(weight: "bold")[Supervised Learning:] Data includes inputs x with corresponding output labels y.  
+
+#text(weight: "bold")[Unsupervised Learning:] Data includes only inputs x, without output labels y. The algorithm must find some structure, pattern, or interesting feature in the data.
+
+#text(weight: "bold")[Types of unsupervised learning algorithms:] 
+
+- *Clustering algorithm:* Groups similar data points.
+- *Anomaly detection:* Used to detect unusual events.
+- *Dimensionality reduction:* Takes a large dataset and compresses it into a much smaller dataset while preserving as much information as possible.
+
+
+
+
+
+
+== Section 2: Supervised vs. Unsupervised Machine Learning
 
 To recap, simple linear regression with one variable is given by:
 
