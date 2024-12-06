@@ -960,3 +960,368 @@ Feature engineering optimizes the model's inputs, enabling more accurate predict
    - Next week, classification algorithms will be introduced, which allow predicting categories.
 
 This approach combines theory and practice to deepen the design and implementation of more effective models.
+
+= Week 3: Classification
+== Section 1: Classification with logistic regression
+=== Video 1: Motivations
+
+1. **Classification vs. Linear Regression:**
+   - Classification predicts a specific category, while linear regression predicts a continuous value.
+   - Examples of classification:
+     - Is this email spam? (yes/no)
+     - Is this transaction fraudulent? (yes/no)
+     - Is this tumor malignant? (yes/no)
+
+2. **Binary Classification:**
+   - In binary classification, the output variable can only take two possible values (e.g., yes/no or 0/1).
+   - Commonly used terms:
+     - **Zero (0):** Negative class (e.g., Not spam).
+     - **One (1):** Positive class (e.g., Spam).
+   - Other terms include **true (1)** and **false (0)**, or **positive (1)** and **negative (0)**, which help to explain the concept.
+
+3. **Issues with Linear Regression in Classification:**
+   - Linear regression is unsuitable for classification because it predicts continuous values, which may not correspond to binary classification.
+   - Applying a threshold (e.g., 0.5) might work in some cases but is not always effective.
+
+4. **Example of Classification with Linear Regression:**
+   - Imagine classifying tumors as malignant (1) or benign (0) based on tumor size.
+   - Using linear regression, a best-fit line may predict values outside the range [0, 1], which is not useful for proper classification.
+   - Adding new data points can shift the best-fit line, leading to misclassification of previously well-classified tumors.
+
+5. **Decision Line Problem:**
+   - Adding a new data point may alter the decision boundary, causing incorrect predictions. This demonstrates the unsuitability of linear regression for binary classification.
+
+6. **Logistic Regression:**
+   - Unlike linear regression, **logistic regression** is specifically designed for binary classification.
+   - Its output always lies between 0 and 1, making it better suited for classifying into two categories (e.g., 0 or 1).
+   - Despite the name "regression," logistic regression is used for binary classification.
+
+7. **Conclusion:**
+   - Linear regression may work in some cases but is unreliable for binary classification problems.
+   - Logistic regression is the recommended technique, as it avoids the issues of linear regression and provides more accurate results.
+
+=== Video 3: Motivations
+
+**Notes on Logistic Regression:**
+
+1. **Purpose:**
+   - Logistic regression is a widely used classification algorithm.
+   - It is suitable for problems where the goal is to classify data into two categories, such as determining whether a tumor is malignant or benign (labels 1 or 0).
+
+2. **Graph and Output of Logistic Regression:**
+   - The horizontal axis represents tumor size, and the vertical axis is 0 or 1, reflecting a binary classification problem.
+   - Logistic regression fits an S-shaped curve (sigmoid function) to the data, yielding probabilities between 0 and 1.
+
+3. **Sigmoid Function:**
+   - The mathematical formula for the sigmoid function is:
+     \[
+     g(z) = \frac{1}{1 + e^{-z}}
+     \]
+   - The function outputs values between 0 and 1, modeling probabilities.
+   - For large \( z \), \( g(z) \) approaches 1; for small \( z \), \( g(z) \) approaches 0.
+
+4. **Logistic Regression Model:**
+   - Logistic regression uses a linear formula \( wx + b \), passed through the sigmoid function:
+     \[
+     f(x) = g(wx + b)
+     \]
+   - This produces a value between 0 and 1, interpreted as the probability of belonging to the positive class (1).
+
+5. **Interpreting Results:**
+   - The logistic regression output represents the probability that \( y = 1 \) for a given input \( x \).
+   - For example, if the model predicts 0.7, the tumor has a 70% probability of being malignant (1).
+   - Probabilities must sum to 1: if \( P(y = 1) = 0.7 \), then \( P(y = 0) = 0.3 \).
+
+6. **Notation:**
+   - Notation \( f(x) = P(y = 1 | x) \) represents the probability of \( y = 1 \) given \( x \), with \( w \) and \( b \) as model parameters.
+
+7. **Code Implementation:**
+   - In optional labs, the sigmoid function can be implemented in code to observe how it improves classification tasks.
+
+8. **Practical Applications:**
+   - Logistic regression is used in fields like online advertising to decide which ads to show to users based on data and probabilities.
+
+=== Video 5: Decision Boundary
+
+1. **Computing \( z \):** 
+   - \( z = w \cdot x + b \), where \( w \) are weights, \( x \) is the feature vector, and \( b \) is the bias.
+
+2. **Applying Sigmoid Function:**
+   - The sigmoid function \( g(z) \) is applied to \( z \), resulting in the probability \( f(x) = g(z) \):
+     \[
+     g(z) = \frac{1}{1 + e^{-z}}
+     \]
+
+3. **Binary Prediction:**
+   - A threshold (e.g., 0.5) is used: 
+     - If \( f(x) \geq 0.5 \), predict \( y = 1 \).
+     - If \( f(x) < 0.5 \), predict \( y = 0 \).
+
+4. **Decision Boundary:**
+   - The decision boundary is where \( P(y = 1) = 0.5 \), or \( z = 0 \), forming a line or surface in the feature space.
+   - For example, with \( w_1 = 1 \), \( w_2 = 1 \), \( b = -3 \), the boundary is \( x_1 + x_2 = 3 \).
+
+5. **Complex Boundaries:**
+   - Adding polynomial terms can create nonlinear boundaries, such as circles (\( x_1^2 + x_2^2 = 1 \)) or ellipses, enabling the model to handle complex data distributions.
+
+== Section 2: Cost Function for Logistic Regression 
+=== Video 1: Cost Function for Logistic Regression
+
+1. **Cost Function**:  
+   - The cost function measures how well a set of parameters fits the training data.  
+   - In logistic regression, the squared error cost function is not ideal because it produces a non-convex cost function, which can result in local minima, making gradient descent ineffective.
+
+2. **Logistic Regression**:  
+   - Used for binary classification tasks.  
+   - The logistic regression model is defined using parameters \( w \) and \( b \).  
+   - The goal is to choose \( w \) and \( b \) based on the training data.
+
+3. **Squared Error in Logistic Regression**:  
+   - Squared error is unsuitable because it leads to a non-convex cost function, preventing gradient descent from finding the global minimum.
+
+4. **New Cost Function**:  
+   - A new cost function ensures convexity, allowing gradient descent to converge to the global minimum.  
+   - This cost function is defined using a loss function based on the negative logarithm of the logistic regression prediction.
+
+5. **Loss Function**:  
+   - If \( y = 1 \), the loss is the negative logarithm of \( f(x) \).  
+   - If \( y = 0 \), the loss is the negative logarithm of \( 1 - f(x) \).  
+   - The loss function evaluates the performance for a single training example and is used to compute the overall cost function as the average loss across all examples.
+
+6. **Loss Interpretation**:  
+   - If the model predicts a value close to 1 when \( y = 1 \), the loss is small.  
+   - If the model predicts a value close to 0 when \( y = 0 \), the loss is also small.  
+   - The loss increases significantly when predictions diverge from the true labels, especially when \( f(x) \) approaches 0 for \( y = 1 \), or \( f(x) \) approaches 1 for \( y = 0 \).
+
+7. **Advantages of the New Cost Function**:  
+   - The cost function defined with the new loss function is convex, enabling reliable optimization using gradient descent.
+
+8. **Conclusion**:  
+   - Squared error cost is inappropriate for logistic regression due to local minima. The logistic loss function ensures a convex cost function, improving gradient descent's effectiveness.
+
+=== Video 3: Simplified Cost Function for Logistic Regression
+
+This video explains how the loss and cost functions for logistic regression can be simplified for easier implementation when using gradient descent to optimize model parameters.
+
+1. **Loss Function**:  
+   The logistic regression loss function for binary classification can be written as:  
+   \[
+   \text{Loss} = -y \log(f(x)) - (1 - y) \log(1 - f(x))
+   \]
+   where \( f(x) \) is the model's prediction and \( y \) is the true label (0 or 1).
+
+2. **Simplification**:  
+   This formula is equivalent to the more complex form of the loss function.  
+   - When \( y = 1 \), the loss becomes \( -\log(f(x)) \).  
+   - When \( y = 0 \), the loss becomes \( -\log(1 - f(x)) \).  
+   The simplified formula avoids handling these two cases separately.
+
+3. **Cost Function**:  
+   The cost function is the average loss over the training set:  
+   $\[
+   J(theta) = frac{1}{m} sum_{i=1}^{m} [ -y^{(i)} log(f(x^{(i)})) - (1 - y^{(i)}) log(1 - f(x^{(i)})) ]$
+   \]
+   where \( m \) is the number of training examples.
+
+4. **Statistical Basis**:  
+   This cost function is based on the principle of **maximum likelihood estimation**, a technique to find the most efficient model parameters.  
+   - The function's convexity facilitates optimization with gradient descent.
+
+== Section 2: Cost Function for Logistic Regression  
+=== Video 1: Cost Function for Logistic Regression
+
+1. **Cost Function**:  
+   - The cost function measures how well a set of parameters fits the training data.  
+   - In logistic regression, the squared error cost function is not ideal because it produces a non-convex cost function, which can result in local minima, making gradient descent ineffective.
+
+2. **Logistic Regression**:  
+   - Used for binary classification tasks.  
+   - The logistic regression model is defined using parameters \( w \) and \( b \).  
+   - The goal is to choose \( w \) and \( b \) based on the training data.
+
+3. **Squared Error in Logistic Regression**:  
+   - Squared error is unsuitable because it leads to a non-convex cost function, preventing gradient descent from finding the global minimum.
+
+4. **New Cost Function**:  
+   - A new cost function ensures convexity, allowing gradient descent to converge to the global minimum.  
+   - This cost function is defined using a loss function based on the negative logarithm of the logistic regression prediction.
+
+5. **Loss Function**:  
+   - If \( y = 1 \), the loss is the negative logarithm of \( f(x) \).  
+   - If \( y = 0 \), the loss is the negative logarithm of \( 1 - f(x) \).  
+   - The loss function evaluates the performance for a single training example and is used to compute the overall cost function as the average loss across all examples.
+
+6. **Loss Interpretation**:  
+   - If the model predicts a value close to 1 when \( y = 1 \), the loss is small.  
+   - If the model predicts a value close to 0 when \( y = 0 \), the loss is also small.  
+   - The loss increases significantly when predictions diverge from the true labels, especially when \( f(x) \) approaches 0 for \( y = 1 \), or \( f(x) \) approaches 1 for \( y = 0 \).
+
+7. **Advantages of the New Cost Function**:  
+   - The cost function defined with the new loss function is convex, enabling reliable optimization using gradient descent.
+
+8. **Conclusion**:  
+   - Squared error cost is inappropriate for logistic regression due to local minima. The logistic loss function ensures a convex cost function, improving gradient descent's effectiveness.
+
+=== Video 3: Simplified Cost Function for Logistic Regression
+
+This video explains how the loss and cost functions for logistic regression can be simplified for easier implementation when using gradient descent to optimize model parameters.
+
+1. **Loss Function**:  
+   The logistic regression loss function for binary classification can be written as:  
+   \[
+   \text{Loss} = -y \log(f(x)) - (1 - y) \log(1 - f(x))
+   \]
+   where \( f(x) \) is the model's prediction and \( y \) is the true label (0 or 1).
+
+2. **Simplification**:  
+   This formula is equivalent to the more complex form of the loss function.  
+   - When \( y = 1 \), the loss becomes \( -\log(f(x)) \).  
+   - When \( y = 0 \), the loss becomes \( -\log(1 - f(x)) \).  
+   The simplified formula avoids handling these two cases separately.
+
+3. **Cost Function**:  
+   The cost function is the average loss over the training set:  
+   \[
+   $J(theta) = frac{1}{m} sum_{i=1}^{m} [ -y^{(i)} log(f(x^{(i)})) - (1 - y^{(i)}) log(1 - f(x^{(i)}))]$
+   \]
+   where \( m \) is the number of training examples.
+
+4. **Statistical Basis**:  
+   This cost function is based on the principle of **maximum likelihood estimation**, a technique to find the most efficient model parameters.  
+   - The function's convexity facilitates optimization with gradient descent.
+
+== Section 5: Gradient Descent for Logistic Regression  
+=== Video 1: Gradient Descent Implementation  
+
+**Goal: Optimizing Parameters \(w\) and \(b\)**  
+- The goal is to find the optimal values for the parameters \(w\) (weights) and \(b\) (bias) that minimize the cost function \(J(w, b)\) using the **gradient descent** algorithm.  
+
+**Gradient Descent for Logistic Regression**  
+1. **Cost Function Formula**:  
+   - The aim is to minimize \(J(w, b)\) by calculating the partial derivatives of the cost function with respect to each parameter.  
+
+2. **Parameter Updates**:  
+   - Gradient descent updates the parameters using the formulas:  
+     \[
+     w_j := w_j - \alpha \frac{\partial J(w, b)}{\partial w_j}
+     \]
+     \[
+     b := b - \alpha \frac{\partial J(w, b)}{\partial b}
+     \]  
+     where:  
+     - \(\alpha\) is the learning rate,  
+     - \(\frac{\partial J(w, b)}{\partial w_j}\) and \(\frac{\partial J(w, b)}{\partial b}\) are the partial derivatives of \(J(w, b)\) with respect to \(w_j\) and \(b\).  
+
+3. **Partial Derivatives**:  
+   - The partial derivative of \(J(w, b)\) with respect to \(w_j\) is:  
+     \[
+     $frac{1}{m} sum_{i=1}^{m}( f(x^{(i)}) - y^{(i)} ) x_j^{(i)}$
+     \]  
+   - The partial derivative of \(J(w, b)\) with respect to \(b\) is:  
+     $\[
+     frac{1}{m} sum_{i=1}^{m} ( f(x^{(i)}) - y^{(i)})
+     \] $ 
+
+4. **Vectorized Gradient Descent**:  
+   - Using a vectorized implementation of gradient descent can significantly speed up computation and improve the algorithm's convergence. However, the video does not go into the details of this approach.  
+
+**Logistic Regression vs. Linear Regression**  
+- Although the parameter update formulas in logistic and linear regression look similar, **they are not the same**.  
+- The key difference lies in the **activation function**:  
+  - For linear regression: \( f(x) = wx + b \).  
+  - For logistic regression: \( f(x) = \frac{1}{1 + e^{-(wx + b)}} \) (sigmoid function).  
+- This distinction allows logistic regression to handle binary classification tasks, whereas linear regression is used for continuous predictions.  
+
+**Feature Scaling**  
+- **Feature Scaling**: Similar to linear regression, scaling features (e.g., normalizing values to a range between -1 and 1) can significantly accelerate the convergence of gradient descent in logistic regression.    
+
+== **Section 7: The Problem of Overfitting**
+
+=== **Video 1: The Problem of Overfitting**
+
+1. **Overfitting**:
+   - Occurs when a model fits the training data too well, capturing even "noise" and random fluctuations. While the model performs perfectly on the training data, its performance on unseen data is poor.
+   - An example of overfitting is using a high-order polynomial (e.g., a fourth-order polynomial) to fit the data. This model might perfectly match the training data but fails to generalize due to high variance.
+
+2. **Underfitting**:
+   - Happens when the model is too simple to capture the underlying relationships in the data, resulting in poor performance on both training and unseen data.
+   - An example of underfitting is using a linear model to predict house prices based on size when the data shows a more complex quadratic relationship.
+
+3. **High Bias and High Variance**:
+   - **High Bias** refers to models that underfit the data (e.g., assuming a linear relationship when it's not).
+   - **High Variance** refers to models that overfit the training data, making them highly sensitive to small variations.
+
+4. **Generalization**:
+   - The goal of machine learning is to find a model that generalizes well, performing accurately on both training and unseen data. Balancing bias and variance is key to achieving this.
+
+=== **Video 2: Addressing Overfitting**
+
+1. **Collect More Data**:
+   - One of the most effective ways to address overfitting is by increasing the training dataset size. More examples provide the algorithm with a broader variety, reducing variance and improving generalization.
+
+2. **Reduce the Number of Features**:
+   - If the model has too many features (e.g., house size, number of bedrooms, age, etc.), selecting only the most relevant ones can reduce complexity and overfitting. This is known as **feature selection**. While it might reduce information, removing irrelevant features often enhances the model's generalization.
+
+3. **Regularization**:
+   - Regularization reduces the impact of specific features without removing them entirely. Instead of forcing parameters to zero, it adjusts them to avoid large values, which can lead to overfitting. This approach allows the model to retain all features but ensures that none dominates the model excessively.
+
+**Summary**: To reduce overfitting:
+- Increase training data.
+- Use only the most relevant features.
+- Apply regularization to control parameter magnitudes and prevent overfitting.
+
+These techniques enhance the model's ability to generalize and make accurate predictions on unseen data.
+
+=== **Video 4: Cost Function with Regularization**
+
+1. **Basic Intuition**:
+   - Regularization aims to reduce the value of model parameters (e.g., \( W_3 \), \( W_4 \)) to prevent overfitting. Large parameter values often result in overly complex models that fail to generalize.
+
+2. **Modifying the Cost Function**:
+   - To apply regularization, a penalty term is added to the cost function. For example, adding \( 1000 \times W_3^2 + 1000 \times W_4^2 \) forces \( W_3 \) and \( W_4 \) to approach zero, simplifying the model and reducing overfitting.
+
+3. **General Regularization**:
+   - Instead of penalizing specific parameters, regularization typically applies to all parameters. A common penalty term is \( $lambda times sum_{j=1}^{n} W_j^2$ \), where \( n \) is the number of features, and \( \lambda \) is the regularization parameter.
+
+4. **Scaling and Convention**:
+   - The regularization term is often scaled by \( \frac{\lambda}{2m} \), where \( m \) is the training set size. By convention, the bias term \( b \) is not regularized as it has minimal impact in practice.
+
+5. **Balancing Objectives**:
+   - The new cost function balances two goals:
+     - Minimize training error.
+     - Penalize large parameters.
+   - The value of \( \lambda \) determines this balance:
+     - \( \lambda = 0 \): Overfitting occurs.
+     - Large \( \lambda \): The model becomes overly simplified.
+     - Optimal \( \lambda \): Balances error reduction and model simplicity.
+
+6. **Example: Predicting House Prices**:
+   - With \( \lambda = 0 \), the model may overfit.
+   - With a large \( \lambda \), the model may oversimplify (e.g., fit a straight line).
+   - Choosing an appropriate \( \lambda \) allows the model to generalize effectively.
+
+**Conclusion**: Regularization mitigates overfitting by penalizing large parameter values. Adjusting \( \lambda \) helps balance the trade-off between fitting the data and maintaining model simplicity, improving generalization.
+
+Here is the translation of the provided content into English, formatted in Typst:  
+
+== Video 5: Regularized Linear Regression
+The cost function now includes two components: the traditional quadratic error and an additional regularization term that penalizes large parameter values \(w\). The key difference in gradient descent is that the parameter updates slightly change due to the inclusion of regularization. However, the format remains similar to non-regularized linear regression, with the regularization term affecting only \(w\), not \(b\).
+
+Parameter Updates:
+- **For \(w_j\):** The update formula for \(w_j\) includes a regularization term proportional to \(w_j\). This term is multiplied by a value close to 1 (depending on the learning rate \(\alpha\), the regularization parameter \(\lambda\), and the training set size \(m\)). The effect of regularization is to reduce \(w_j\) values at each gradient descent step, helping to prevent overfitting.
+
+- **For \(b\):** The parameter \(b\) is not regularized, so its update remains the same as in non-regularized linear regression.
+
+Derivatives:
+The derivatives of the cost function with respect to \(w_j\) and \(b\) account for the regularization term. The derivative with respect to \(w_j\) includes the additional regularization term, whereas the derivative with respect to \(b\) remains unchanged, as in traditional linear regression.
+
+Impact of Regularization:
+The regularization term helps shrink the values of \(w_j\), improving model performance, especially when dealing with many parameters and relatively small datasets. This technique is instrumental in preventing overfitting.
+
+Conclusion:
+By implementing regularized linear regression, you can improve model performance, control overfitting, and optimize model generalization.
+
+== Video 6: Regularized Logistic Regression
+Regularized logistic regression is used to prevent overfitting by adding a regularization term to the cost function. This term penalizes the parameters \(w_1, w_2, ..., w_n\), preventing them from becoming excessively large and ensuring the model does not overfit the training data. The regularized cost function includes a term \(\lambda\) that penalizes the parameter values \(w\), while \(b\) remains unregularized.
+
+The implementation process is similar to that of regularized linear regression. Gradient descent is used to minimize this new cost function, and the parameter update rules for \(w_j\) are applied in a similar manner. As a result, the model becomes more generalizable, avoiding overfitting noisy features in the training data and enhancing its ability to generalize to unseen data. This approach is critical in real-world machine learning applications and a valuable skill for building robust models.
