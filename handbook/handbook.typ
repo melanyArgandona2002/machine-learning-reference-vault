@@ -660,148 +660,303 @@ Vectorization is a powerful technique that simplifies and accelerates algorithm 
 
 In summary, vectorization not only reduces development time by minimizing code but also optimizes performance, fully leveraging modern hardware capabilities.
 
+=== Video 3: Vectorization Part 2
 
+**Vectorization** is a key technique in machine learning algorithms that significantly improves both code efficiency and readability.
 
+1. **Definition and Benefits:**
+   - **Vectorization**: The process of using parallel mathematical operations instead of iterating through loops.
+   - **Advantages**:
+     - Shorter, more readable code.
+     - Much faster execution by leveraging specialized hardware like CPUs or GPUs.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-== Section 2: Supervised vs. Unsupervised Machine Learning
-
-To recap, simple linear regression with one variable is given by:
-
-#simpleTable(
-  columns: (1fr, 1fr),
-  [*Attribute*], [*Formula*],
-  [*Model*], [
-    $ f_(w,b)(x) = w x + b $
-  ],
-  [*Parameters*], [
-    $ w, b $
-  ],
-  [*Cost Function*], [
-    $ J(w, b) = 1/(2m) sum_(i=1)^m ( f_(w,b)( x^(\(i\)) ) - y^(\(i\) ) )^2 $
-  ],
-  [*Objective*], [
-    $ min_(w,b) J(w, b) $
-  ],
-)
-
-This is the simplest form of linear regression, and we are given a dataset:
-
-$ (X, Y) $
-
-Where $X$ is a vector of features and $Y$ is a vector of labels.
+2. **Implementation Example:**
+   - Without vectorization:
+     - Using `for` loops to perform calculations one by one.
+   - With vectorization:
+     - Operations like **dot product** implemented via libraries like NumPy (e.g., `np.dot()`).
+     - Calculations are performed in parallel, improving efficiency.
 
 #figure(
-  image("./images/2024-10-30-simple-regression.png"),
-  caption: [
-    I made this diagram using _excalidraw_, that, in my head, represents what we are trying to do. $x^(\(i\))$ is the $i$-th training example, and $y^(\(i\))$ is the $i$-th training label.
-  ]
-)
+  image("./images/w2_s1_v3_vectorization_without_with.png" )
+) 
 
-=== Cost Function
+3. **Performance Impact:**
+   - **Parallel Hardware**:
+     - Processes multiple values simultaneously, reducing execution time.
+     - Especially useful for large datasets or models with thousands of features.
+   - Comparison:
+     - Non-vectorized algorithms may take hours.
+     - Vectorized implementations complete the same tasks in minutes.
 
-One interesting observation is how the cost function $J(w)$ changes as we change the value of $w$. For example, the code below plots the cost for a simple target:
-
-$ f_(w, b = 0) = w x $
-
-Notice that for convenience, we are using $b = 0$, so our target is simply $f_(w) = w x$.
-
-#codeBlock(
-  ```python
-  def plot_simple_error(
-    x: NDArray[np.float64],
-    y: NDArray[np.float64],
-    w_range: NDArray[np.float64],
-    x_marker_position: float,
-  ) -> Tuple[Figure, Axes]:
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    errors = np.array([cost_function(y, simple_hypothesis(x, w)) for w in w_range])
-    ax.plot(w_range, errors, color="blue", label="J(w)")
-    ax.axvline(
-        x=x_marker_position,
-        color="red",
-        linestyle="--",
-        label=f"w = {x_marker_position}",
-    )
-    ax.set_xlabel("w")
-    ax.set_ylabel("J(w)")
-    ax.set_title("Cost as a function of w - J(w)")
-    ax.legend()
-
-    return fig, ax
-  ```
-)
-
-This allow us to visualize the behavior of the cost function by using a *known model* and a range of sampling values for $w$. In the example below, we are using:
-
-$ f_(w) =  (4 x) / 3 $
-
-#codeBlock(
-  ```python
-  w: float = 4 / 3
-  x_train = np.linspace(-5, 5, 100)
-  y_train = simple_hypothesis(x_train, w)
-  w_sample_range = np.linspace(-5, 8, 100)
-
-  fig, ax = plot_simple_error(
-      x=x_train, y=y_train, w_range=w_sample_range, x_marker_position=w
-  )
-  ```
-)
-
-@simple-cost shows the resulting plot. We can observe how the cost approaches a minimum as we change the value of $w$ from both sides, converging to a value close to $1.33$.
+4. **Applications in Machine Learning:**
+   - Parameter updates in **multiple linear regression**:
+     - Without vectorization: Each weight (`w_j`) updated in a loop.
+     - With vectorization: All weights updated simultaneously via mathematical operations.
 
 #figure(
-  image("./images/cost-linear-reg-line.png"),
-  caption: [
-    Plot of the cost function $J(w)$ as a function of $w$ for the target $f_(w) =  (4 x) / 3$.
-  ]
-)<simple-cost>
+  image("./images/w2_s1_v3_gradiant_descent.png" )
+) 
 
-A similar approach can be used to now introduce $b$ as a second target parameter. For example, using a target of the form:
+5. **Using NumPy:**
+   - **NumPy Arrays**:
+     - Primary tool for vectorization in Python.
+   - Example:
+     - `w = w - 0.1 * d` updates all weights at once.
+   - Key functions:
+     - `np.dot()` for dot product operations.
+     - Efficiently handles large datasets.
 
-$ f_(w, b) = (2 x) / 5 - 3 / 2  $
+6. **Practical Recommendations:**
+   - Learn and optimize vectorized code with NumPy.
+   - Use timing techniques to compare vectorized vs. non-vectorized implementations.
 
-#codeBlock(
-  ```python
-  w = 2.5
-  b = -1.5
-  x_train = np.linspace(-5, 5, 100)
-  y_train = complex_hypothesis(x_train, w, b)
-  w_sample_range = np.linspace(-5, 5, 100)
-  b_sample_range = np.linspace(-5, 5, 100)
+**Conclusion:**  
+Vectorization is essential for modern machine learning, enabling algorithms to scale efficiently for large datasets.
 
-  fig, ax = plot_complex_error_with_contour(
-      x=x_train, y=y_train, w_range=w_sample_range, b_range=b_sample_range
-  )
-  ```
-)
+=== Video 5: Gradient Descent for Multiple Linear Regression ===
 
-@complex-cost shows the resulting plot. We can observe how the cost function has a minimum at $(w, b) = (2.5, -1.5)$ but it is a bit more difficult to observe. As we increase the number of dimensions in the feature space, it becomes even more difficult to visualize the cost function.
+**Multiple Linear Regression**
+- In this model, parameters \( w_1, w_2, \ldots, w_n \) (weights) and \( b \) (bias) define the relationship between multiple features \( x_1, x_2, \ldots, x_n \) and the target value \( y \).
+- The model can be compactly represented in **vector notation**:
+  \[
+ $ f_{w,b}(x) = w^T x + b$
+  \]
+  Where:
+  - \( w \): vector of weights.
+  - \( x \): vector of features.
+  - \( w^T x \): dot product between \( w \) and \( x \).
 
-But the main idea is that for linear regression, the cost function is *convex and will always have a global minimum.*
+- The cost function \( J(w, b) \) measures the average error between predictions \( $f_{w,b}(x) $\) and true values \( y \). The goal is to minimize \( J \) to find optimal \( w \) and \( b \).
 
-#figure(
-  image("./images/cost-linear-reg-contour.png"),
-  caption: [
-    Plot of the cost function $J(w, b)$ as a function of $w$ and $b$ for the target $f_(w, b) = (2 x) / 5 - 3 / 2$.
-  ]
-)<complex-cost>
+**Gradient Descent for Multiple Linear Regression**
+Gradient descent iteratively updates parameters to minimize \( J \):
+- **General Rule**:
+  \[
+  w_j = w_j - \alpha \frac{\partial J}{\partial w_j}
+  \]
+  \[
+  b = b - \alpha \frac{\partial J}{\partial b}
+  \]
+  Where \( \alpha \) is the **learning rate**, controlling step size.
+
+- For multiple features (\( n > 1 \)):
+  - Each weight \( w_j \) is updated using all features \( x_j \) and the error term \( $(f_{w,b}(x) - y)$ \).
+  - The bias \( b \) is updated similarly as in univariate regression.
+ 
+**Vectorized Implementation**
+Vectorization enables efficient calculations, avoiding loops. For example:
+- The error term can be computed for all examples at once:
+  \[
+  \text{error} =$ f_{w,b}(X) - Y$
+  \]
+  Where \( X \) is a matrix of input vectors, and \( Y \) is a vector of target values.
+
+- Updates for \( w \) and \( b \) are performed using matrix operations, speeding up the process.
+
+**Normal Equation Method**
+- Alternatively, \( w \) and \( b \) can be directly calculated (no iterations) using a formula from linear algebra called the **normal equation**.
+  - Advantage: Exact for linear regression, no iterative optimization needed.
+  - Disadvantages:
+    - Not applicable to other algorithms like logistic regression or neural networks.
+    - Computationally expensive for datasets with many features.
+
+**Key Notes**
+- While the normal equation is useful in some cases, gradient descent is preferred for its flexibility and efficiency in large-scale problems.
+- Libraries like NumPy simplify these implementations.
+- Feature scaling (normalization) and choosing an appropriate \( \alpha \) are critical for model performance.
+
+== Section 3: 
+=== Video 1: Feature scaling part 1
+
+1. **Introduction to Feature Scaling**:
+   - A technique that allows gradient descent to be faster.
+   - Analyzes the relationship between the size of the features (entities) and the associated parameters.
+
+2. **Example of House Price Prediction**:
+   - **Features**:
+     - `x1`: Size of the house (300-2000 square feet).
+     - `x2`: Number of bedrooms (0-5 bedrooms).
+   - **First set of parameters**:
+     - `w1 = 50`, `w2 = 0.1`, `b = 50`.
+     - Prediction is far from the actual price ($dollar 500,000$).
+   - **Second set of parameters**:
+     - `w1 = 0.1`, `w2 = 50`, `b = 50`.
+     - Prediction matches the actual price ($dollar 500,000$).
+
+3. **Relationship Between Range of Values and Parameters**:
+   - Features with larger ranges (like `x1`) tend to have smaller parameters.
+   - Features with smaller ranges (like `x2`) tend to have larger parameters.
+
+4. **Impact on Cost Function and Gradient Descent**:
+   - Different scales in features cause elliptical contours in the cost function.
+   - Small changes in `w1` have large impacts on the cost due to the higher range of `x1`.
+   - Changes in `w2` have less impact because `x2` has a smaller range.
+
+5. **Problems with Gradient Descent on Unscaled Features**:
+   - High and thin contours make descent inefficient.
+   - Gradient descent may oscillate and take longer to find the global minimum.
+
+6. **Feature Scaling**:
+   - Transformation of data so that all features take similar ranges, such as between 0 and 1.
+   - Results:
+     - Contours become more circular.
+     - Gradient descent finds the global minimum faster.
+
+7. **Conclusion**:
+   - Scaling features significantly improves the efficiency of gradient descent.
+   - Important for cases where features have very different value ranges.
+
+=== Video 2: Feature Scaling Part 2
+1. **Motivation for Feature Scaling**:
+   - Features often have different value ranges, which can affect the performance of algorithms like gradient descent.
+   - Scaling helps features have comparable ranges, accelerating the optimization process.
+
+2. **Feature Scaling Methods**:
+
+   *Max Scaling:*
+   - Divides each value by the maximum range of the feature.
+   - Example:
+     - If \( x_1 \) ranges from 3 to 2000:
+       - Scaling: \( x_1^{\text{scaled}} = \frac{x_1}{2000} \), with values ranging from 0.0015 to 1.
+     - If \( x_2 \) ranges from 0 to 5:
+       - Scaling: \( x_2^{\text{scaled}} = \frac{x_2}{5} \), with values ranging from 0 to 1.
+
+   *Mean Normalization:*
+   - Centers the values around 0 and scales them within a fixed range.
+   - Formula:  
+     \( x^{\text{norm}} = \frac{x - \mu}{\text{range}} \)  
+     where \(\mu\) is the mean and the range is \(\text{max} - \text{min}\).
+   - Example:
+     - For \( x_1 \) (\(\mu_1 = 600, \text{range} = 2000 - 300\)):  
+       \( x_1^{\text{norm}} \) ranges from -0.18 to 0.82.
+     - For \( x_2 \) (\(\mu_2 = 2.3, \text{range} = 5 - 0\)):  
+       \( x_2^{\text{norm}} \) ranges from -0.46 to 0.54.
+
+   *Z-Score Normalization:*
+   - Uses the mean (\(\mu\)) and standard deviation (\(\sigma\)) to rescale.
+   - Formula:  
+     \( x^{\text{Z}} = \frac{x - \mu}{\sigma} \).
+   - Example:
+     - For \( x_1 \):  
+       \(\mu_1 = 600, \sigma_1 = 450 \Rightarrow x_1^{\text{Z}}\) ranges from -0.67 to -3.1.
+     - For \( x_2 \):  
+       \(\mu_2 = 2.3, \sigma_2 = 1.4 \Rightarrow x_2^{\text{Z}}\) ranges from -1.6 to -1.9.
+
+3. **Scaling Cases**:
+   - Features with large ranges (e.g., -100 to 100) or very small ones (e.g., -0.001 to 0.001) benefit from scaling.
+   - Features with high values (e.g., body temperature ranging from 98.6 to 105 °F) also need rescaling to avoid slowing down gradient descent.
+
+4. **Impact of Scaling**:
+   - Facilitates gradient descent by reducing the dependency on scale.
+   - It is a recommended practice and rarely harms the model.
+
+5. **Conclusion**:
+   - If there is doubt about the need for scaling, it's better to implement it.
+   - Scaling features can significantly improve training efficiency.
+
+=== Video 3: Checking Gradient Descent for Convergence
+The text explains how to check if gradient descent is converging towards the global minimum of the cost function \( J \). The key steps include:
+
+1. **Plotting a Learning Curve**: 
+   - Plot the cost \( J \) (vertical axis) against the number of gradient descent iterations (horizontal axis).
+   - If gradient descent is working correctly, \( J \) should decrease after each iteration.
+
+2. **Detecting Problems**:
+   - If \( J \) increases in any iteration, it may indicate that the learning rate \( \alpha \) is too high or there is an error in the code.
+
+3. **Convergence**:
+   - When the curve stabilizes and \( J \) no longer decreases significantly, the algorithm has converged.
+   - A threshold \( \epsilon \) can be used to automatically detect convergence: if \( J \) changes less than \( \epsilon \) (e.g., 0.001) between iterations, it is considered convergent.
+   - However, the correct threshold can be difficult to choose, so observing the curve directly is preferable.
+
+4. **Variation in Iterations**:
+   - The number of iterations needed for convergence can vary widely depending on the application (tens, thousands, or more).
+
+The analysis of the learning curve helps to adjust parameters and detect if gradient descent is not working correctly.
+
+Here is the translation of the text into English in the requested `typsts` format:
+
+=== Video 4: Choosing the Learning Rate  
+The text discusses how to choose an appropriate learning rate (\( \alpha \)) for gradient descent and how to identify related issues. **Key points:**
+
+1. **Impact of \( \alpha \):**  
+   - If \( \alpha \) is too small, the descent will be slow.  
+   - If \( \alpha \) is too large, the algorithm may not converge and could even cause the cost \( J \) to increase.
+
+2. **Common issues:**  
+   - A high learning rate may cause the gradient to oscillate around the minimum without converging.  
+   - A constant increase in \( J \) may indicate implementation errors, such as using the wrong sign when updating parameters.
+
+3. **Debugging tips:**  
+   - Use a very small \( \alpha \) to check if \( J \) decreases at each iteration.  
+   - If it doesn't decrease, there is likely an error in the code.
+
+4. **Method for choosing \( \alpha \):**  
+   - Test a range of values for \( \alpha \), starting at \( 0.001 \) and gradually increasing (e.g., tripling each time: \( 0.003, 0.01, 0.03 \)).  
+   - Evaluate \( J \) after a few iterations to find a value that decreases \( J \) quickly and steadily.
+
+5. **Final optimization:**  
+   - Choose the highest \( \alpha \) that allows stable reduction of \( J \).  
+   - Perform additional tests to find a good balance between speed and stability.
+
+6. **Optional laboratory:**  
+   - Explore how the learning rate and feature scaling affect training.  
+   - Adjust \( \alpha \) and analyze its effects on the model.
+
+This approach ensures effective training and optimizes the choice of \( \alpha \) for the model.
+
+=== Video 6: Feature Engineering  
+The text discusses **feature engineering** and how designing suitable functions can significantly improve the performance of a learning algorithm. **Key points:**
+
+1. **Importance of features:**  
+   - Selecting or creating appropriate features is key to improving the model's accuracy.
+
+2. **Practical example:**  
+   - To predict house prices:  
+     - \( x_1 \): width (front of the plot).  
+     - \( x_2 \): depth (length of the plot).  
+     - Initial model: \( f(x) = w_1x_1 + w_2x_2 + b \).  
+
+3. **Model improvement:**  
+   - Introduce a new feature \( x_3 = x_1 \times x_2 \) (area of the plot).  
+   - Improved model: \( f(x) = w_1x_1 + w_2x_2 + w_3x_3 + b \).  
+   - This allows the model to decide which feature (width, depth, or area) is most relevant.
+
+4. **Feature engineering:**  
+   - Involves transforming or combining original features based on knowledge or intuition about the problem.  
+   - Helps to adjust models not just for linear data but also for more complex patterns (curves, nonlinear functions).
+
+Feature engineering optimizes the model's inputs, enabling more accurate predictions. In the next content, we will explore how to adjust models to nonlinear patterns.
+
+=== Video 7: Polynomial Regression
+
+1. **Limitations of linear regression:**  
+   - Fitting straight lines to data is not always sufficient to represent complex relationships.
+
+2. **Polynomial regression:**  
+   - Involves creating new features by raising the original variable (\( x \)) to different powers (e.g., \( x^2, x^3 \)).  
+   - Example:  
+     - \( x \): house size.  
+     - \( x^2 \): size squared.  
+     - \( x^3 \): size cubed.  
+   - This approach allows modeling curves that better fit the data.
+
+3. **Importance of feature scaling:**  
+   - The new features (\( x^2, x^3 \)) may have very wide ranges, which affects algorithms like gradient descent.  
+   - It is crucial to normalize features so they have comparable values.
+
+4. **Other transformations:**  
+   - In addition to powers, transformations such as square roots can be used, which produce smooth, increasing curves.
+
+5. **Feature selection:**  
+   - The choice of features depends on the relationship with the data.  
+   - Later, methods will be learned to evaluate the performance of different models and functions.
+
+6. **Implementation and practice:**  
+   - Practice is suggested with laboratories that implement polynomial regression and explore libraries like **Scikit-learn**, widely used in machine learning.
+
+7. **Next steps:**  
+   - Next week, classification algorithms will be introduced, which allow predicting categories.
+
+This approach combines theory and practice to deepen the design and implementation of more effective models.
