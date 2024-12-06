@@ -548,10 +548,117 @@ Visual examples show how parameters \( w \) and \( b \) gradually change with ea
   image("./images/c1_w1_s6_v06_batch.png" )
 ) 
 
+= Week 2: Regression with multiple input variables
 
+== Section 1: multiple linear regression
 
+=== Video 1: Multiple Features
 
+*Multiple Linear Regression with Multiple Features*
 
+*Introduction*
+- In the original linear regression model, only one feature \( x \) was used to predict $\( y \): \( $f{w,b}(x) = wx + b $\)$.
+
+#figure(
+  image("./images/w2_s1_v1_one_characteristic.png" )
+) 
+
+- Now, it extends to work with multiple features (\( X_1, X_2, ..., X_n \)).
+
+#figure(
+  image("./images/w2_s1_v1_multiple_characteristic.png" )
+) 
+
+*New Notations*
+
+1. **Features**:
+   - \( X_j \): Represents the \( j \)-th feature (\( j \) from 1 to \( n \)).
+   - \( X^{(i)} \): A vector containing all features for the \( i \)-th training example.
+   - $\( X^{(i)}_j \)$: Value of the \( j \)-th feature in the \( i \)-th example.
+2. **Model Parameters**:
+   - \( W \): A vector containing the weights (\( W_1, W_2, ..., W_n \)).
+   - \( b \): The intercept, a single number.
+3. **Model with Multiple Features**:
+   $\[
+   f_{w,b}(X) = W_1X_1 + W_2X_2 + \l $dots + W_nX_n + b$
+   \]$
+
+#figure(
+  image("./images/w2_s1_v1_new_notation.png" )
+) 
+
+*Concrete Example*
+
+- To predict a house price (\( y \)):
+  $ \[
+   f_{w,b}(X) = 0.1X_1 + 4X_2 + 10X_3 - 2X_4 + 80
+   \]$
+   - \( X_1 \): House size (\(+100 \, \text{USD per square foot}\)).
+   - \( X_2 \): Number of bedrooms (\(+4000 \, \text{USD per bedroom}\)).
+   - \( X_3 \): Number of floors (\(+10,000 \, \text{USD per floor}\)).
+   - \( X_4 \): House age (\(-2000 \, \text{USD per year}\)).
+
+#figure(
+  image("./images/w2_s1_v1_example.png" )
+) 
+
+*Compact Form Using Vectors*
+1. \( W \) and \( X \) are vectors:
+   - \( W = [W_1, W_2, \ldots, W_n] \).
+   - \( X = [X_1, X_2, \ldots, X_n] \).
+2. The model can be rewritten using the **dot product**:
+  $ \[
+   f_{w,b}(X) = W \cdot X + b
+   \]$
+   - Dot product: \( W \cdot X = W_1X_1 + W_2X_2 + \ldots + W_nX_n \).
+
+*Key Terms*
+- **Multiple Linear Regression**:
+  - Uses multiple features to predict the target value.
+  - Different from **univariate regression** (1 feature) and "multivariate regression" (which refers to something else).
+- **Vectorization**:
+  - A technique to efficiently implement models with multiple features.
+
+=== Video 2: Vectorization Part 1
+
+Vectorization is a powerful technique that simplifies and accelerates algorithm implementation, particularly in machine learning contexts.
+
+*Key Concepts*
+1. **Definition of Vectorization**:
+   - The use of vectorized mathematical operations to replace explicit loops in code.
+   - Leverages optimized libraries and advanced hardware, such as multi-core CPUs or GPUs.
+
+2. **Example of Vectorization**:
+   - Given a parameter vector \( w \) and a feature vector \( x \), calculating a function \( f \) without vectorization requires explicit loops or manual multiplication and addition.
+   - With **NumPy**, a Python linear algebra library, the `np.dot(w, x)` method performs the dot product efficiently, combining multiplication and summation.
+
+3. **Benefits of Vectorization**:
+   - **Shorter Code:** Reduces multiple lines to a single line, improving readability and maintainability.
+   - **Higher Speed:** Vectorized implementations utilize parallel hardware, resulting in significantly shorter execution times.
+
+4. **Non-Vectorized Implementations**:
+   - **Basic Code:** Manually writing each operation.
+   - **Using Loops:** Slightly better but inefficient for large \( n \) (e.g., \( n = 100,000 \)).
+
+5. **Vectorized Implementation**:
+   - Use optimized functions like `np.dot` and leverage modern hardware.
+   - Example:
+     ```python
+     import numpy as np
+
+     w = np.array([1, 2, 3])
+     x = np.array([4, 5, 6])
+     b = 1
+     f = np.dot(w, x) + b
+     print(f)
+     ```
+
+*Comparative Advantages*
+- **Performance:** NumPy uses parallel instructions on modern hardware, speeding up calculations.
+- **Simplicity:** Simplifies development and debugging.
+- **Scalability:** Ideal for large-scale computations.
+
+In summary, vectorization not only reduces development time by minimizing code but also optimizes performance, fully leveraging modern hardware capabilities.
 
 
 
