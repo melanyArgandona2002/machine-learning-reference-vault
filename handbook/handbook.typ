@@ -67,12 +67,12 @@ Algorithms that learn mappings from X to Y or from input to output.
   image("./images/c1_w1_s2_v02_input_output.png" )
 )
 
-You provide the algorithm with examples from which it learns.  
+You provide the algorithm with examples from which it learns.
 It includes correct answers: the correct label.
 
 #text(weight: "bold")[Examples Supervised Learning]
 
-First, the model is trained with examples of inputs X and the correct answers (labels).  
+First, the model is trained with examples of inputs X and the correct answers (labels).
 Once the model has learned pairs of input (x) and output (y), it can take a new input X that it hasn’t seen before and attempt to provide the appropriate corresponding output.
 
 #figure(
@@ -84,8 +84,8 @@ Once the model has learned pairs of input (x) and output (y), it can take a new 
 
 Example:
 
-The x-axis represents the size of the house in square feet, and the y-axis represents the price based on the size of the house in thousands of dollars. A friend wants to know how much his 750-square-foot house is worth.  
-The algorithm will first check if a straight line can be drawn through most of the data points, which suggests the house could be worth $dollar$ 150,000. However, to get a more precise answer, it might use a curve instead of a line, estimating the house to be worth $dollar$  200,000. 
+The x-axis represents the size of the house in square feet, and the y-axis represents the price based on the size of the house in thousands of dollars. A friend wants to know how much his 750-square-foot house is worth.
+The algorithm will first check if a straight line can be drawn through most of the data points, which suggests the house could be worth $dollar$ 150,000. However, to get a more precise answer, it might use a curve instead of a line, estimating the house to be worth $dollar$  200,000.
 
 #figure(
   image("./images/c1_w1_s2_v02_example_price_house.png" ),
@@ -105,14 +105,14 @@ The previous example uses a specific type of supervised learning called #text(we
  #text(weight: "bold")[Classification] : Predicts categories, which may not be numerical. It predicts a small, limited set of possible output categories.
 
  Maps input x to output Y, where the algorithm learns from the "correct answers."
- 
+
  If the categories are numerical, there will never be an intermediate value. For example, if we have 1 and 2, a result of 1.5 will never appear.
- 
+
  The input values may consist of one or more variables to predict the output.
 
 Example:
 
-The example aims to classify whether a tumor is benign or malignant. The x-axis represents the first category, which would be tumor size, and the y-axis represents the patients' age, with only two values representing malignant (x) or benign (o). 
+The example aims to classify whether a tumor is benign or malignant. The x-axis represents the first category, which would be tumor size, and the y-axis represents the patients' age, with only two values representing malignant (x) or benign (o).
 
 #figure(
   image("./images/c1_w1_s2_v03_example_cancer.png" ),
@@ -139,12 +139,12 @@ The two main types of supervised learning are  #text(weight: "bold")[Regression]
 
 In unsupervised learning, each example was associated with an output label, like benign or malignant, shown by circles and crosses.
 
-If we receive data not associated with any output label, let’s say we’re given data on patients, their tumor sizes, and ages. But we don’t know if the tumor was benign or malignant, so the dataset looks like the example on the right.  
-We aren’t asked to diagnose if a tumor is benign or malignant because no labels are provided. 
+If we receive data not associated with any output label, let’s say we’re given data on patients, their tumor sizes, and ages. But we don’t know if the tumor was benign or malignant, so the dataset looks like the example on the right.
+We aren’t asked to diagnose if a tumor is benign or malignant because no labels are provided.
 
 In this dataset, our task is to find some structure or pattern or simply something interesting in the data.
 
-Therefore, we might decide there are two distinct groups. This type of unsupervised learning is called a 
+Therefore, we might decide there are two distinct groups. This type of unsupervised learning is called a
 #text(weight: "bold")[clustering algorithm] .
 
 #text(weight: "bold")[Unsupervised Learning] : The algorithm is not supervised.
@@ -172,11 +172,11 @@ Market segmentation found a few distinct groups of people. The primary motivatio
 
 #text(weight: "bold")[Reminder from the previous video:]
 
-#text(weight: "bold")[Supervised Learning:] Data includes inputs x with corresponding output labels y.  
+#text(weight: "bold")[Supervised Learning:] Data includes inputs x with corresponding output labels y.
 
 #text(weight: "bold")[Unsupervised Learning:] Data includes only inputs x, without output labels y. The algorithm must find some structure, pattern, or interesting feature in the data.
 
-#text(weight: "bold")[Types of unsupervised learning algorithms:] 
+#text(weight: "bold")[Types of unsupervised learning algorithms:]
 
 - *Clustering algorithm:* Groups similar data points.
 - *Anomaly detection:* Used to detect unusual events.
@@ -308,7 +308,7 @@ Use of the *cost function* in the context of linear regression to determine the 
 
 #figure(
   image("./images/c1_w1_s4_v04_function_cost_example.png" )
-) 
+)
 
 - To simplify, we set \( b = 0 \), reducing the model to:
   \[
@@ -320,11 +320,11 @@ Use of the *cost function* in the context of linear regression to determine the 
 
 #figure(
   image("./images/c1_w1_s4_v04_function_cost_group.png" )
-) 
+)
 
 1. *Training Set*:
    Three points: \( (1, 1) \), \( (2, 2) \), \( (3, 3) \).
-   
+
 2. *Graph of \( f_w(x) \)*:
    - When \( w = 1 \):
      - \( f_w(x) = x \), a straight line that passes exactly through all points.
@@ -335,7 +335,7 @@ Use of the *cost function* in the context of linear regression to determine the 
    - When \( w = 0 \):
      - The line is horizontal and does not fit the data well.
      - \( J(0) \approx 2.33 \).
-     
+
 3. *Graph of \( J(w) \)*:
    - Shows how the cost changes as \( w \) varies.
    - The minimum of \( J(w) \) occurs at \( w = 1 \), the optimal value.
@@ -354,7 +354,7 @@ Visualization of the *cost function J(w, b)* in the context of a linear regressi
 
 #figure(
   image("./images/c1_w1_s4_v05_function_cost_model.png" )
-)  
+)
 
 1. *Model and Cost Function*:
    - The model \( f(x) = wx + b \) predicts values based on \( x \), \( w \), and \( b \).
@@ -364,14 +364,14 @@ Visualization of the *cost function J(w, b)* in the context of a linear regressi
 
 #figure(
   image("./images/c1_w1_s4_v05_image_3d.png" )
-)  
+)
 
    - When only \( w \) is considered, \( J(w) \) takes the form of a U-shaped curve (similar to a "bowl").
    - By including \( b \), \( J(w, b) \) becomes a 3D surface in the shape of a "bowl" or "hammock." Each point on this surface represents a value of \( J \) for a particular pair of \( w \) and \( b \).
 
 #figure(
   image("./images/c1_w1_s4_v05_image_grafics.png" )
-) 
+)
 
 3. *Contour Plots*:
    - Alternatively, the 3D surface can be represented in 2D as a *contour plot*.
@@ -390,7 +390,7 @@ How the choices of parameters \( w \) and \( b \) in a linear regression model a
 
 #figure(
   image("./images/c1_w1_s4_v06_image_example_1.png" )
-) 
+)
 
    - Different combinations of \( w \) and \( b \) generate straight lines \( f(x) \) that may fit the dataset better or worse.
    - If the line doesn't fit well, the cost \( J(w, b) \) will be high, and the point on the contour plot will be far from the center of the concentric ellipses, where the cost is minimum.
@@ -399,7 +399,7 @@ How the choices of parameters \( w \) and \( b \) in a linear regression model a
 
 #figure(
   image("./images/c1_w1_s4_v06_image_example_2.png" )
-) 
+)
 
    - Lines with different values of \( w \) and \( b \) are visually analyzed. Lines that don't fit well have higher cost values.
    - The minimum cost point on the contour plot corresponds to the optimal combination of \( w \) and \( b \), which defines the best-fit line.
@@ -415,19 +415,19 @@ The *gradient descent algorithm* is a key technique for minimizing cost function
 
 #figure(
   image("./images/c1_w1_s6_v01_function_lineal.png" )
-) 
+)
 
-1. *Objective*: Minimize a cost function \( J(w, b) \) by selecting optimal values for the parameters \( w \) and \( b \).  
-2. *Method*:  
-   - Start with initial values for \( w \) and \( b \) (commonly set to 0).  
-   - In each iteration, adjust \( w \) and \( b \) by moving in the steepest downhill direction on the cost function graph.  
-   - Repeat until reaching a local minimum (a valley on the \( J \) graph).  
-3. *Property*:  
-   - Depending on the starting point, gradient descent may converge to different local minima.  
+1. *Objective*: Minimize a cost function \( J(w, b) \) by selecting optimal values for the parameters \( w \) and \( b \).
+2. *Method*:
+   - Start with initial values for \( w \) and \( b \) (commonly set to 0).
+   - In each iteration, adjust \( w \) and \( b \) by moving in the steepest downhill direction on the cost function graph.
+   - Repeat until reaching a local minimum (a valley on the \( J \) graph).
+3. *Property*:
+   - Depending on the starting point, gradient descent may converge to different local minima.
 
-4. *Visual Example*:  
-   - The graph of \( J(w, b) \) is compared to a mountainous terrain. Gradient descent simulates controlled steps towards the nearest valley bottom.  
-5. *Importance*:  
+4. *Visual Example*:
+   - The graph of \( J(w, b) \) is compared to a mountainous terrain. Gradient descent simulates controlled steps towards the nearest valley bottom.
+5. *Importance*:
    - Gradient descent is essential not only in linear regression but also in training more complex deep learning models.
 
 
@@ -435,22 +435,22 @@ The *gradient descent algorithm* is a key technique for minimizing cost function
 
 #figure(
   image("./images/c1_w1_s6_v02_function.png" )
-) 
+)
 
-Gradient descent is an iterative algorithm that adjusts parameters \( w \) and \( b \) to minimize a cost function \( J(w, b) \). At each step, the parameters are updated using the formula:  
+Gradient descent is an iterative algorithm that adjusts parameters \( w \) and \( b \) to minimize a cost function \( J(w, b) \). At each step, the parameters are updated using the formula:
 \[
 w := w - \alpha \frac{\partial J}{\partial w}, \quad b := b - \alpha \frac{\partial J}{\partial b}
 \]
 where \( \alpha \) is the learning rate, a small value controlling the step size in the downhill direction.
 
 *Key Points:*
-1. *Simultaneous Updates*:  
-   - The values of \( w \) and \( b \) are calculated and updated simultaneously to ensure consistency. This involves computing temporary values (\( \text{temp}_w, \text{temp}_b \)) before assigning them to \( w \) and \( b \).  
-2. *Incorrect Implementation*:  
-   - Updating \( w \) before calculating \( b \) leads to inconsistent results, as the new \( w \) affects \( b \)'s calculation.  
-3. *Derivatives*:  
-   - Derivatives indicate the steepest downhill direction of \( J \), and along with \( \alpha \), they determine the magnitude of parameter adjustments.  
-4. *Convergence*:  
+1. *Simultaneous Updates*:
+   - The values of \( w \) and \( b \) are calculated and updated simultaneously to ensure consistency. This involves computing temporary values (\( \text{temp}_w, \text{temp}_b \)) before assigning them to \( w \) and \( b \).
+2. *Incorrect Implementation*:
+   - Updating \( w \) before calculating \( b \) leads to inconsistent results, as the new \( w \) affects \( b \)'s calculation.
+3. *Derivatives*:
+   - Derivatives indicate the steepest downhill direction of \( J \), and along with \( \alpha \), they determine the magnitude of parameter adjustments.
+4. *Convergence*:
    - The algorithm repeats until \( w \) and \( b \) change minimally between iterations, indicating a local minimum.
 
 
@@ -462,14 +462,14 @@ Gradient descent is an algorithm used to minimize cost functions by adjusting mo
 
 #figure(
   image("./images/c1_w1_s6_v03_example.png" )
-) 
+)
 
-1. *Positive Derivative*:  
-   - If the slope of the cost function (\( J(w) \)) at a point is positive, \( w \) decreases by subtracting \( \alpha \cdot \frac{d}{dw}J(w) \), moving towards the minimum.  
-2. *Negative Derivative*:  
-   - If the slope is negative, \( w \) increases, as subtracting a negative number is equivalent to adding, also moving \( w \) towards the minimum.  
-3. *Slopes and Minima*:  
-   - Gradient descent adjusts values to reduce \( J(w) \), progressing towards the nearest minimum.  
+1. *Positive Derivative*:
+   - If the slope of the cost function (\( J(w) \)) at a point is positive, \( w \) decreases by subtracting \( \alpha \cdot \frac{d}{dw}J(w) \), moving towards the minimum.
+2. *Negative Derivative*:
+   - If the slope is negative, \( w \) increases, as subtracting a negative number is equivalent to adding, also moving \( w \) towards the minimum.
+3. *Slopes and Minima*:
+   - Gradient descent adjusts values to reduce \( J(w) \), progressing towards the nearest minimum.
 
 A very small \( \alpha \) slows convergence, while a large \( \alpha \) may cause oscillation or divergence, preventing convergence.
 
@@ -479,27 +479,27 @@ A very small \( \alpha \) slows convergence, while a large \( \alpha \) may caus
 
 #figure(
   image("./images/c1_w1_s6_v04_resume.png" )
-) 
+)
 
 This section explains the importance of the learning rate (\(\alpha\)) in the gradient descent algorithm, a method for minimizing a cost function \( J(w) \). Key points include:
 
-1. *Impact of Learning Rate*:  
-   - If \(\alpha\) is *too small*, update steps will be tiny, making the algorithm extremely slow to reach the minimum.  
-   - If \(\alpha\) is *too large*, the algorithm may overshoot the minimum and oscillate or diverge, preventing convergence.  
+1. *Impact of Learning Rate*:
+   - If \(\alpha\) is *too small*, update steps will be tiny, making the algorithm extremely slow to reach the minimum.
+   - If \(\alpha\) is *too large*, the algorithm may overshoot the minimum and oscillate or diverge, preventing convergence.
 
-Image: c1_w1_s6_v04_impact_point.png  
+Image: c1_w1_s6_v04_impact_point.png
 
-2. *Behavior at a Local Minimum*:  
-   - If \( w \) is already at a local minimum, the slope (\(\nabla J\)) is zero, so \( w \) remains unchanged. This ensures that gradient descent stays at the solution.  
+2. *Behavior at a Local Minimum*:
+   - If \( w \) is already at a local minimum, the slope (\(\nabla J\)) is zero, so \( w \) remains unchanged. This ensures that gradient descent stays at the solution.
 
-Image: c1_w1_s6_v04_education_gradiant.png  
+Image: c1_w1_s6_v04_education_gradiant.png
 
-3. *Automatic Step Adjustment*:  
-   - As the algorithm approaches the minimum, slopes (\(\nabla J\)) decrease, naturally reducing update step sizes, even with a fixed learning rate.  
+3. *Automatic Step Adjustment*:
+   - As the algorithm approaches the minimum, slopes (\(\nabla J\)) decrease, naturally reducing update step sizes, even with a fixed learning rate.
 
-Image: c1_w1_s6_v04_education_automatic.png  
+Image: c1_w1_s6_v04_education_automatic.png
 
-4. *General Application of Gradient Descent*:  
+4. *General Application of Gradient Descent*:
    - This algorithm minimizes any cost function, not just the mean squared error used in linear regression. In future steps, it will combine with specific functions to train models like linear regression.
 
 Selecting the right \(\alpha\) is critical for the efficiency and success of gradient descent.
@@ -510,43 +510,43 @@ This section explains how to train a linear regression model using a cost functi
 
 #figure(
   image("./images/c1_w1_s6_v05_past_video.png" )
-) 
+)
 
 The derived formulas for calculating the gradients of parameters \( w \) (slope) and \( b \) (intercept) are explained, showing they result from differential calculus.
 
 #figure(
   image("./images/c1_w1_s6_v05_formulas.png" )
-) 
+)
 
 The model fits a straight line to training data by iteratively minimizing the cost function.
 
 #figure(
   image("./images/c1_w1_s6_v05_algorim.png" )
-) 
+)
 
 The cost function for linear regression is convex (bowl-shaped), ensuring gradient descent always converges to the global minimum if the learning rate is appropriate.
 
 #figure(
   image("./images/c1_w1_s6_v05_example_1.png" )
-) 
+)
 
 #figure(
   image("./images/c1_w1_s6_v05_example_2.png" )
-) 
+)
 
 === Video 6: Running Gradient Descent
 
-This section demonstrates how gradient descent trains a linear regression model.  
+This section demonstrates how gradient descent trains a linear regression model.
 
 #figure(
   image("./images/c1_w1_s6_v06_example_1.png" )
-) 
+)
 
 Visual examples show how parameters \( w \) and \( b \) gradually change with each iteration, reducing the cost function and better fitting the model line to data. It starts with initial parameters (\( w = -0.1 \), \( b = 900 \)) and shows improvement until the global minimum is reached.
 
 #figure(
   image("./images/c1_w1_s6_v06_batch.png" )
-) 
+)
 
 = Week 2: Regression with multiple input variables
 
@@ -561,13 +561,13 @@ Visual examples show how parameters \( w \) and \( b \) gradually change with ea
 
 #figure(
   image("./images/w2_s1_v1_one_characteristic.png" )
-) 
+)
 
 - Now, it extends to work with multiple features (\( X_1, X_2, ..., X_n \)).
 
 #figure(
   image("./images/w2_s1_v1_multiple_characteristic.png" )
-) 
+)
 
 *New Notations*
 
@@ -585,7 +585,7 @@ Visual examples show how parameters \( w \) and \( b \) gradually change with ea
 
 #figure(
   image("./images/w2_s1_v1_new_notation.png" )
-) 
+)
 
 *Concrete Example*
 
@@ -600,7 +600,7 @@ Visual examples show how parameters \( w \) and \( b \) gradually change with ea
 
 #figure(
   image("./images/w2_s1_v1_example.png" )
-) 
+)
 
 *Compact Form Using Vectors*
 1. \( W \) and \( X \) are vectors:
@@ -679,7 +679,7 @@ In summary, vectorization not only reduces development time by minimizing code b
 
 #figure(
   image("./images/w2_s1_v3_vectorization_without_with.png" )
-) 
+)
 
 3. *Performance Impact:*
    - *Parallel Hardware*:
@@ -696,7 +696,7 @@ In summary, vectorization not only reduces development time by minimizing code b
 
 #figure(
   image("./images/w2_s1_v3_gradiant_descent.png" )
-) 
+)
 
 5. *Using NumPy:*
    - *NumPy Arrays*:
@@ -711,7 +711,7 @@ In summary, vectorization not only reduces development time by minimizing code b
    - Learn and optimize vectorized code with NumPy.
    - Use timing techniques to compare vectorized vs. non-vectorized implementations.
 
-*Conclusion:*  
+*Conclusion:*
 Vectorization is essential for modern machine learning, enabling algorithms to scale efficiently for large datasets.
 
 === Video 5: Gradient Descent for Multiple Linear Regression ===
@@ -743,7 +743,7 @@ Gradient descent iteratively updates parameters to minimize \( J \):
 - For multiple features (\( n > 1 \)):
   - Each weight \( w_j \) is updated using all features \( x_j \) and the error term \( $(f_{w,b}(x) - y)$ \).
   - The bias \( b \) is updated similarly as in univariate regression.
- 
+
 *Vectorized Implementation*
 Vectorization enables efficient calculations, avoiding loops. For example:
 - The error term can be computed for all examples at once:
@@ -766,7 +766,7 @@ Vectorization enables efficient calculations, avoiding loops. For example:
 - Libraries like NumPy simplify these implementations.
 - Feature scaling (normalization) and choosing an appropriate \( \alpha \) are critical for model performance.
 
-== Section 3: 
+== Section 3:
 === Video 1: Feature scaling part 1
 
 1. *Introduction to Feature Scaling*:
@@ -824,23 +824,23 @@ Vectorization enables efficient calculations, avoiding loops. For example:
 
    *Mean Normalization:*
    - Centers the values around 0 and scales them within a fixed range.
-   - Formula:  
-     \( x^{\text{norm}} = \frac{x - \mu}{\text{range}} \)  
+   - Formula:
+     \( x^{\text{norm}} = \frac{x - \mu}{\text{range}} \)
      where \(\mu\) is the mean and the range is \(\text{max} - \text{min}\).
    - Example:
-     - For \( x_1 \) (\(\mu_1 = 600, \text{range} = 2000 - 300\)):  
+     - For \( x_1 \) (\(\mu_1 = 600, \text{range} = 2000 - 300\)):
        \( x_1^{\text{norm}} \) ranges from -0.18 to 0.82.
-     - For \( x_2 \) (\(\mu_2 = 2.3, \text{range} = 5 - 0\)):  
+     - For \( x_2 \) (\(\mu_2 = 2.3, \text{range} = 5 - 0\)):
        \( x_2^{\text{norm}} \) ranges from -0.46 to 0.54.
 
    *Z-Score Normalization:*
    - Uses the mean (\(\mu\)) and standard deviation (\(\sigma\)) to rescale.
-   - Formula:  
+   - Formula:
      \( x^{\text{Z}} = \frac{x - \mu}{\sigma} \).
    - Example:
-     - For \( x_1 \):  
+     - For \( x_1 \):
        \(\mu_1 = 600, \sigma_1 = 450 \Rightarrow x_1^{\text{Z}}\) ranges from -0.67 to -3.1.
-     - For \( x_2 \):  
+     - For \( x_2 \):
        \(\mu_2 = 2.3, \sigma_2 = 1.4 \Rightarrow x_2^{\text{Z}}\) ranges from -1.6 to -1.9.
 
 3. *Scaling Cases*:
@@ -858,7 +858,7 @@ Vectorization enables efficient calculations, avoiding loops. For example:
 === Video 3: Checking Gradient Descent for Convergence
 The text explains how to check if gradient descent is converging towards the global minimum of the cost function \( J \). The key steps include:
 
-1. *Plotting a Learning Curve*: 
+1. *Plotting a Learning Curve*:
    - Plot the cost \( J \) (vertical axis) against the number of gradient descent iterations (horizontal axis).
    - If gradient descent is working correctly, \( J \) should decrease after each iteration.
 
@@ -877,56 +877,56 @@ The analysis of the learning curve helps to adjust parameters and detect if grad
 
 Here is the translation of the text into English in the requested `typsts` format:
 
-=== Video 4: Choosing the Learning Rate  
-The text discusses how to choose an appropriate learning rate (\( \alpha \)) for gradient descent and how to identify related issues. 
+=== Video 4: Choosing the Learning Rate
+The text discusses how to choose an appropriate learning rate (\( \alpha \)) for gradient descent and how to identify related issues.
 
 *Key points:*
 
-1. *Impact of \( \alpha \):*  
-   - If \( \alpha \) is too small, the descent will be slow.  
+1. *Impact of \( \alpha \):*
+   - If \( \alpha \) is too small, the descent will be slow.
    - If \( \alpha \) is too large, the algorithm may not converge and could even cause the cost \( J \) to increase.
 
 2. *Common issues:*
-   - A high learning rate may cause the gradient to oscillate around the minimum without converging.  
+   - A high learning rate may cause the gradient to oscillate around the minimum without converging.
    - A constant increase in \( J \) may indicate implementation errors, such as using the wrong sign when updating parameters.
 
-3. *Debugging tips:* 
-   - Use a very small \( \alpha \) to check if \( J \) decreases at each iteration.  
+3. *Debugging tips:*
+   - Use a very small \( \alpha \) to check if \( J \) decreases at each iteration.
    - If it doesn't decrease, there is likely an error in the code.
 
 4. *Method for choosing \( \alpha \):*
-   - Test a range of values for \( \alpha \), starting at \( 0.001 \) and gradually increasing (e.g., tripling each time: \( 0.003, 0.01, 0.03 \)).  
+   - Test a range of values for \( \alpha \), starting at \( 0.001 \) and gradually increasing (e.g., tripling each time: \( 0.003, 0.01, 0.03 \)).
    - Evaluate \( J \) after a few iterations to find a value that decreases \( J \) quickly and steadily.
 
-5. *Final optimization:*  
-   - Choose the highest \( \alpha \) that allows stable reduction of \( J \).  
+5. *Final optimization:*
+   - Choose the highest \( \alpha \) that allows stable reduction of \( J \).
    - Perform additional tests to find a good balance between speed and stability.
 
 6. *Optional laboratory:*
-   - Explore how the learning rate and feature scaling affect training.  
+   - Explore how the learning rate and feature scaling affect training.
    - Adjust \( \alpha \) and analyze its effects on the model.
 
 This approach ensures effective training and optimizes the choice of \( \alpha \) for the model.
 
-=== Video 6: Feature Engineering  
+=== Video 6: Feature Engineering
 The text discusses *feature engineering* and how designing suitable functions can significantly improve the performance of a learning algorithm. *Key points:*
 
 1. *Importance of features:*
    - Selecting or creating appropriate features is key to improving the model's accuracy.
 
-2. *Practical example:* 
-   - To predict house prices:  
-     - \( x_1 \): width (front of the plot).  
-     - \( x_2 \): depth (length of the plot).  
-     - Initial model: \( f(x) = w_1x_1 + w_2x_2 + b \).  
+2. *Practical example:*
+   - To predict house prices:
+     - \( x_1 \): width (front of the plot).
+     - \( x_2 \): depth (length of the plot).
+     - Initial model: \( f(x) = w_1x_1 + w_2x_2 + b \).
 
 3. *Model improvement:*
-   - Introduce a new feature \( x_3 = x_1 \times x_2 \) (area of the plot).  
-   - Improved model: \( f(x) = w_1x_1 + w_2x_2 + w_3x_3 + b \).  
+   - Introduce a new feature \( x_3 = x_1 \times x_2 \) (area of the plot).
+   - Improved model: \( f(x) = w_1x_1 + w_2x_2 + w_3x_3 + b \).
    - This allows the model to decide which feature (width, depth, or area) is most relevant.
 
 4. *Feature engineering:*
-   - Involves transforming or combining original features based on knowledge or intuition about the problem.  
+   - Involves transforming or combining original features based on knowledge or intuition about the problem.
    - Helps to adjust models not just for linear data but also for more complex patterns (curves, nonlinear functions).
 
 Feature engineering optimizes the model's inputs, enabling more accurate predictions. In the next content, we will explore how to adjust models to nonlinear patterns.
@@ -936,23 +936,23 @@ Feature engineering optimizes the model's inputs, enabling more accurate predict
 1. *Limitations of linear regression:*
    - Fitting straight lines to data is not always sufficient to represent complex relationships.
 
-2. *Polynomial regression:* 
-   - Involves creating new features by raising the original variable (\( x \)) to different powers (e.g., \( x^2, x^3 \)).  
-   - Example:  
-     - \( x \): house size.  
-     - \( x^2 \): size squared.  
-     - \( x^3 \): size cubed.  
+2. *Polynomial regression:*
+   - Involves creating new features by raising the original variable (\( x \)) to different powers (e.g., \( x^2, x^3 \)).
+   - Example:
+     - \( x \): house size.
+     - \( x^2 \): size squared.
+     - \( x^3 \): size cubed.
    - This approach allows modeling curves that better fit the data.
 
-3. *Importance of feature scaling:* 
-   - The new features (\( x^2, x^3 \)) may have very wide ranges, which affects algorithms like gradient descent.  
+3. *Importance of feature scaling:*
+   - The new features (\( x^2, x^3 \)) may have very wide ranges, which affects algorithms like gradient descent.
    - It is crucial to normalize features so they have comparable values.
 
 4. *Other transformations:*
    - In addition to powers, transformations such as square roots can be used, which produce smooth, increasing curves.
 
-5. *Feature selection:* 
-   - The choice of features depends on the relationship with the data.  
+5. *Feature selection:*
+   - The choice of features depends on the relationship with the data.
    - Later, methods will be learned to evaluate the performance of different models and functions.
 
 6. *Implementation and practice:*
@@ -1055,7 +1055,7 @@ This approach combines theory and practice to deepen the design and implementati
      \]
 
 3. *Binary Prediction:*
-   - A threshold (e.g., 0.5) is used: 
+   - A threshold (e.g., 0.5) is used:
      - If \( f(x) \geq 0.5 \), predict \( y = 1 \).
      - If \( f(x) < 0.5 \), predict \( y = 0 \).
 
@@ -1066,176 +1066,176 @@ This approach combines theory and practice to deepen the design and implementati
 5. *Complex Boundaries:*
    - Adding polynomial terms can create nonlinear boundaries, such as circles (\( x_1^2 + x_2^2 = 1 \)) or ellipses, enabling the model to handle complex data distributions.
 
-== Section 2: Cost Function for Logistic Regression 
+== Section 2: Cost Function for Logistic Regression
 === Video 1: Cost Function for Logistic Regression
 
-1. *Cost Function*:  
-   - The cost function measures how well a set of parameters fits the training data.  
+1. *Cost Function*:
+   - The cost function measures how well a set of parameters fits the training data.
    - In logistic regression, the squared error cost function is not ideal because it produces a non-convex cost function, which can result in local minima, making gradient descent ineffective.
 
-2. *Logistic Regression*:  
-   - Used for binary classification tasks.  
-   - The logistic regression model is defined using parameters \( w \) and \( b \).  
+2. *Logistic Regression*:
+   - Used for binary classification tasks.
+   - The logistic regression model is defined using parameters \( w \) and \( b \).
    - The goal is to choose \( w \) and \( b \) based on the training data.
 
-3. *Squared Error in Logistic Regression*:  
+3. *Squared Error in Logistic Regression*:
    - Squared error is unsuitable because it leads to a non-convex cost function, preventing gradient descent from finding the global minimum.
 
-4. *New Cost Function*:  
-   - A new cost function ensures convexity, allowing gradient descent to converge to the global minimum.  
+4. *New Cost Function*:
+   - A new cost function ensures convexity, allowing gradient descent to converge to the global minimum.
    - This cost function is defined using a loss function based on the negative logarithm of the logistic regression prediction.
 
-5. *Loss Function*:  
-   - If \( y = 1 \), the loss is the negative logarithm of \( f(x) \).  
-   - If \( y = 0 \), the loss is the negative logarithm of \( 1 - f(x) \).  
+5. *Loss Function*:
+   - If \( y = 1 \), the loss is the negative logarithm of \( f(x) \).
+   - If \( y = 0 \), the loss is the negative logarithm of \( 1 - f(x) \).
    - The loss function evaluates the performance for a single training example and is used to compute the overall cost function as the average loss across all examples.
 
-6. *Loss Interpretation*:  
-   - If the model predicts a value close to 1 when \( y = 1 \), the loss is small.  
-   - If the model predicts a value close to 0 when \( y = 0 \), the loss is also small.  
+6. *Loss Interpretation*:
+   - If the model predicts a value close to 1 when \( y = 1 \), the loss is small.
+   - If the model predicts a value close to 0 when \( y = 0 \), the loss is also small.
    - The loss increases significantly when predictions diverge from the true labels, especially when \( f(x) \) approaches 0 for \( y = 1 \), or \( f(x) \) approaches 1 for \( y = 0 \).
 
-7. *Advantages of the New Cost Function*:  
+7. *Advantages of the New Cost Function*:
    - The cost function defined with the new loss function is convex, enabling reliable optimization using gradient descent.
 
-8. *Conclusion*:  
+8. *Conclusion*:
    - Squared error cost is inappropriate for logistic regression due to local minima. The logistic loss function ensures a convex cost function, improving gradient descent's effectiveness.
 
 === Video 3: Simplified Cost Function for Logistic Regression
 
 This video explains how the loss and cost functions for logistic regression can be simplified for easier implementation when using gradient descent to optimize model parameters.
 
-1. *Loss Function*:  
-   The logistic regression loss function for binary classification can be written as:  
+1. *Loss Function*:
+   The logistic regression loss function for binary classification can be written as:
    \[
    \text{Loss} = -y \log(f(x)) - (1 - y) \log(1 - f(x))
    \]
    where \( f(x) \) is the model's prediction and \( y \) is the true label (0 or 1).
 
-2. *Simplification*:  
-   This formula is equivalent to the more complex form of the loss function.  
-   - When \( y = 1 \), the loss becomes \( -\log(f(x)) \).  
-   - When \( y = 0 \), the loss becomes \( -\log(1 - f(x)) \).  
+2. *Simplification*:
+   This formula is equivalent to the more complex form of the loss function.
+   - When \( y = 1 \), the loss becomes \( -\log(f(x)) \).
+   - When \( y = 0 \), the loss becomes \( -\log(1 - f(x)) \).
    The simplified formula avoids handling these two cases separately.
 
-3. *Cost Function*:  
-   The cost function is the average loss over the training set:  
+3. *Cost Function*:
+   The cost function is the average loss over the training set:
    $\[
    J(theta) = frac{1}{m} sum_{i=1}^{m} [ -y^{(i)} log(f(x^{(i)})) - (1 - y^{(i)}) log(1 - f(x^{(i)})) ]$
    \]
    where \( m \) is the number of training examples.
 
-4. *Statistical Basis*:  
-   This cost function is based on the principle of *maximum likelihood estimation*, a technique to find the most efficient model parameters.  
+4. *Statistical Basis*:
+   This cost function is based on the principle of *maximum likelihood estimation*, a technique to find the most efficient model parameters.
    - The function's convexity facilitates optimization with gradient descent.
 
-== Section 2: Cost Function for Logistic Regression  
+== Section 2: Cost Function for Logistic Regression
 === Video 1: Cost Function for Logistic Regression
 
-1. *Cost Function*:  
-   - The cost function measures how well a set of parameters fits the training data.  
+1. *Cost Function*:
+   - The cost function measures how well a set of parameters fits the training data.
    - In logistic regression, the squared error cost function is not ideal because it produces a non-convex cost function, which can result in local minima, making gradient descent ineffective.
 
-2. *Logistic Regression*:  
-   - Used for binary classification tasks.  
-   - The logistic regression model is defined using parameters \( w \) and \( b \).  
+2. *Logistic Regression*:
+   - Used for binary classification tasks.
+   - The logistic regression model is defined using parameters \( w \) and \( b \).
    - The goal is to choose \( w \) and \( b \) based on the training data.
 
-3. *Squared Error in Logistic Regression*:  
+3. *Squared Error in Logistic Regression*:
    - Squared error is unsuitable because it leads to a non-convex cost function, preventing gradient descent from finding the global minimum.
 
-4. *New Cost Function*:  
-   - A new cost function ensures convexity, allowing gradient descent to converge to the global minimum.  
+4. *New Cost Function*:
+   - A new cost function ensures convexity, allowing gradient descent to converge to the global minimum.
    - This cost function is defined using a loss function based on the negative logarithm of the logistic regression prediction.
 
-5. *Loss Function*:  
-   - If \( y = 1 \), the loss is the negative logarithm of \( f(x) \).  
-   - If \( y = 0 \), the loss is the negative logarithm of \( 1 - f(x) \).  
+5. *Loss Function*:
+   - If \( y = 1 \), the loss is the negative logarithm of \( f(x) \).
+   - If \( y = 0 \), the loss is the negative logarithm of \( 1 - f(x) \).
    - The loss function evaluates the performance for a single training example and is used to compute the overall cost function as the average loss across all examples.
 
-6. *Loss Interpretation*:  
-   - If the model predicts a value close to 1 when \( y = 1 \), the loss is small.  
-   - If the model predicts a value close to 0 when \( y = 0 \), the loss is also small.  
+6. *Loss Interpretation*:
+   - If the model predicts a value close to 1 when \( y = 1 \), the loss is small.
+   - If the model predicts a value close to 0 when \( y = 0 \), the loss is also small.
    - The loss increases significantly when predictions diverge from the true labels, especially when \( f(x) \) approaches 0 for \( y = 1 \), or \( f(x) \) approaches 1 for \( y = 0 \).
 
-7. *Advantages of the New Cost Function*:  
+7. *Advantages of the New Cost Function*:
    - The cost function defined with the new loss function is convex, enabling reliable optimization using gradient descent.
 
-8. *Conclusion*:  
+8. *Conclusion*:
    - Squared error cost is inappropriate for logistic regression due to local minima. The logistic loss function ensures a convex cost function, improving gradient descent's effectiveness.
 
 === Video 3: Simplified Cost Function for Logistic Regression
 
 This video explains how the loss and cost functions for logistic regression can be simplified for easier implementation when using gradient descent to optimize model parameters.
 
-1. *Loss Function*:  
-   The logistic regression loss function for binary classification can be written as:  
+1. *Loss Function*:
+   The logistic regression loss function for binary classification can be written as:
    \[
    \text{Loss} = -y \log(f(x)) - (1 - y) \log(1 - f(x))
    \]
    where \( f(x) \) is the model's prediction and \( y \) is the true label (0 or 1).
 
-2. *Simplification*:  
-   This formula is equivalent to the more complex form of the loss function.  
-   - When \( y = 1 \), the loss becomes \( -\log(f(x)) \).  
-   - When \( y = 0 \), the loss becomes \( -\log(1 - f(x)) \).  
+2. *Simplification*:
+   This formula is equivalent to the more complex form of the loss function.
+   - When \( y = 1 \), the loss becomes \( -\log(f(x)) \).
+   - When \( y = 0 \), the loss becomes \( -\log(1 - f(x)) \).
    The simplified formula avoids handling these two cases separately.
 
-3. *Cost Function*:  
-   The cost function is the average loss over the training set:  
+3. *Cost Function*:
+   The cost function is the average loss over the training set:
    \[
    $J(theta) = frac{1}{m} sum_{i=1}^{m} [ -y^{(i)} log(f(x^{(i)})) - (1 - y^{(i)}) log(1 - f(x^{(i)}))]$
    \]
    where \( m \) is the number of training examples.
 
-4. *Statistical Basis*:  
-   This cost function is based on the principle of *maximum likelihood estimation*, a technique to find the most efficient model parameters.  
+4. *Statistical Basis*:
+   This cost function is based on the principle of *maximum likelihood estimation*, a technique to find the most efficient model parameters.
    - The function's convexity facilitates optimization with gradient descent.
 
-== Section 5: Gradient Descent for Logistic Regression  
-=== Video 1: Gradient Descent Implementation  
+== Section 5: Gradient Descent for Logistic Regression
+=== Video 1: Gradient Descent Implementation
 
 *Goal: Optimizing Parameters \(w\) and \(b\)*
-- The goal is to find the optimal values for the parameters \(w\) (weights) and \(b\) (bias) that minimize the cost function \(J(w, b)\) using the *gradient descent* algorithm.  
+- The goal is to find the optimal values for the parameters \(w\) (weights) and \(b\) (bias) that minimize the cost function \(J(w, b)\) using the *gradient descent* algorithm.
 
-*Gradient Descent for Logistic Regression*  
-1. *Cost Function Formula*:  
-   - The aim is to minimize \(J(w, b)\) by calculating the partial derivatives of the cost function with respect to each parameter.  
+*Gradient Descent for Logistic Regression*
+1. *Cost Function Formula*:
+   - The aim is to minimize \(J(w, b)\) by calculating the partial derivatives of the cost function with respect to each parameter.
 
-2. *Parameter Updates*:  
-   - Gradient descent updates the parameters using the formulas:  
+2. *Parameter Updates*:
+   - Gradient descent updates the parameters using the formulas:
      \[
      w_j := w_j - \alpha \frac{\partial J(w, b)}{\partial w_j}
      \]
      \[
      b := b - \alpha \frac{\partial J(w, b)}{\partial b}
-     \]  
-     where:  
-     - \(\alpha\) is the learning rate,  
-     - \(\frac{\partial J(w, b)}{\partial w_j}\) and \(\frac{\partial J(w, b)}{\partial b}\) are the partial derivatives of \(J(w, b)\) with respect to \(w_j\) and \(b\).  
+     \]
+     where:
+     - \(\alpha\) is the learning rate,
+     - \(\frac{\partial J(w, b)}{\partial w_j}\) and \(\frac{\partial J(w, b)}{\partial b}\) are the partial derivatives of \(J(w, b)\) with respect to \(w_j\) and \(b\).
 
-3. *Partial Derivatives*:  
-   - The partial derivative of \(J(w, b)\) with respect to \(w_j\) is:  
+3. *Partial Derivatives*:
+   - The partial derivative of \(J(w, b)\) with respect to \(w_j\) is:
      \[
      $frac{1}{m} sum_{i=1}^{m}( f(x^{(i)}) - y^{(i)} ) x_j^{(i)}$
-     \]  
-   - The partial derivative of \(J(w, b)\) with respect to \(b\) is:  
+     \]
+   - The partial derivative of \(J(w, b)\) with respect to \(b\) is:
      $\[
      frac{1}{m} sum_{i=1}^{m} ( f(x^{(i)}) - y^{(i)})
-     \] $ 
+     \] $
 
-4. *Vectorized Gradient Descent*:  
-   - Using a vectorized implementation of gradient descent can significantly speed up computation and improve the algorithm's convergence. However, the video does not go into the details of this approach.  
+4. *Vectorized Gradient Descent*:
+   - Using a vectorized implementation of gradient descent can significantly speed up computation and improve the algorithm's convergence. However, the video does not go into the details of this approach.
 
-*Logistic Regression vs. Linear Regression*  
-- Although the parameter update formulas in logistic and linear regression look similar, *they are not the same*.  
-- The key difference lies in the *activation function*:  
-  - For linear regression: \( f(x) = wx + b \).  
-  - For logistic regression: \( f(x) = \frac{1}{1 + e^{-(wx + b)}} \) (sigmoid function).  
-- This distinction allows logistic regression to handle binary classification tasks, whereas linear regression is used for continuous predictions.  
+*Logistic Regression vs. Linear Regression*
+- Although the parameter update formulas in logistic and linear regression look similar, *they are not the same*.
+- The key difference lies in the *activation function*:
+  - For linear regression: \( f(x) = wx + b \).
+  - For logistic regression: \( f(x) = \frac{1}{1 + e^{-(wx + b)}} \) (sigmoid function).
+- This distinction allows logistic regression to handle binary classification tasks, whereas linear regression is used for continuous predictions.
 
-*Feature Scaling*  
-- *Feature Scaling*: Similar to linear regression, scaling features (e.g., normalizing values to a range between -1 and 1) can significantly accelerate the convergence of gradient descent in logistic regression.    
+*Feature Scaling*
+- *Feature Scaling*: Similar to linear regression, scaling features (e.g., normalizing values to a range between -1 and 1) can significantly accelerate the convergence of gradient descent in logistic regression.
 
 == Section 7: The Problem of Overfitting
 
@@ -1304,7 +1304,7 @@ These techniques enhance the model's ability to generalize and make accurate pre
 
 *Conclusion*: Regularization mitigates overfitting by penalizing large parameter values. Adjusting \( \lambda \) helps balance the trade-off between fitting the data and maintaining model simplicity, improving generalization.
 
-Here is the translation of the provided content into English, formatted in Typst:  
+Here is the translation of the provided content into English, formatted in Typst:
 
 == Video 5: Regularized Linear Regression
 The cost function now includes two components: the traditional quadratic error and an additional regularization term that penalizes large parameter values \(w\). The key difference in gradient descent is that the parameter updates slightly change due to the inclusion of regularization. However, the format remains similar to non-regularized linear regression, with the regularization term affecting only \(w\), not \(b\).
