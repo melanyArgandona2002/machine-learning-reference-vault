@@ -67,6 +67,7 @@ def test_fit_and_predict_comparison(mpg_instance):
 
 def test_predict_new_data(mpg_instance):
     mpg_instance.run()
+    
     new_data = {
         "cylinders": 8,
         "displacement": 307.0,
@@ -77,5 +78,6 @@ def test_predict_new_data(mpg_instance):
         "origin": "usa",
         "name": "chevrolet chevelle malibu"
     }
+
     prediction = mpg_instance.predict_new(new_data)
     assert isinstance(prediction, float), "Prediction should return a single float value"

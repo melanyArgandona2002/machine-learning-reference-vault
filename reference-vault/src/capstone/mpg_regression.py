@@ -122,17 +122,28 @@ class MpgRegressionCapstone:
         Run the entire pipeline: preprocess, train, and evaluate.
         """
 
+        self.console.print("Vehicle Dataset Overview", style="bold")
         self.console.print(self.dataset.head())
+
+        self.console.print("\n")
+
+        self.console.print("DataFrame Structure and Summary of the Vehicle Dataset", style="bold")
         self.dataset.info()
+
+        self.console.print("\n")
 
         self.console.print("[bold yellow]Starting MPG regression pipeline...[/bold yellow]")
 
         X, y = self.preprocess()
         X_train, X_test, y_train, y_test = self.split_data(X, y)
 
+        self.console.print("\n")
+
         self.fit(X_train, y_train)
         y_pred = self.predict(X_test)
         self.evaluate(y_test, y_pred)
+
+        self.console.print("\n")
 
         # Plot predictions
         self.plot_predictions(y_test, y_pred)
