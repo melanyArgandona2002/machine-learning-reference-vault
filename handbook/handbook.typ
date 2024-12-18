@@ -1327,3 +1327,1049 @@ By implementing regularized linear regression, you can improve model performance
 Regularized logistic regression is used to prevent overfitting by adding a regularization term to the cost function. This term penalizes the parameters \(w_1, w_2, ..., w_n\), preventing them from becoming excessively large and ensuring the model does not overfit the training data. The regularized cost function includes a term \(\lambda\) that penalizes the parameter values \(w\), while \(b\) remains unregularized.
 
 The implementation process is similar to that of regularized linear regression. Gradient descent is used to minimize this new cost function, and the parameter update rules for \(w_j\) are applied in a similar manner. As a result, the model becomes more generalizable, avoiding overfitting noisy features in the training data and enhancing its ability to generalize to unseen data. This approach is critical in real-world machine learning applications and a valuable skill for building robust models.
+
+= Class 2: Advanced Learning Algorithms
+
+== Week 1: Neural Networks
+
+=== Section 1: Neural Networks Intuition
+
+==== Video 2: Neurons and the Brain
+
+*Origins and Biological Inspiration*
+- Artificial neural networks were inspired by the human brain.
+- Initially based on simplified models of biological neurons:
+  - *Biological neurons*: Receive electrical impulses through dendrites, perform calculations, and send signals via axons.
+  - *Artificial neurons*: Take numerical inputs, perform mathematical calculations, and produce outputs.
+- Today, neural networks have little resemblance to the functioning of the human brain.
+
+*History and Resurgence*
+
+- Initial work: 1950s; gained popularity in the 80s and 90s for tasks like handwritten digit recognition.
+- Fell out of favor in the late 90s.
+- Resurgence since 2005, associated with deep learning, a trending term.
+- Neural networks have since revolutionized fields such as:
+  - Speech recognition.
+  - Computer vision (e.g., the "ImageNet moment" in 2012).
+  - Natural language processing (NLP).
+  - Applications in medical imaging, climate change, advertising, and more.
+
+#figure(
+  image("./images/C2_W1_S1_V2_Neural_Networks.png" )
+)
+
+*Key Factors Behind the Resurgence*
+
+1. *Availability of Digital Data*:
+   - Exponential increase in data due to digitalization.
+   - Digital records now include medical, transactional, and digital interaction data.
+2. *Limitations of Traditional Algorithms*:
+   - Algorithms like logistic regression did not scale well with large data volumes.
+3. *Advantages of Large Neural Networks*:
+   - Performance scales with more data and neurons.
+   - Effectively leverage "big data" for solving complex problems.
+4. *Advancements in Hardware*:
+   - GPUs optimized for deep learning, originally designed for graphics.
+
+#figure(
+  image("./images/C2_W1_S1_V2_Neural_Brains.png" )
+)
+
+ *Notes*
+- While neural networks began with a biological motivation, they now focus on engineering principles.
+- There is still much to learn about the human brain, but simplified neuron models are highly effective in practice.
+
+==== Video 3: Demand Prediction
+
+*1. Initial Example: Demand Prediction*
+- *Context:* Predicting whether a T-shirt will be a bestseller.
+- *Data:* Features such as price, shipping costs, marketing investments, and material quality.
+- *Practical Application:* Helps plan inventory and marketing campaigns for retailers.
+
+#figure(
+  image("./images/C2_W1_S1_V3_Demand_Prediction.png" )
+)
+
+*2. Concept of an Artificial Neuron*
+- *Simplified Model:*
+  - The artificial neuron is a simplified model of a biological neuron.
+  - Takes an input (e.g., price) and calculates an output using a formula, representing a probability.
+- *Terminology:*
+  - "A" or *activation*: Neuron output, representing energy or probability.
+- *Biological Relation:* Although much simpler, artificial neurons are effective in practice.
+
+*3. Building a Neural Network*
+- *Layers:*
+  - A group of connected neurons.
+  - *Input Layer:* Receives original features (price, shipping, marketing, material quality).
+  - *Hidden Layer:* Processes data to generate intermediate activations (affordability, awareness, perceived quality).
+  - *Output Layer:* Predicts the probability of success.
+- *Fully Connected:* Each neuron in a layer receives inputs from all outputs of the previous layer.
+
+#figure(
+  image("./images/C2_W1_S1_V3_Layers.png" )
+)
+
+*4. Detailed Example: Complex Prediction*
+- *Three Subproblems:*
+  - Estimating *affordability* based on price and shipping.
+  - Determining *awareness* using marketing investments.
+  - Evaluating *perceived quality* based on price and material quality.
+- *Integration:* These estimations are processed by a final neuron to predict success.
+
+#figure(
+  image("./images/C2_W1_S1_V3_Layers_multiple.png" )
+)
+
+*5. Simplification and Generalization*
+- *Vector Representation:*
+  - Inputs and outputs are grouped into vectors for implementation simplicity.
+- *Automated Calculations:*
+  - The network learns to prioritize relevant features without manual intervention.
+
+#figure(
+  image("./images/C2_W1_S1_V3_simplify_general.png" )
+)
+
+*6. Key Terminology*
+- *Input Layer:* Receives original data.
+- *Hidden Layer:* Processes intermediate data (activations).
+- *Output Layer:* Produces the final result.
+- *Activations:* Intermediate values representing the network's internal knowledge.
+
+#figure(
+  image("./images/C2_W1_S1_V3_multiple_hidden_layers.png" )
+)
+
+*7. Advantages of Neural Networks*
+- Transform initial features into more useful representations for prediction.
+- Learn complex relationships automatically.
+
+==== Video 4: Example: Recognizing Images
+*1. Image Representation*
+- Images are represented as *matrices* of pixel intensity values.
+- For example, a 1000x1000 pixel image generates a matrix of *1,000,000 values*(brightness intensity between 0 and 255).
+
+#figure(
+  image("./images/C2_W1_S1_V4_face_recognition.png" )
+)
+
+*2. Neural Network Structure*
+- The network takes a *vector* of pixel intensity values as input.
+- Includes multiple layers:
+  - *Hidden Layers:* Extract intermediate features.
+  - *Output Layer:* Predicts the identity of the person in the image.
+
+*3. Features Learned by Layers*
+- *First Hidden Layer:* Detects edges and simple lines.
+- *Second Hidden Layer:* Combines edges and lines to identify facial parts (eyes, nose, ears).
+- *Third Hidden Layer:* Assembles facial parts to recognize complete face shapes.
+- *Remark:* The network learns these features from data without explicit instruction.
+
+#figure(
+  image("./images/C2_W1_S1_V4_name_layers.png" )
+)
+
+*4. Generalization to Other Datasets*
+- With different data, the network learns specific features for other objects.
+  - Example: Trained on car images, it detects edges, car parts, and complete vehicle shapes.
+
+#figure(
+  image("./images/C2_W1_S1_V4_car_classification.png" )
+)
+
+*5. Importance and Applications*
+- Applicable to various computer vision tasks, including:
+  - *Facial recognition.*
+  - *Object detection.*
+  - *Pattern recognition (e.g., handwritten digits).*
+
+
+=== Section 3: Neural Network Model
+
+==== Video 1: Neural Network Layer
+
+1. *Neuron Layer*:
+   - Fundamental component of a modern neural network.
+   - Each layer receives inputs, performs calculations, and generates outputs passed to the next layer.
+
+2. *Neural Network Structure*:
+   - Example: A network with 4 input entities, one hidden layer with 3 neurons, and one output layer with a single neuron.
+   - Layers are numbered sequentially (input layer: 0, hidden layer: 1, output layer: 2).
+
+3. *Calculation in a Neuron*:
+   - Each neuron has parameters \( w \) (weights) and \( b \) (bias).
+   - Formula: \( $z = w \c x + b$ \), where \( x \) is the input vector.
+   - Activation \( a \) is computed using a sigmoid function: \( a = g(z) \), where \( $g(z) = \f{1}{1 + e^{-z}}$ \).
+
+4. *Notation for Layers and Parameters*:
+   - Superscripts (e.g., \[1\], \[2\]) indicate the corresponding layer.
+   - Example: \( w^{[1]} \) and \( b^{[1]} \) represent parameters of layer 1.
+
+5. *Hidden Layer Calculations*:
+   - Each neuron calculates \( $a_i = g(w_i \c x + b_i)$ \).
+   - Produces an activation vector \( $a^{[1]}$ \), used as input for the next layer.
+
+#figure(
+  image("./images/C2_W1_S3_V1_neural_network_layer.png" )
+)
+
+6. *Output Layer Calculations*:
+   - Receives the activation vector \( $a^{[1]}$ \) from the hidden layer.
+   - For a single neuron, produces a scalar \( $a^{[2]} = g(w \c a^{[1]} + b)$ \), representing a probability (e.g., \( 0.84 \)).
+
+#figure(
+  image("./images/C2_W1_S3_V1_end_layer.png" )
+)
+
+7. *Final Prediction*:
+   - In binary classification, apply a threshold (e.g., \( 0.5 \)):
+     - If \( $a^{[2]} \g 0.5$ \): prediction = 1.
+     - If \( $a^{[2]} < 0.5$ \): prediction = 0.
+
+#figure(
+  image("./images/C2_W1_S3_V1_final_prediction.png" )
+)
+
+8. *Building Larger Networks*:
+   - Networks are expanded by chaining multiple hidden layers.
+   - Each layer processes outputs of the previous layer, enabling more complex and precise models.
+
+9. *Practical Application*:
+   - This approach supports iterative computations from inputs to outputs in models requiring complex predictions.
+
+==== Video 2: More Complex Neural Networks
+
+1. *Neural Network Structure*:
+   - Composed of layers: input layer (layer 0), hidden layers (e.g., 1, 2, 3), and output layer.
+   - The input layer is typically not counted in the total number of layers.
+
+#figure(
+  image("./images/C2_W1_S3_V2_neural_network_structure.png" )
+)
+
+2. *Hidden Layer Calculation (Example: Layer 3)*:
+   - Receives an activation vector \( a^{[2]} \) from the previous layer.
+   - Produces a new activation vector \( a^{[3]} \).
+   - Each neuron computes:
+     \[
+     $a_j^{[3]} = g\l (w_j^{[3]} \c a^{[2]} + b_j^{[3]}\r)$
+     \]
+     Where:
+     - \( $w_j^{[3]}$ \): weights of neuron \( j \) in layer 3.
+     - \( $b_j^{[3]}$ \): bias of neuron \( j \) in layer 3.
+     - \( g \): activation function (e.g., sigmoid function).
+
+#figure(
+  image("./images/C2_W1_S3_V2_more_complex_neural.png" )
+)
+
+3. *Notation*:
+   - Superscripts (\([l]\)) indicate the layer.
+   - Subscripts (\(j\)) indicate the neuron within a layer.
+   - Input data \( X \) is often denoted as \( $a_0$ \).
+
+#figure(
+  image("./images/C2_W1_S3_V2_notation.png" )
+)
+
+4. *Activation Function*:
+   - The function \( g \), known as the activation function, determines activation values.
+   - Example: sigmoid function. Other functions will be explored later.
+
+5. *Inference Algorithm*:
+   - The network predicts values by sequentially calculating activations layer-by-layer using parameters \( w \) and \( b \) and activations from the previous layer.
+
+Here’s the translated text for Section 5 in English:
+
+=== Section 5: TensorFlow Implementation
+==== Video 1: Inference in Code
+
+1. *Introduction to TensorFlow*
+   - TensorFlow is one of the leading frameworks for implementing deep learning algorithms, often used in projects.
+
+2. *Illustrative Example: Coffee Roasting*
+   - A coffee roasting example is used to illustrate how a neural network makes inferences.
+   - The controlled parameters are:
+     - *Temperature*: The degrees Celsius to which the beans are heated.
+     - *Duration*: The time the beans are roasted.
+   - A good roast is represented with binary labels:
+     - *1*: Good tasting coffee.
+     - *0*: Bad tasting coffee.
+
+Image: C01_W02_S05_V01_Coffe_example.png
+
+3. *Dataset Features*
+   - Low temperature or insufficient time: Undercooked beans.
+   - High temperature or excessive time: Burnt beans.
+   - Only certain combinations of temperature and duration produce good coffee.
+
+#figure(
+  image("./images/C01_W02_S05_V01_Coffe_build_model.png" )
+)
+
+4. *Inference in a Neural Network with TensorFlow*
+   - *Input*: Vector `x` with temperature and duration (e.g., `[200, 17]` for 200°C and 17 minutes).
+   - *Layer 1*:
+     - Type: Dense (3 hidden units).
+     - Activation: Sigmoid function.
+     - Output: Activation `a1` (e.g., `[0.2, 0.7, 0.3]`).
+   - *Layer 2*:
+     - Type: Dense (1 unit).
+     - Activation: Sigmoid function.
+     - Output: Activation `a2` (e.g., `0.8`).
+   - *Prediction (`ŷ`)*:
+     - Threshold: `0.5`.
+     - If `a2 ≥ 0.5`, the prediction is `1` (positive roast). If not, it's `0` (negative roast).
+
+5. *Key Steps for Inference*
+   - Create the layers with the necessary specifications (type and activation function).
+   - Apply forward propagation:
+     - Calculate activations (`a1`, `a2`, etc.).
+   - Compare the final result with a threshold to make the prediction.
+
+6. *dditional Details*
+   - Use of the TensorFlow library to load parameters (`w` and `b`).
+   - Practical lab examples to explore these details.
+
+#figure(
+  image("./images/C01_W02_S05_V01_model_for_digit.png" )
+)
+
+7. *Additional Example: Handwritten Digit Classification*
+   - Input `x`: List of pixel intensity values (numeric matrix).
+   - Neural Network:
+     - *Layer 1*: Dense (25 units, sigmoid function).
+     - *Layer 2*: Dense (10 units, sigmoid function).
+     - *Layer 3*: Dense (1 unit, sigmoid function).
+   - Inference similar to the coffee example:
+     - Forward propagation through multiple layers.
+     - Compare the final output with the threshold.
+
+8. *Matrix Structure in TensorFlow*
+   - TensorFlow handles data as numerical matrices (tensors).
+   - It is essential to understand how data is structured and processed in TensorFlow.
+
+==== Video 2: Data in TensorFlow
+
+*Main Topic*
+Representation of data in *NumPy* and *TensorFlow* to implement neural networks within a coherent framework.
+
+*Key Points*
+ *Introduction*
+- *NumPy*: The standard library for linear algebra in Python, created years ago.
+- *TensorFlow*: Created by Google Brain, designed to handle large datasets.
+- Differences in representation conventions between *NumPy* and *TensorFlow*.
+
+#figure(
+  image("./images/C01_W02_S05_V02_feature_vectors.png" )
+)
+
+*Data Representation in TensorFlow and NumPy*
+ *Matrices in NumPy*
+1. *Matrix Definition and Example*:
+   - *Dimensions*: Number of rows x number of columns.
+   - Example:
+     - `2 x 3`: Two rows, three columns.
+     - Code: `x = np.array([[1, 2, 3], [4, 5, 6]])`.
+
+2. *Matrices with Different Dimensions*:
+   - `4 x 2`: Four rows, two columns.
+   - Code: `x = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])`.
+
+3. *Row and Column Vectors*:
+   - *1 x 2*: One row, two columns.
+     - Example: `x = np.array([[200, 17]])`.
+   - *2 x 1*: Two rows, one column.
+     - Example: `x = np.array([[200], [17]])`.
+
+4. *1D Vectors*:
+   - Simplified representation (without rows or columns): `x = np.array([200, 17])`.
+   - Contrast with 2D matrices.
+
+*Matrices and Tensors in TensorFlow*
+1. *Tensors*:
+   - The internal data representation in TensorFlow for computational efficiency.
+   - Example: A `1 x 3` tensor with values `[0.2, 0.7, 0.3]`.
+     - Code: `tf.constant([[0.2, 0.7, 0.3]])`.
+
+2. *Conversion Between TensorFlow and NumPy*:
+   - From tensor to NumPy array: `a1.numpy()`.
+   - Example: `a2.numpy()` converts a `1 x 1` tensor into a NumPy array.
+
+*Code Examples*
+1. *Layer 1: Activations*:
+   - Code: `a1 = layer_1(x)`.
+   - Result: `1 x 3` tensor.
+
+2. *Layer 2: Activations*:
+   - Code: `a2 = layer_2(a1)`.
+   - Result: `1 x 1` tensor.
+
+*Final Reflection*
+- TensorFlow automatically converts NumPy matrices to tensors.
+- Conversions between tensors and matrices are common but add complexity.
+- Despite the differences, both libraries work well together.
+
+==== Video 3: Building a neural network
+1. *Manual Network Building*:
+   - In previous methods, layers were created and connected manually, passing input data through each layer.
+
+2. *Using the Sequential Model*:
+   - TensorFlow provides the sequential model to simplify the process.
+   - This method automatically connects layers to form a neural network.
+   - Example:
+
+     ```python
+     from tensorflow.keras.models import Sequential
+     from tensorflow.keras.layers import Dense
+
+     model = Sequential([
+         Dense(3, activation='sigmoid'),
+         Dense(1, activation='sigmoid')
+     ])
+     ```
+
+3. *Training the Network*:
+   - Training data is structured as matrices (X for features and Y for labels).
+   - Training:
+     ```python
+     model.compile(optimizer='adam', loss='binary_crossentropy')
+     model.fit(X, Y)
+     ```
+
+4. *Predictions with the Model*:
+   - Use the trained model for inference:
+     ```python
+     predictions = model.predict(X_new)
+     ```
+
+5. *Common Conventions*:
+   - Instead of assigning layers to separate variables, they are typically defined directly within the sequential model.
+   - This results in more compact and readable code.
+
+6. *Example Implementations*:
+   - Coffee example: Classifying data using a simple two-layer dense model.
+   - Digit classification example: Similar to the coffee example, but with multiple layers.
+
+7. *Importance of Understanding the Basics*:
+   - Although libraries like TensorFlow simplify development, it is crucial to understand how the underlying algorithms work.
+   - You will learn to implement forward propagation from scratch in Python for a deeper understanding.
+
+8. *Balancing Efficiency and Knowledge*:
+   - Modern libraries allow you to create advanced neural networks with just a few lines of code.
+   - However, it is essential to know the details to diagnose problems and understand what happens behind the scenes.
+
+=== Section 7: Neural network implementation in Python
+
+==== Video 1: Forward prop in a single layer
+
+1. *Activation calculation of the first layer*:
+   - Start with an input vector `x` and implement forward propagation to obtain the activation `a2` in a simple neural network.
+   - Subscript notation is used to indicate different parameter values (e.g., `w2_1` and `b2_1`).
+   - The first value to calculate is the activation `a1_1`, which is obtained by calculating `z1_1` as the dot product between `w1_1` and `x`, adding the bias `b1_1`, and applying the sigmoid function.
+
+2. *Calculation of other activations of the first layer*:
+   - Repeat the process to calculate `a1_2` and `a1_3`, using parameters `w1_2` and `b1_2`, and then applying the sigmoid function.
+   - The results of the three activations (`a1_1`, `a1_2`, `a1_3`) are grouped into a matrix `a1`.
+
+3. *Forward propagation of the second layer*:
+   - The output `a2` is calculated using the parameters of the second layer, `w2_1` and `b2_1`.
+   - Calculate `z2_1` as the dot product between `w2_1` and `a1`, add the bias `b2_1`, and then apply the sigmoid function to obtain `a2_1`.
+
+4. *Implementation with NumPy*:
+   - The entire forward propagation process is implemented using Python and NumPy (`np`).
+
+*Video 2: General implementation of forward propagation*
+
+1. *Implementation of the dense layer*:
+   - Introduce the `dense` function, which takes the activation of the previous layer (`a`), and the parameters of the current layer (`w` and `b`) as inputs.
+   - In the example, we work with three neurons in layer 1. The parameters `w_1, w_2, w_3` are stacked into a 2x3 matrix, where each column represents the weights corresponding to each neuron.
+   - Similarly, the bias terms (`b`) are stacked into a 1D matrix.
+
+2. *Activation calculation*:
+   - The `dense` function generates activations for the current layer. It uses a loop to calculate the activation value `a` for each unit (neuron) using the standard formula: \( z = W \cdot a + b \), followed by the sigmoid function \( a = g(z) \).
+   - This process is repeated for each neuron in the layer.
+
+3. *Code for the `dense` function*:
+   - The code shows how to extract columns from the matrix `W` and how to use the dot product with the activation from the previous layer. Then, biases are added and the sigmoid function is applied to obtain the activation.
+
+4. *Layer composition*:
+   - Explanation of how to combine multiple dense layers sequentially to implement a forward propagation system in a neural network.
+   - From the input features `x`, the activation of the first layer \( a_1 \) is calculated, then the second layer \( a_2 \), and so on until the final output \( a_4 \) in a network with four layers.
+   - Standard algebraic notation is used: matrices `W` are denoted with uppercase letters and vectors with lowercase letters.
+
+5. *Importance of understanding the low-level process*:
+   - Although libraries like TensorFlow or PyTorch are commonly used, it is crucial to understand how they work internally to debug errors and improve performance.
+   - Understanding how to implement forward propagation from scratch helps identify issues when things don't work as expected, allowing developers to fix bugs more quickly.
+
+*Section 9: Speculations on artificial general intelligence (AGI)*
+
+*Video 1: Is there a path to AGI?*
+
+1. *Distinction between ANI and AGI*:
+   - *ANI (Artificial Narrow Intelligence)*:
+     - Refers to systems that perform specific tasks with great efficiency (e.g., virtual assistants, autonomous cars, search engines, applications in agriculture, factories, etc.).
+     - Advances in ANI have generated significant value in today's society.
+   - *AGI (Artificial General Intelligence)*:
+     - The goal is to create AI systems that can perform any task that a typical human can do.
+     - While ANI has made great strides, AGI has not made significant progress in practice.
+
+2. *The myth of AI progress towards AGI*:
+   - The relationship between ANI progress and AGI is not direct. Progress in ANI does not automatically imply advances in AGI.
+   - The rise of modern deep learning has led some to believe that simulating many neurons could replicate human intelligence, but this idea has proven to be overly simplistic.
+
+3. *Difficulties in attempting to simulate the human brain*:
+   - *Simplicity of artificial neural networks*: Artificial neural networks are much simpler than biological neurons and do not accurately simulate the behavior of the human brain.
+   - *Lack of understanding of the brain*: We still do not fully understand how the brain works, which makes simulating it in a machine an extremely difficult task.
+
+4. *Experiments on brain plasticity*:
+   - *Experiments showing the adaptability of the brain*:
+     - Animal experiments show that areas of the brain, such as the auditory cortex or somatosensory cortex, can learn to process different types of data (e.g., images instead of sounds).
+     - The brain is highly adaptable, suggesting that there could be basic learning algorithms responsible for this plasticity.
+     - Examples include using sensors or devices (e.g., cameras mounted on the forehead) that teach people to "see" with different parts of the body, such as the tongue.
+     - *Human echolocation*: Echolocation experiments have been conducted where humans learn to use sound to "see" in a manner similar to bats or dolphins.
+     - *Haptic belt*: Research has shown that it is possible to teach humans to "feel" direction using devices such as vibrating belts.
+   - The brain's plasticity suggests that a single learning algorithm might be able to process different types of sensory inputs.
+
+5. *Hope of replicating the brain with algorithms*:
+   - If the brain can learn to perform complex tasks (e.g., seeing, hearing, feeling) with different types of data, perhaps there is an underlying algorithm that we can discover and implement in a machine.
+   - Despite progress, the narrator is doubtful that we will ever discover that algorithm and truly replicate the human brain.
+
+6. *Long-term perspective on AGI*:
+   - Working on AGI remains one of the most fascinating problems in science and engineering.
+   - While there is hope that a path to AGI will one day be discovered, the narrator emphasizes that progress will be extremely difficult.
+   - It should not be exaggerated that AGI advancements are near, as we do not fully understand how the human brain works or how to replicate it.
+
+7. *The value of machine learning and neural networks*:
+   - While AGI is still a distant goal, neural networks and machine learning are already powerful tools in current applications.
+
+=== Section 10: Vectorization (optional)
+
+==== Video 1: How neural networks are implemented efficiently
+*Notes on the vectorized implementation of neural networks:*
+
+1. *Reason for the scalability of neural networks:*
+   - Neural networks can be vectorized, allowing for efficient implementation through matrix multiplications.
+   - Parallel computing hardware, such as GPUs and certain CPU functions, excels at performing large matrix multiplications, which has been key to the success and scalability of deep learning.
+
+2. *Implementation of Forward Propagation in a single layer:*
+   - The code shown is a basic implementation of forward propagation in a single layer of a neural network, where:
+     - *X* is the input,
+     - *W* are the neuron weights,
+     - *B* is the bias.
+   - This implementation generates three output numbers by applying the neural network formula.
+
+3. *Vectorized implementation:*
+   - Instead of using a `for` loop to process each neuron separately, the process is vectorized, allowing operations to be performed in parallel.
+   - *X* is defined as a 2D matrix, just like *W* (the weights), and *B* is also converted into a 2D matrix of size 1x3.
+   - Matrix multiplication is performed using `np.matmul`, which is how NumPy performs matrix multiplication.
+   - The simplified code is reduced to a few lines:
+     - *Z* is calculated as the product of the matrices *X* and *W*.
+     - *B* is added to *Z*.
+     - Then, the activation function *g* (sigmoid) is applied to *Z* to obtain *A*, which is the output of the layer.
+
+4. *Advantages of the vectorized implementation:*
+   - The vectorized implementation is more efficient and faster as it avoids iterative loops and allows parallel computation of operations.
+   - The input and output, as well as the parameters *W* and *B*, are now 2D matrices, making forward propagation in a single layer easier.
+
+This vectorized approach is crucial for neural networks to handle large amounts of data and scale efficiently.
+
+==== Video 2: Matrix multiplication
+
+1. *Matrices and Dot Product:*
+   - A matrix is a block or 2D array of numbers.
+   - The dot product between two vectors is calculated by multiplying corresponding elements and summing the results. Example with vectors (1, 2) and (3, 4): \(1 \times 3 + 2 \times 4 = 11\).
+
+2. *Dot Product and Transposition:*
+   - The dot product between two vectors can also be written as the transposition of one vector multiplied by another vector. The transposition of a vector changes its orientation from column to row.
+
+3. *Multiplying a Vector by a Matrix:*
+   - A vector can be multiplied by a matrix, and the result is a new matrix.
+   - Example: The vector (1, 2) multiplied by the matrix \( \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \) results in the vector \( (11, 17) \), calculated by performing the dot product between the transposed vector and the columns of the matrix.
+
+4. *Matrix Multiplication:*
+   - Matrix multiplication involves dot products between vectors, but organized in a structured way to form the elements of the resulting matrix.
+   - Example: If A is a matrix with columns \( a_1 \) and \( a_2 \), and W is a matrix, matrix multiplication is calculated by multiplying the rows of \( A^T \) (the transposition of A) with the columns of W.
+
+5. *Matrix Transposition:*
+   - To transpose a matrix, its rows and columns are swapped. This changes the columns of A into the rows of \( A^T \).
+   - Example: The matrix \( A = \begin{pmatrix} 1 & 2 \\ -1 & -2 \end{pmatrix} \) becomes \( A^T = \begin{pmatrix} 1 & -1 \\ 2 & -2 \end{pmatrix} \).
+
+6. *Multiplying \( A^T \) and W:*
+   - The multiplication of \( A^T \) by W is performed in the same way as the dot product, but with the rows of \( A^T \) and the columns of W.
+   - Results from the example: The first element is \( 1 \times 3 + 2 \times 4 = 11 \), the second is \( 1 \times 5 + 2 \times 6 = 17 \), the third is \( -1 \times 3 + -2 \times 4 = -11 \), and the last is \( -1 \times 5 + -2 \times 6 = -17 \).
+
+7. *Generalization:*
+   - Matrix multiplication is a combination of dot products between vectors, organized in a specific way to construct the resulting matrix.
+
+==== Video 3: Matrix multiplication rules
+
+1. *Matrix Multiplication:*
+   - Matrix A is of size 2x3 (two rows and three columns).
+   - The transposition of matrix A is applied, turning its columns into rows.
+   - Matrix W has four columns and is considered as vectors w1, w2, w3, w4.
+
+2. *Calculating the Product between Matrices:*
+   - To calculate the multiplication between the transposition of A and W, the dot product is performed between the rows of the transposition of A and the columns of W.
+   - Each element of the resulting matrix Z is obtained by multiplying a row of the transposed A by a column of W.
+
+3. *Examples of Calculations:*
+   - Specific examples are given on how to calculate values in the matrix Z using dot products, such as the value in row 1, column 1 of Z being the result of the dot product between the first row of A transposed and the first column of W.
+   - Other examples are analyzed, like the calculation for row 3, column 2, and row 2, column 3.
+
+4. *Matrix Multiplication Requirements:*
+   - Matrix multiplication is only valid if the number of columns of the first matrix (A transposed) is equal to the number of rows of the second matrix (W).
+   - The dimensions of the resulting matrix Z will be the rows of the first transposed matrix (3) and the columns of the second matrix (4).
+
+5. *Matrix Multiplication Properties:*
+   - The matrix product results in a matrix of dimensions determined by the rows of the transposed matrix and the columns of the multiplying matrix.
+
+6. *Application in Vectorized Neural Networks:*
+   - The vectorized implementation of neural networks is based on these matrix multiplication principles.
+   - Vectorization greatly improves the execution speed of neural networks.
+
+==== Video 4: Matrix multiplication code
+
+1. *Initial Concepts:*
+   - Matrix multiplication is analyzed, specifically the transposition of matrix A and its multiplication by matrix W to obtain Z.
+   - In code, the transposition of A is performed with `A.T` or `A.transpose()`, and matrix multiplication with `np.matmul(AT, W)`.
+
+2. *Calculations with Matrices:*
+   - Matrix W is formed with the weights `w_1`, `w_2`, `w_3`, and matrix B with the biases `b_1`, `b_2`, `b_3`.
+   - The calculation of Z as `Z = A.T @ W + B` gives the results 165, -531, and 900, corresponding to the weights of the feature inputs.
+
+3. *Sigmoid Function:*
+   - The sigmoid function is applied to the values of Z to obtain the output values, A, which are [1, 0, 1] after rounding.
+
+4. *Implementation in Code:*
+   - The transposition of A and multiplication with W and B are implemented as `Z = np.matmul(A.T, W) + B`.
+   - The final output of the layer is obtained by applying the activation function `g` to Z: `a_out = g(Z)`.
+
+5. *TensorFlow Conventions:*
+   - In TensorFlow, it is common for individual examples to be in rows of matrix X, rather than transposing X.
+   - This implementation variation is mentioned as a convention, but both forms are correct.
+
+6. *Advantages of Vectorized Implementation:*
+   - Using vectorized operations and efficient matrix multiplication (`matmul`) allows for neural network inference with fewer lines of code and takes advantage of the efficiency of modern computers.
+
+== Week 2: Neural Network Training
+
+== Section 1: Neural Network Training
+=== Video 1: TensorFlow Implementation
+==== *Model Architecture*
+- Input: Image (`X`).
+- Neural network with:
+  - First hidden layer: 25 units (sigmoid activation).
+  - Second hidden layer: 15 units.
+  - Output layer: 1 unit.
+- Goal: Train parameters using training examples (`X`, `Y`).
+
+==== *Steps to Train a Neural Network with TensorFlow*
+1. *Define the Model*:
+   - Specify the layers of the neural network sequentially.
+   - Reuse last week’s code to define the architecture.
+
+2. *Compile the Model*:
+   - Select the loss function:
+     - Binary cross-entropy in this case.
+   - TensorFlow will use this function to compute the cost.
+
+3. *Train the Model*:
+   - Call the `fit` function to adjust the model.
+   - Use the dataset (`X`, `Y`) and the specified loss function.
+   - *Epochs*:
+     - Indicate how many gradient descent steps are executed.
+
+==== *Importance of Conceptual Understanding*
+- Running the code isn’t enough; understanding how it works is essential.
+- A conceptual framework helps:
+  - Debug errors when the algorithm doesn’t work as expected.
+  - Understand what happens behind each line of code.
+
+=== Video 2: Training Details
+
+1. *Training Neural Networks*:
+   - Follows the same basic principles as training logistic regression.
+   - Three main steps:
+     1. Specify how to calculate the result based on input (`x`) and parameters (`W` and `b`).
+     2. Define the loss function and associated cost function.
+     3. Minimize the cost function using algorithms like gradient descent.
+
+2. *Logistic Regression*:
+   - Prediction uses a sigmoid function (`f(x)`).
+   - The loss function measures the difference between the prediction (`f(x)`) and the true label (`y`).
+   - The cost function (`J`) is the average loss over the entire training set.
+   - Gradient descent adjusts parameters (`W, b`) to minimize cost.
+
+3. *Neural Networks in TensorFlow*:
+   - Step 1: Specify the network architecture (layers, units, activation functions) through code.
+   - Step 2: Define the loss function (e.g., binary cross-entropy for classification).
+     - TensorFlow allows switching loss functions for different problems (e.g., mean squared error for regression).
+   - Step 3: Optimize the cost function with algorithms like gradient descent.
+     - TensorFlow uses backpropagation to compute necessary derivatives.
+
+4. *TensorFlow Features*:
+   - The `fit()` function encapsulates the training process, including backpropagation.
+   - Automatically adjusts parameters for a specific number of iterations (epochs).
+   - Supports multiple optimization algorithms faster than traditional gradient descent.
+
+5. *Technological Evolution*:
+   - Libraries like TensorFlow simplify complex tasks, enabling engineers to focus on high-level problems.
+   - Highlights how using mature libraries is a common trend in modern computing.
+
+== Section 3: Activation Functions
+
+=== Video 1: Alternatives to the Sigmoid Activation
+1. *Initial Use of Sigmoid Function*:
+   - Originally used in hidden and output layer nodes.
+   - Inspired by logistic regression, which uses similar functions.
+
+2. *Limitations of the Sigmoid Function*:
+   - Restricted to the range [0, 1], which can limit modeling certain phenomena.
+   - Example: Modeling consumer awareness might require extending to larger non-negative values.
+
+#figure(
+  image("./images/C02_W02_S03_V01_Demand_prediction.png" )
+)
+
+3. *Introduction to ReLU (Rectified Linear Unit)*:
+   - A common activation function in modern neural networks.
+   - Defined as \( g(z) = \max(0, z) \), allowing non-negative values and being 0 for negative values.
+   - Advantage: Can represent large values, useful for non-binary phenomena.
+
+4. *Alternative Activation Functions*:
+   - *Linear*: \( g(z) = z \), considered “no activation” in some contexts.
+   - *Softmax*: An important activation function discussed later in the course.
+
+5. *Choosing Activation Functions*:
+   - The choice depends on the context and purpose of the neural network.
+   - Commonly used functions: Sigmoid, ReLU, and linear.
+
+#figure(
+  image("./images/C02_W02_S03_V01_examples_of_activation_fuction.png" )
+)
+
+6. *Key Concepts*:
+   - Activation functions transform input values to improve learning and data representation.
+   - Names like ReLU reflect terminology adopted by their creators.
+
+=== Video 2: Choosing Activation Functions
+==== 1. *Output Layer*:
+   - The choice of activation depends on the problem type and target labels:
+     - *Binary Classification* (`y` = 0 or 1): Use *sigmoid*.
+       - Reason: Models the probability of `y = 1`, like logistic regression.
+     - *Regression with positive/negative values*: Use *linear*.
+       - Example: Predicting stock price changes.
+     - *Regression with non-negative values*: Use *ReLU*.
+       - Example: House price predictions, as prices cannot be negative.
+
+==== 2. *Hidden Layers*:
+   - *ReLU* is the default and most common choice.
+     - Advantages:
+       - Faster computation (only requires calculating the maximum between 0 and `z`).
+       - Reduces vanishing gradients, speeding up learning.
+     - Comparison to Sigmoid:
+       - Sigmoid has more flat regions in its graph, slowing learning with small gradients.
+
+==== 3. *Why Choose ReLU in Hidden Layers?*
+   - Flat gradient functions slow down gradient descent, affecting training time.
+   - ReLU avoids this, making neural networks more efficient.
+
+==== 4. *Other Activation Functions*:
+   - Less common alternatives:
+     - *TanH*: Similar to sigmoid but zero-centered.
+     - *LeakyReLU*: Variant of ReLU allowing small negative values.
+     - *Swish*, among others.
+   - These can be useful for specific cases, though ReLU suffices for most applications.
+
+==== 5. *Importance of Activation Functions*:
+   - Without activation functions, neural networks cannot model non-linear relationships.
+   - Activation functions enable the network to capture complex patterns in data.
+
+==== *Conclusion*:
+   - *Output Layer*: Choose activation based on problem type (sigmoid, linear, ReLU).
+   - *Hidden Layers*: Use ReLU by default.
+   - Explore other functions for specific cases or advanced research.
+
+=== Video 3: Why Do We Need Activation Functions?
+1. *Issue with Linear Activation Functions:*
+   - Using a linear activation function for all neurons reduces the network to simple linear regression.
+   - Limits the network's ability to learn complex functions.
+
+2. *Illustrative Example:*
+   - A network with one hidden and one output layer using linear activations:
+     - Final output expressed as \(a_2 = wx + b\), a linear function.
+     - Shows that multiple layers with linear activations add no extra complexity.
+
+#figure(
+  image("./images/C02_W02_S03_V03_linear_example.png" )
+)
+
+3. *General Implications:*
+   - A neural network with only linear activations is equivalent to a linear regression model.
+   - Adding a logistic activation in the output layer creates a logistic regression model.
+
+4. *General Rule:*
+   - Avoid linear activation functions in hidden layers.
+   - Use non-linear activations like ReLU to allow learning of complex relationships.
+
+#figure(
+  image("./images/C02_W02_S03_V03_example.png" )
+)
+
+5. *Discussed Applications:*
+   - Neural networks for binary classification (output \(y\) in {0, 1}).
+   - Regression problems (continuous positive/negative values).
+
+=== Section 5: Multiclass Classification
+
+==== Video 1: Multiclass
+
+1. *Clarity and Precision*:
+   - The introduction could be more direct in defining multiclass classification. For example: "Multiclass classification refers to problems where the output variable can take more than two distinct labels."
+   - It is recommended to split long ideas into shorter sentences for better understanding.
+
+2. *Consistent Terminology*:
+   - "and" is used several times to refer to the output, but it is not explained at the beginning of the text. It would be helpful to clarify this at the start: "and represents the output label or category."
+
+3. *Organization of Examples*:
+   - The examples are good but could be organized in a list for easier reading:
+     - Handwritten digit recognition (0 to 9).
+     - Classification of patients with multiple diseases.
+     - Visual inspection of manufacturing defects.
+
+4. *Avoid Redundancy*:
+   - The idea that multiclass classification problems have more than two categories is mentioned multiple times, which could be simplified.
+
+5. *Clear Technical Terms*:
+   - Briefly explain what "softmax regression" is and how it generalizes "logistic regression" before mentioning them.
+
+6. *Transition Between Ideas*:
+   - Transitions between examples and technical explanations could be smoother. For example: "Now let’s look at how this problem is addressed through specific algorithms like logistic regression and its extension, softmax regression."
+
+=== Improved Text Example:
+
+Multiclass classification refers to classification problems where the output variable can take more than two possible labels, rather than just two categories like 0 and 1. For example:
+
+- In handwritten digit recognition, we might want to distinguish between the ten digits (0-9).
+- Diagnosing patients may require identifying if they have one of three or five possible diseases.
+- In visual inspection of manufactured products, like tablets, we might classify defects into categories such as scratches, discoloration, or chips.
+
+Unlike binary classification problems, where we estimate the probability of the output being one of two possible labels (e.g., 0 or 1), in multiclass classification we aim to estimate the probability that it belongs to each of the multiple possible classes. For example, if there are four classes, the model estimates the probabilities that the output label is equal to 1, 2, 3, or 4.
+
+To address this type of problem, a generalization of the logistic regression algorithm, known as softmax regression, is used. This method not only adjusts decision boundaries for two categories but also divides the space into as many regions as there are classes. Additionally, this approach can be integrated with neural networks to solve complex multiclass classification problems.
+
+==== Video 2: Softmax
+
+1. *Basic Definition*:
+   - Softmax regression is a generalization of logistic regression for multiclass classification problems.
+   - While logistic regression works with two possible values (0 and 1), softmax regression is used when there are multiple possible classes (e.g., 1, 2, 3, 4, etc.).
+
+2. *Logistic Regression Functioning*:
+   - \( $z = w \cdot x + b$ \), where \( w \) are the weights, \( x \) the features, and \( b \) the bias.
+   - The sigmoid function \( g(z) \) is then applied to obtain the probability that \( y = 1 \), with \( $P(y = 0) = 1 - P(y = 1$) \).
+
+3. *Extension to Softmax Regression*:
+   - Calculates \( z_j = w_j \cdot x + b_j \) for each class \( j \).
+   - The probability of each class \( a_j \) is estimated using the formula:
+     \[
+     $a_j = \f{e^{z_j}}{\s{k=1}^n e^{z_k}}$
+     \]
+     where \( n \) is the total number of classes.
+
+4. *Important Properties*:
+   - The estimated probabilities (\( a_1, a_2, \ldots, a_n \)) always sum to 1.
+   - For two classes (\( n = 2 \)), softmax regression reduces to logistic regression.
+
+5. *Loss Function*:
+   - The loss for a specific class \( y = j \) is defined as:
+     \[
+     \t{Loss} = -\log(a_j)
+     \]
+   - This encourages the model to maximize the probability \( a_j \) for the correct class, minimizing the loss.
+   - The global cost function is the average of individual losses in the training set.
+
+6. *Loss Visualization*:
+   - If \( a_j \) approaches 1 (high confidence in the correct class), the loss is small.
+   - If \( a_j \) is low, the loss increases significantly.
+
+7. *Practical Application*:
+   - Softmax regression enables building algorithms for multiclass classification.
+   - This model can be trained as a foundation for more advanced neural networks.
+
+8. *Quick Test*:
+   - If the estimated probabilities for three classes are \( a_1 = 0.30 \), \( a_2 = 0.20 \), \( a_3 = 0.15 \), then \( a_4 = 1 - (0.30 + 0.20 + 0.15) = 0.35 \).
+
+==== Video 3: Neural Network with Softmax Output
+
+1. *Softmax Model*: For multiclass classification, the softmax regression model is used in the output layer of a neural network. This allows the network to classify between several possible classes, like digits 0 to 9.
+
+2. *Softmax Output Layer*: The output layer has 10 units for the 10 possible classes. The formula is used to calculate the activations for each output unit (a1, a2, ..., a10) based on inputs (Z1, Z2, ..., Z10).
+
+3. *Probability Calculation*: For each class, the activation of the output layer (a1, a2, ..., a10) is calculated using the softmax formula, providing probability estimates for each output label.
+
+4. *Properties of Softmax*: Unlike other activation functions, the softmax function considers all classes simultaneously. For instance, the activation a1 depends on Z1, Z2, ..., Z10, unlike functions like sigmoid or linear, where each activation only depends on its respective input.
+
+5. *Implementation in TensorFlow*: The implementation in TensorFlow involves creating a neural network with three layers. The output layer uses the softmax activation function. The recommended loss function is `SparseCategoricalCrossEntropy`, which is suitable for multiclass classification problems.
+
+6. *Loss Function*: `SparseCategoricalCrossEntropy` is used because it is a classification in categories (1 through 10), and "sparse" means each input can belong to only one category.
+
+==== Video 4: Improved Implementation of Softmax
+
+1. *Numerical Rounding Issue in Calculations*:
+   - The video discusses how to calculate \( $x = \f{2}{10000}$ \) in two ways: directly and through a more complex expression. The difference in results is due to rounding errors caused by the finite precision of computers when storing floating-point numbers.
+
+2. *Impact of Rounding Errors in TensorFlow*:
+   - Rounding errors can affect the performance of calculations in TensorFlow. Although the cost function for softmax is correctly implemented, it can be improved to reduce these errors, leading to more precise calculations.
+
+3. *Optimization in Logistic Regression*:
+   - In logistic regression, the terms in the loss function are rearranged to improve numerical accuracy. This avoids explicitly calculating certain intermediate values, which can introduce rounding errors.
+
+4. *Applying Ideas in Softmax*:
+   - The same principles of numerical accuracy are applied to the softmax implementation. Instead of calculating activations and losses in separate steps, TensorFlow can rearrange the terms in the loss to calculate it more accurately, especially when handling very small or very large values.
+
+5. *Using the Linear Activation Function*:
+   - To improve numerical accuracy, the activation in the final layer of the neural network is changed from softmax to a linear activation. This also affects how the output of the network is calculated, mapping values from \( z_1 \) to \( $z_{10}$ \).
+
+6. *Implementation in Code*:
+   - The recommended code for a more precise implementation of the softmax loss function is harder to read but improves numerical accuracy by avoiding the use of intermediate logistic functions. The `from_logits=True` parameter is used in TensorFlow to handle this.
+
+7. *Multiclass Classification*:
+   - It explains how to perform multiclass classification with a softmax output layer in a numerically stable way.
+
+==== Video 5: Classification with Multiple Outputs (Optional)
+
+1. *Multiclass Classification vs. Multi-label Classification*:
+   - *Multiclass Classification*: Each input has a single output label, which can be one of several possible categories (e.g., handwritten digit classification).
+   - *Multi-label Classification*: Each input can be associated with multiple labels, meaning multiple categories can appear simultaneously (e.g., in an autonomous vehicle, detecting cars, buses, or pedestrians).
+
+2. *Practical Example*:
+   - In a driver assistance system, questions could be asked about the categories present in an image of the vehicle's surroundings, like "Is there a car?" or "Is there a pedestrian?"
+   - The answers would be multiple possible labels associated with an image, such as a vector: [Car: Yes, Bus: No, Pedestrian: Yes].
+
+3. *Building a Neural Network for Multi-label Classification*:
+   - One approach is to create independent neural networks for each category (e.g., one for cars, one for buses, and one for pedestrians).
+   - Alternatively, a single neural network can be trained to simultaneously detect all labels. This is achieved with a neural network architecture that has an output layer with multiple neurons (one for each class), each using a sigmoid activation function to predict the presence of each category.
+
+4. *Confusion Between Multiclass Classification and Multi-label Classification*:
+   - The differences between these two types of problems are highlighted, and the importance of choosing the appropriate approach for the application is emphasized.
+   - In multi-label classification, several binary classification problems are solved in parallel (e.g., deciding if there is a car, bus, or pedestrian in the image).
+
+=== Section 7: Additional Neural Network Concepts
+==== Video 1: Advanced Optimization
+1. *Gradient Descent*: It is a widely used optimization algorithm in machine learning, fundamental for algorithms like linear and logistic regression, and neural networks.
+
+2. *Gradient Descent Problem*: Although useful, gradient descent can be slow. If the learning rate (Alpha) is small, the algorithm advances slowly. If it is too large, it may oscillate and not converge properly.
+
+3. *Adam Algorithm*: The Adam optimization algorithm improves gradient descent by automatically adjusting the learning rate for each parameter, helping it converge faster.
+
+4. *How Adam Works*: Adam increases the learning rate when the parameter moves in the same direction and decreases it when the parameter oscillates. This helps achieve a more stable path toward the cost function minimum.
+
+5. *Learning Rates per Parameter*: Adam uses a distinct learning rate for each parameter (w_1 to w_10, b), which improves performance by allowing specific adjustments for each parameter.
+
+6. *Practical Implementation of Adam*: The optimizer `tf.keras.optimizers.Adam` is used in model compilation in frameworks like TensorFlow. The initial learning rate is important and may require adjustments.
+
+7. *Advantages of Adam*: It is more robust than traditional gradient descent, as it automatically adjusts the learning rate. This makes it more efficient and suitable for practical neural networks.
+
+==== Video 2: Additional Layer Types
+*Notes on the text:*
+
+1. *Dense Neural Networks:*
+   - Until now, dense layers have been used, where each neuron receives inputs from all neurons in the previous layer.
+   - This type of layer is sufficient to create powerful learning algorithms.
+
+#figure(
+  image("./images/C02_W02_S05_V02_convulcional.png", width: 100%)
+)
+
+2. *Convolutional Layer:*
+   - In some applications, convolutional layers are used, which have different properties.
+   - In a convolutional layer, neurons do not see the entire input but only a small region (window) of the input image, speeding up the process and improving efficiency.
+   - Using this type of layer can reduce the need for large amounts of training data and make the network less prone to overfitting.
+
+3. *Advantages of Convolutional Layers:*
+   - They accelerate computation.
+   - They reduce the risk of overfitting.
+   - They are especially useful in processing images and signals, such as electrocardiogram (EKG) signals.
+
+4. *Practical Example of a Convolutional Layer:*
+   - An EKG signal, which is a time series of voltage values, is processed by a convolutional neural network.
+   - Each neuron in the hidden layer observes a limited window of the EKG signal, rather than the entire sequence.
+
+5. *Convolutional Neural Network Architecture:*
+   - The first hidden layer observes only a part of the input (windows).
+   - The next hidden layer is also convolutional and analyzes the activations of the previous layer in limited windows.
+   - The output layer could be a sigmoid layer that classifies the data (e.g., presence or absence of heart disease).
+
+6. *Considerations in Designing Convolutional Neural Networks:*
+   - There are different architectural parameters, such as the size of the window each neuron should observe and how many neurons should be present in each layer.
+   - Properly selecting these parameters can create more effective networks than dense layers in some applications.
+
+=== Section 9: Back Propagation (Optional)
+==== Video 1: What is a derivative? (Optional)
+- *Objective of Backpropagation*: In TensorFlow, the architecture of a neural network is specified to calculate the output as a function of the input and a cost function. TensorFlow uses backpropagation to compute derivatives and train parameters via gradient descent or Adam.
+
+- *Backpropagation and Calculation*: The backpropagation algorithm computes the derivatives of the cost function with respect to the parameters. In the example of a simplified cost function \(J(w) = w^2\), it illustrates how increasing a parameter \(w\) by a small amount (epsilon) changes \(J(w)\).
+
+- *Derivatives and Change Calculation*: If \(w\) increases by \(0.001\), it is observed that \(J(w)\) increases approximately six times that amount. In calculus, this is interpreted as the derivative of \(J(w)\) with respect to \(w\) being 6. This is repeated for other values of \(w\) and \(J(w)\), observing that the derivative depends on the value of \(w\).
+
+- *Concept of Derivative*: The derivative of a function shows how the function changes with respect to the parameters. The smaller the derivative, the smaller the change in the parameter. A large derivative suggests that small changes in the parameter have a significant effect on the cost function.
+
+- *Derivative Examples*: Derivatives for \(w^2\), \(w^3\), \(w\), and \(1/w\) are shown. The calculated derivatives help understand how a small change in \(w\) affects the cost function.
+
+- *Using SymPy in Python*: It is mentioned how to use the SymPy library to compute derivatives in Python. The example of the derivative of \($w^2$\) is given, showing that the derivative is \(2w\), and users are encouraged to perform these calculations with different functions.
+
+==== Video 2: Computation graph (Optional)
+1. *Computation Graph*: A computation graph is a representation of the operations performed in a neural network model. In this case, the graph describes how the output and the loss function (causing function) of a simple neural network are calculated.
+
+2. *Neural Network Example*:
+   - The network has a single layer (output layer) and a single output unit.
+   - It takes input \(x\), applies a linear activation function, and generates an output \(a = wx + b\), which is linear regression.
+   - The causing function \(J\) measures the error, calculated as \( \frac{1}{2}(a - y)^2 \), where \(y\) is the observed real value.
+
+3. *Calculating the Causing Function*:
+   - The calculations are broken down into small steps within the computation graph, such as multiplying the parameters \(w\) and \(x\), summing \(wx + b\), and finally calculating the loss \(J\).
+
+4. *Backpropagation*:
+   - *Calculating Derivatives*: The computation graph is used to calculate the derivatives of the loss function with respect to parameters \(w\) and \(b\).
+   - The backpropagation process goes from right to left (unlike forward propagation, which goes from left to right).
+   - It calculates how changes in each node of the network affect the final output \(J\). This includes derivatives of \(J\) with respect to different parameters, such as \(w\), \(b\), and intermediate nodes.
+
+5. *Chain Rule*:
+   - The derivative calculation relies on the chain rule of calculus, which allows breaking down complex derivatives into products of simpler derivatives.
+
+6. *Derivative Calculation Process*:
+   - The derivative of \(J\) with respect to intermediate nodes is calculated, then moved toward the final parameters.
+   - For instance, if \(c\) changes slightly, it is calculated how this affects the output \(J\), and the same is done with each parameter until the derivative of \(J\) with respect to \(w\) is obtained.
+
+7. *Backpropagation Results*:
+   - Derivatives of \(J\) with respect to parameters \(w\), \(b\), and other nodes are obtained, which help update the parameters in the optimization process (e.g., gradient descent).
+
+==== Video 3: Larger neural network example (Optional)
+1. *Backpropagation in Neural Networks*: The video explains how backpropagation works in a larger neural network. It uses a simple example with one hidden layer and one hidden unit producing output `a1`, which is fed into the output layer producing final prediction `a2`.
+
+2. *Cost Function*: The network uses the ReLU activation function (`g(z) = max(0, z)`) and the squared error cost function:
+   \($J(w, b) = \f{1}{2} (a^2 - y)^2$ \),
+   where `y = 5` is the target and `a2 = 7` is the predicted value.
+
+3. *Step-by-Step Calculation*:
+   - The intermediate calculations include multiplying weights with inputs, applying the ReLU function, and calculating the error.
+   - The final error \( J = 2 \) is obtained after calculating the squared difference between the prediction and target.
+
+4. *Graph of Calculation*: A computation graph is built to visually represent the steps involved in calculating the output, from the input `x = 1` to the output `a2 = 7`.
+
+5. *Backpropagation*: The backpropagation algorithm helps compute the gradients of the cost function with respect to each parameter (e.g., `w1`, `w2`, `b1`, `b2`) in a more efficient manner. This involves calculating the derivatives step by step.
+
+6. *Efficient Calculation*:
+   - Instead of manually changing one parameter at a time and observing how the cost changes, backpropagation computes all the derivatives efficiently using the chain rule.
+   - The derivatives of the cost with respect to parameters are calculated and used to adjust the weights and biases during training.
+
+7. *Real-World Application*:
+   - Backpropagation is used in modern machine learning frameworks like TensorFlow and PyTorch, which automatically compute the derivatives using a technique called autodiff (automatic differentiation).
+   - This makes the training of neural networks much more efficient and accessible compared to the manual differentiation methods used in the past.
+
+8. *Advances in Neural Networks*:
+   - The advent of autodiff and computational graphs has made implementing and training neural networks more straightforward.
+   - The complexity of the required calculations has decreased over time, making it easier for researchers and practitioners to train models.
+
