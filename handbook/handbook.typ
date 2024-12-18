@@ -1327,3 +1327,306 @@ By implementing regularized linear regression, you can improve model performance
 Regularized logistic regression is used to prevent overfitting by adding a regularization term to the cost function. This term penalizes the parameters \(w_1, w_2, ..., w_n\), preventing them from becoming excessively large and ensuring the model does not overfit the training data. The regularized cost function includes a term \(\lambda\) that penalizes the parameter values \(w\), while \(b\) remains unregularized.
 
 The implementation process is similar to that of regularized linear regression. Gradient descent is used to minimize this new cost function, and the parameter update rules for \(w_j\) are applied in a similar manner. As a result, the model becomes more generalizable, avoiding overfitting noisy features in the training data and enhancing its ability to generalize to unseen data. This approach is critical in real-world machine learning applications and a valuable skill for building robust models.
+
+= Class 2: Advanced Learning Algorithms
+
+== Week 1: Neural Networks
+
+=== Section 1: Neural Networks Intuition
+
+==== Video 2: Neurons and the Brain
+
+*Origins and Biological Inspiration*
+- Artificial neural networks were inspired by the human brain.
+- Initially based on simplified models of biological neurons:
+  - *Biological neurons*: Receive electrical impulses through dendrites, perform calculations, and send signals via axons.
+  - *Artificial neurons*: Take numerical inputs, perform mathematical calculations, and produce outputs.
+- Today, neural networks have little resemblance to the functioning of the human brain.
+
+*History and Resurgence*
+
+- Initial work: 1950s; gained popularity in the 80s and 90s for tasks like handwritten digit recognition.
+- Fell out of favor in the late 90s.
+- Resurgence since 2005, associated with deep learning, a trending term.
+- Neural networks have since revolutionized fields such as:
+  - Speech recognition.
+  - Computer vision (e.g., the "ImageNet moment" in 2012).
+  - Natural language processing (NLP).
+  - Applications in medical imaging, climate change, advertising, and more.
+
+#figure(
+  image("./images/C2_W1_S1_V2_Neural_Networks.png" )
+)
+
+*Key Factors Behind the Resurgence*
+
+1. *Availability of Digital Data*:
+   - Exponential increase in data due to digitalization.
+   - Digital records now include medical, transactional, and digital interaction data.
+2. *Limitations of Traditional Algorithms*:
+   - Algorithms like logistic regression did not scale well with large data volumes.
+3. *Advantages of Large Neural Networks*:
+   - Performance scales with more data and neurons.
+   - Effectively leverage "big data" for solving complex problems.
+4. *Advancements in Hardware*:
+   - GPUs optimized for deep learning, originally designed for graphics.
+
+#figure(
+  image("./images/C2_W1_S1_V2_Neural_Brains.png" )
+)
+
+ *Notes*
+- While neural networks began with a biological motivation, they now focus on engineering principles.
+- There is still much to learn about the human brain, but simplified neuron models are highly effective in practice.
+
+==== Video 3: Demand Prediction
+
+*1. Initial Example: Demand Prediction*
+- *Context:* Predicting whether a T-shirt will be a bestseller.
+- *Data:* Features such as price, shipping costs, marketing investments, and material quality.
+- *Practical Application:* Helps plan inventory and marketing campaigns for retailers.
+
+#figure(
+  image("./images/C2_W1_S1_V3_Demand_Prediction.png" )
+)
+
+*2. Concept of an Artificial Neuron*
+- *Simplified Model:*
+  - The artificial neuron is a simplified model of a biological neuron.
+  - Takes an input (e.g., price) and calculates an output using a formula, representing a probability.
+- *Terminology:*
+  - "A" or *activation*: Neuron output, representing energy or probability.
+- *Biological Relation:* Although much simpler, artificial neurons are effective in practice.
+
+*3. Building a Neural Network*
+- *Layers:*
+  - A group of connected neurons.
+  - *Input Layer:* Receives original features (price, shipping, marketing, material quality).
+  - *Hidden Layer:* Processes data to generate intermediate activations (affordability, awareness, perceived quality).
+  - *Output Layer:* Predicts the probability of success.
+- *Fully Connected:* Each neuron in a layer receives inputs from all outputs of the previous layer.
+
+#figure(
+  image("./images/C2_W1_S1_V3_Layers.png" )
+)
+
+*4. Detailed Example: Complex Prediction*
+- *Three Subproblems:*
+  - Estimating *affordability* based on price and shipping.
+  - Determining *awareness* using marketing investments.
+  - Evaluating *perceived quality* based on price and material quality.
+- *Integration:* These estimations are processed by a final neuron to predict success.
+
+#figure(
+  image("./images/C2_W1_S1_V3_Layers_multiple.png" )
+)
+
+*5. Simplification and Generalization*
+- *Vector Representation:*
+  - Inputs and outputs are grouped into vectors for implementation simplicity.
+- *Automated Calculations:*
+  - The network learns to prioritize relevant features without manual intervention.
+
+#figure(
+  image("./images/C2_W1_S1_V3_simplify_general.png" )
+)
+
+*6. Key Terminology*
+- *Input Layer:* Receives original data.
+- *Hidden Layer:* Processes intermediate data (activations).
+- *Output Layer:* Produces the final result.
+- *Activations:* Intermediate values representing the network's internal knowledge.
+
+#figure(
+  image("./images/C2_W1_S1_V3_multiple_hidden_layers.png" )
+)
+
+*7. Advantages of Neural Networks*
+- Transform initial features into more useful representations for prediction.
+- Learn complex relationships automatically.
+
+==== Video 4: Example: Recognizing Images
+*1. Image Representation*
+- Images are represented as *matrices* of pixel intensity values.
+- For example, a 1000x1000 pixel image generates a matrix of *1,000,000 values*(brightness intensity between 0 and 255).
+
+#figure(
+  image("./images/C2_W1_S1_V4_face_recognition.png" )
+)
+
+*2. Neural Network Structure*
+- The network takes a *vector* of pixel intensity values as input.
+- Includes multiple layers:
+  - *Hidden Layers:* Extract intermediate features.
+  - *Output Layer:* Predicts the identity of the person in the image.
+
+*3. Features Learned by Layers*
+- *First Hidden Layer:* Detects edges and simple lines.
+- *Second Hidden Layer:* Combines edges and lines to identify facial parts (eyes, nose, ears).
+- *Third Hidden Layer:* Assembles facial parts to recognize complete face shapes.
+- *Remark:* The network learns these features from data without explicit instruction.
+
+#figure(
+  image("./images/C2_W1_S1_V4_name_layers.png" )
+)
+
+*4. Generalization to Other Datasets*
+- With different data, the network learns specific features for other objects.
+  - Example: Trained on car images, it detects edges, car parts, and complete vehicle shapes.
+
+#figure(
+  image("./images/C2_W1_S1_V4_car_classification.png" )
+)
+
+*5. Importance and Applications*
+- Applicable to various computer vision tasks, including:
+  - *Facial recognition.*
+  - *Object detection.*
+  - *Pattern recognition (e.g., handwritten digits).*
+
+
+=== Section 3: Neural Network Model
+
+==== Video 1: Neural Network Layer
+
+1. *Neuron Layer*:
+   - Fundamental component of a modern neural network.
+   - Each layer receives inputs, performs calculations, and generates outputs passed to the next layer.
+
+2. *Neural Network Structure*:
+   - Example: A network with 4 input entities, one hidden layer with 3 neurons, and one output layer with a single neuron.
+   - Layers are numbered sequentially (input layer: 0, hidden layer: 1, output layer: 2).
+
+3. *Calculation in a Neuron*:
+   - Each neuron has parameters \( w \) (weights) and \( b \) (bias).
+   - Formula: \( $z = w \c x + b$ \), where \( x \) is the input vector.
+   - Activation \( a \) is computed using a sigmoid function: \( a = g(z) \), where \( $g(z) = \f{1}{1 + e^{-z}}$ \).
+
+4. *Notation for Layers and Parameters*:
+   - Superscripts (e.g., \[1\], \[2\]) indicate the corresponding layer.
+   - Example: \( w^{[1]} \) and \( b^{[1]} \) represent parameters of layer 1.
+
+5. *Hidden Layer Calculations*:
+   - Each neuron calculates \( $a_i = g(w_i \c x + b_i)$ \).
+   - Produces an activation vector \( $a^{[1]}$ \), used as input for the next layer.
+
+#figure(
+  image("./images/C2_W1_S3_V1_neural_network_layer.png" )
+)
+
+6. *Output Layer Calculations*:
+   - Receives the activation vector \( $a^{[1]}$ \) from the hidden layer.
+   - For a single neuron, produces a scalar \( $a^{[2]} = g(w \c a^{[1]} + b)$ \), representing a probability (e.g., \( 0.84 \)).
+
+#figure(
+  image("./images/C2_W1_S3_V1_end_layer.png" )
+)
+
+7. *Final Prediction*:
+   - In binary classification, apply a threshold (e.g., \( 0.5 \)):
+     - If \( $a^{[2]} \g 0.5$ \): prediction = 1.
+     - If \( $a^{[2]} < 0.5$ \): prediction = 0.
+
+#figure(
+  image("./images/C2_W1_S3_V1_final_prediction.png" )
+)
+
+8. *Building Larger Networks*:
+   - Networks are expanded by chaining multiple hidden layers.
+   - Each layer processes outputs of the previous layer, enabling more complex and precise models.
+
+9. *Practical Application*:
+   - This approach supports iterative computations from inputs to outputs in models requiring complex predictions.
+
+==== Video 2: More Complex Neural Networks
+
+1. *Neural Network Structure*:
+   - Composed of layers: input layer (layer 0), hidden layers (e.g., 1, 2, 3), and output layer.
+   - The input layer is typically not counted in the total number of layers.
+
+#figure(
+  image("./images/C2_W1_S3_V2_neural_network_structure.png" )
+)
+
+2. *Hidden Layer Calculation (Example: Layer 3)*:
+   - Receives an activation vector \( a^{[2]} \) from the previous layer.
+   - Produces a new activation vector \( a^{[3]} \).
+   - Each neuron computes:
+     \[
+     $a_j^{[3]} = g\l (w_j^{[3]} \c a^{[2]} + b_j^{[3]}\r)$
+     \]
+     Where:
+     - \( $w_j^{[3]}$ \): weights of neuron \( j \) in layer 3.
+     - \( $b_j^{[3]}$ \): bias of neuron \( j \) in layer 3.
+     - \( g \): activation function (e.g., sigmoid function).
+
+#figure(
+  image("./images/C2_W1_S3_V2_more_complex_neural.png" )
+)
+
+3. *Notation*:
+   - Superscripts (\([l]\)) indicate the layer.
+   - Subscripts (\(j\)) indicate the neuron within a layer.
+   - Input data \( X \) is often denoted as \( $a_0$ \).
+
+#figure(
+  image("./images/C2_W1_S3_V2_notation.png" )
+)
+
+4. *Activation Function*:
+   - The function \( g \), known as the activation function, determines activation values.
+   - Example: sigmoid function. Other functions will be explored later.
+
+5. *Inference Algorithm*:
+   - The network predicts values by sequentially calculating activations layer-by-layer using parameters \( w \) and \( b \) and activations from the previous layer.
+
+==== Video 3: Inference: Making Predictions (Forward Propagation)
+
+1. *Forward Propagation in Neural Networks*:
+   - An algorithm to perform predictions in a neural network.
+   - Example: handwritten digit recognition (binary classification: digits 0 and 1).
+
+2. *Motivating Example*:
+   - Input: 8x8 pixel grid (64 intensity values).
+   - Pixel intensity:
+     - 255: bright white.
+     - 0: black.
+     - Intermediate values: shades of gray.
+
+3. *Neural Network Structure*:
+   - Input: 64 features (pixel values).
+   - Hidden layers:
+     - First hidden layer: 25 neurons.
+     - Second hidden layer: 15 neurons.
+   - Output layer: 1 neuron (probability of digit being 1 or 0).
+
+#figure(
+  image("./images/C2_W1_S3_V3_handwritten_digit.png" )
+)
+
+4. *Calculation Sequence*:
+   - *First Hidden Layer*:
+     - Activation vector \( $a^{[1]}$ \) (25 values).
+   - *Second Hidden Layer*:
+     - Activation vector \( $a^{[2]}$ \) (15 values).
+   - *Output Layer*:
+     - Scalar \( $a^{[3]}$ \) for prediction.
+
+#figure(
+  image("./images/C2_W1_S3_V3_handwritten_digit_15.png" )
+)
+
+5. *Forward Propagation*:
+   - Sequential activation calculations from input to output.
+   - Represents the function \( f(x) \) computed by the network.
+
+6. *Comparison with Backpropagation*:
+   - Forward propagation: used for predictions.
+   - Backpropagation: used for training (learning parameters).
+
+#figure(
+  image("./images/C2_W1_S3_V3_propagation.png" )
+)
+
+7. *Designing Network Architectures*:
+   - Typical architecture: more units in initial hidden layers, fewer towards the output.
