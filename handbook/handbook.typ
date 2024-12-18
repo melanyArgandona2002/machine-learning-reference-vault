@@ -2255,3 +2255,121 @@ To address this type of problem, a generalization of the logistic regression alg
 4. *Confusion Between Multiclass Classification and Multi-label Classification*:
    - The differences between these two types of problems are highlighted, and the importance of choosing the appropriate approach for the application is emphasized.
    - In multi-label classification, several binary classification problems are solved in parallel (e.g., deciding if there is a car, bus, or pedestrian in the image).
+
+=== Section 7: Additional Neural Network Concepts
+==== Video 1: Advanced Optimization
+1. *Gradient Descent*: It is a widely used optimization algorithm in machine learning, fundamental for algorithms like linear and logistic regression, and neural networks.
+
+2. *Gradient Descent Problem*: Although useful, gradient descent can be slow. If the learning rate (Alpha) is small, the algorithm advances slowly. If it is too large, it may oscillate and not converge properly.
+
+3. *Adam Algorithm*: The Adam optimization algorithm improves gradient descent by automatically adjusting the learning rate for each parameter, helping it converge faster.
+
+4. *How Adam Works*: Adam increases the learning rate when the parameter moves in the same direction and decreases it when the parameter oscillates. This helps achieve a more stable path toward the cost function minimum.
+
+5. *Learning Rates per Parameter*: Adam uses a distinct learning rate for each parameter (w_1 to w_10, b), which improves performance by allowing specific adjustments for each parameter.
+
+6. *Practical Implementation of Adam*: The optimizer `tf.keras.optimizers.Adam` is used in model compilation in frameworks like TensorFlow. The initial learning rate is important and may require adjustments.
+
+7. *Advantages of Adam*: It is more robust than traditional gradient descent, as it automatically adjusts the learning rate. This makes it more efficient and suitable for practical neural networks.
+
+==== Video 2: Additional Layer Types
+*Notes on the text:*
+
+1. *Dense Neural Networks:*
+   - Until now, dense layers have been used, where each neuron receives inputs from all neurons in the previous layer.
+   - This type of layer is sufficient to create powerful learning algorithms.
+
+#figure(
+  image("./images/C02_W02_S05_V02_convulcional.png", width: 100%)
+)
+
+2. *Convolutional Layer:*
+   - In some applications, convolutional layers are used, which have different properties.
+   - In a convolutional layer, neurons do not see the entire input but only a small region (window) of the input image, speeding up the process and improving efficiency.
+   - Using this type of layer can reduce the need for large amounts of training data and make the network less prone to overfitting.
+
+3. *Advantages of Convolutional Layers:*
+   - They accelerate computation.
+   - They reduce the risk of overfitting.
+   - They are especially useful in processing images and signals, such as electrocardiogram (EKG) signals.
+
+4. *Practical Example of a Convolutional Layer:*
+   - An EKG signal, which is a time series of voltage values, is processed by a convolutional neural network.
+   - Each neuron in the hidden layer observes a limited window of the EKG signal, rather than the entire sequence.
+
+5. *Convolutional Neural Network Architecture:*
+   - The first hidden layer observes only a part of the input (windows).
+   - The next hidden layer is also convolutional and analyzes the activations of the previous layer in limited windows.
+   - The output layer could be a sigmoid layer that classifies the data (e.g., presence or absence of heart disease).
+
+6. *Considerations in Designing Convolutional Neural Networks:*
+   - There are different architectural parameters, such as the size of the window each neuron should observe and how many neurons should be present in each layer.
+   - Properly selecting these parameters can create more effective networks than dense layers in some applications.
+
+=== Section 9: Back Propagation (Optional)
+==== Video 1: What is a derivative? (Optional)
+- *Objective of Backpropagation*: In TensorFlow, the architecture of a neural network is specified to calculate the output as a function of the input and a cost function. TensorFlow uses backpropagation to compute derivatives and train parameters via gradient descent or Adam.
+
+- *Backpropagation and Calculation*: The backpropagation algorithm computes the derivatives of the cost function with respect to the parameters. In the example of a simplified cost function \(J(w) = w^2\), it illustrates how increasing a parameter \(w\) by a small amount (epsilon) changes \(J(w)\).
+
+- *Derivatives and Change Calculation*: If \(w\) increases by \(0.001\), it is observed that \(J(w)\) increases approximately six times that amount. In calculus, this is interpreted as the derivative of \(J(w)\) with respect to \(w\) being 6. This is repeated for other values of \(w\) and \(J(w)\), observing that the derivative depends on the value of \(w\).
+
+- *Concept of Derivative*: The derivative of a function shows how the function changes with respect to the parameters. The smaller the derivative, the smaller the change in the parameter. A large derivative suggests that small changes in the parameter have a significant effect on the cost function.
+
+- *Derivative Examples*: Derivatives for \(w^2\), \(w^3\), \(w\), and \(1/w\) are shown. The calculated derivatives help understand how a small change in \(w\) affects the cost function.
+
+- *Using SymPy in Python*: It is mentioned how to use the SymPy library to compute derivatives in Python. The example of the derivative of \($w^2$\) is given, showing that the derivative is \(2w\), and users are encouraged to perform these calculations with different functions.
+
+==== Video 2: Computation graph (Optional)
+1. *Computation Graph*: A computation graph is a representation of the operations performed in a neural network model. In this case, the graph describes how the output and the loss function (causing function) of a simple neural network are calculated.
+
+2. *Neural Network Example*:
+   - The network has a single layer (output layer) and a single output unit.
+   - It takes input \(x\), applies a linear activation function, and generates an output \(a = wx + b\), which is linear regression.
+   - The causing function \(J\) measures the error, calculated as \( \frac{1}{2}(a - y)^2 \), where \(y\) is the observed real value.
+
+3. *Calculating the Causing Function*:
+   - The calculations are broken down into small steps within the computation graph, such as multiplying the parameters \(w\) and \(x\), summing \(wx + b\), and finally calculating the loss \(J\).
+
+4. *Backpropagation*:
+   - *Calculating Derivatives*: The computation graph is used to calculate the derivatives of the loss function with respect to parameters \(w\) and \(b\).
+   - The backpropagation process goes from right to left (unlike forward propagation, which goes from left to right).
+   - It calculates how changes in each node of the network affect the final output \(J\). This includes derivatives of \(J\) with respect to different parameters, such as \(w\), \(b\), and intermediate nodes.
+
+5. *Chain Rule*:
+   - The derivative calculation relies on the chain rule of calculus, which allows breaking down complex derivatives into products of simpler derivatives.
+
+6. *Derivative Calculation Process*:
+   - The derivative of \(J\) with respect to intermediate nodes is calculated, then moved toward the final parameters.
+   - For instance, if \(c\) changes slightly, it is calculated how this affects the output \(J\), and the same is done with each parameter until the derivative of \(J\) with respect to \(w\) is obtained.
+
+7. *Backpropagation Results*:
+   - Derivatives of \(J\) with respect to parameters \(w\), \(b\), and other nodes are obtained, which help update the parameters in the optimization process (e.g., gradient descent).
+
+==== Video 3: Larger neural network example (Optional)
+1. *Backpropagation in Neural Networks*: The video explains how backpropagation works in a larger neural network. It uses a simple example with one hidden layer and one hidden unit producing output `a1`, which is fed into the output layer producing final prediction `a2`.
+
+2. *Cost Function*: The network uses the ReLU activation function (`g(z) = max(0, z)`) and the squared error cost function:
+   \($J(w, b) = \f{1}{2} (a^2 - y)^2$ \),
+   where `y = 5` is the target and `a2 = 7` is the predicted value.
+
+3. *Step-by-Step Calculation*:
+   - The intermediate calculations include multiplying weights with inputs, applying the ReLU function, and calculating the error.
+   - The final error \( J = 2 \) is obtained after calculating the squared difference between the prediction and target.
+
+4. *Graph of Calculation*: A computation graph is built to visually represent the steps involved in calculating the output, from the input `x = 1` to the output `a2 = 7`.
+
+5. *Backpropagation*: The backpropagation algorithm helps compute the gradients of the cost function with respect to each parameter (e.g., `w1`, `w2`, `b1`, `b2`) in a more efficient manner. This involves calculating the derivatives step by step.
+
+6. *Efficient Calculation*:
+   - Instead of manually changing one parameter at a time and observing how the cost changes, backpropagation computes all the derivatives efficiently using the chain rule.
+   - The derivatives of the cost with respect to parameters are calculated and used to adjust the weights and biases during training.
+
+7. *Real-World Application*:
+   - Backpropagation is used in modern machine learning frameworks like TensorFlow and PyTorch, which automatically compute the derivatives using a technique called autodiff (automatic differentiation).
+   - This makes the training of neural networks much more efficient and accessible compared to the manual differentiation methods used in the past.
+
+8. *Advances in Neural Networks*:
+   - The advent of autodiff and computational graphs has made implementing and training neural networks more straightforward.
+   - The complexity of the required calculations has decreased over time, making it easier for researchers and practitioners to train models.
+
