@@ -1803,8 +1803,6 @@ Representation of data in *NumPy* and *TensorFlow* to implement neural networks 
    - Although libraries like TensorFlow or PyTorch are commonly used, it is crucial to understand how they work internally to debug errors and improve performance.
    - Understanding how to implement forward propagation from scratch helps identify issues when things don't work as expected, allowing developers to fix bugs more quickly.
 
-
-
 *Section 9: Speculations on artificial general intelligence (AGI)*
 
 *Video 1: Is there a path to AGI?*
@@ -1905,8 +1903,6 @@ This vectorized approach is crucial for neural networks to handle large amounts 
 7. *Generalization:*
    - Matrix multiplication is a combination of dot products between vectors, organized in a specific way to construct the resulting matrix.
 
-
-
 ==== Video 3: Matrix multiplication rules
 
 1. *Matrix Multiplication:*
@@ -1957,3 +1953,305 @@ This vectorized approach is crucial for neural networks to handle large amounts 
 6. *Advantages of Vectorized Implementation:*
    - Using vectorized operations and efficient matrix multiplication (`matmul`) allows for neural network inference with fewer lines of code and takes advantage of the efficiency of modern computers.
 
+== Week 2: Neural Network Training
+
+== Section 1: Neural Network Training
+=== Video 1: TensorFlow Implementation
+==== *Model Architecture*
+- Input: Image (`X`).
+- Neural network with:
+  - First hidden layer: 25 units (sigmoid activation).
+  - Second hidden layer: 15 units.
+  - Output layer: 1 unit.
+- Goal: Train parameters using training examples (`X`, `Y`).
+
+==== *Steps to Train a Neural Network with TensorFlow*
+1. *Define the Model*:
+   - Specify the layers of the neural network sequentially.
+   - Reuse last week’s code to define the architecture.
+
+2. *Compile the Model*:
+   - Select the loss function:
+     - Binary cross-entropy in this case.
+   - TensorFlow will use this function to compute the cost.
+
+3. *Train the Model*:
+   - Call the `fit` function to adjust the model.
+   - Use the dataset (`X`, `Y`) and the specified loss function.
+   - *Epochs*:
+     - Indicate how many gradient descent steps are executed.
+
+==== *Importance of Conceptual Understanding*
+- Running the code isn’t enough; understanding how it works is essential.
+- A conceptual framework helps:
+  - Debug errors when the algorithm doesn’t work as expected.
+  - Understand what happens behind each line of code.
+
+=== Video 2: Training Details
+
+1. *Training Neural Networks*:
+   - Follows the same basic principles as training logistic regression.
+   - Three main steps:
+     1. Specify how to calculate the result based on input (`x`) and parameters (`W` and `b`).
+     2. Define the loss function and associated cost function.
+     3. Minimize the cost function using algorithms like gradient descent.
+
+2. *Logistic Regression*:
+   - Prediction uses a sigmoid function (`f(x)`).
+   - The loss function measures the difference between the prediction (`f(x)`) and the true label (`y`).
+   - The cost function (`J`) is the average loss over the entire training set.
+   - Gradient descent adjusts parameters (`W, b`) to minimize cost.
+
+3. *Neural Networks in TensorFlow*:
+   - Step 1: Specify the network architecture (layers, units, activation functions) through code.
+   - Step 2: Define the loss function (e.g., binary cross-entropy for classification).
+     - TensorFlow allows switching loss functions for different problems (e.g., mean squared error for regression).
+   - Step 3: Optimize the cost function with algorithms like gradient descent.
+     - TensorFlow uses backpropagation to compute necessary derivatives.
+
+4. *TensorFlow Features*:
+   - The `fit()` function encapsulates the training process, including backpropagation.
+   - Automatically adjusts parameters for a specific number of iterations (epochs).
+   - Supports multiple optimization algorithms faster than traditional gradient descent.
+
+5. *Technological Evolution*:
+   - Libraries like TensorFlow simplify complex tasks, enabling engineers to focus on high-level problems.
+   - Highlights how using mature libraries is a common trend in modern computing.
+
+== Section 3: Activation Functions
+
+=== Video 1: Alternatives to the Sigmoid Activation
+1. *Initial Use of Sigmoid Function*:
+   - Originally used in hidden and output layer nodes.
+   - Inspired by logistic regression, which uses similar functions.
+
+2. *Limitations of the Sigmoid Function*:
+   - Restricted to the range [0, 1], which can limit modeling certain phenomena.
+   - Example: Modeling consumer awareness might require extending to larger non-negative values.
+
+#figure(
+  image("./images/C02_W02_S03_V01_Demand_prediction.png" )
+)
+
+3. *Introduction to ReLU (Rectified Linear Unit)*:
+   - A common activation function in modern neural networks.
+   - Defined as \( g(z) = \max(0, z) \), allowing non-negative values and being 0 for negative values.
+   - Advantage: Can represent large values, useful for non-binary phenomena.
+
+4. *Alternative Activation Functions*:
+   - *Linear*: \( g(z) = z \), considered “no activation” in some contexts.
+   - *Softmax*: An important activation function discussed later in the course.
+
+5. *Choosing Activation Functions*:
+   - The choice depends on the context and purpose of the neural network.
+   - Commonly used functions: Sigmoid, ReLU, and linear.
+
+#figure(
+  image("./images/C02_W02_S03_V01_examples_of_activation_fuction.png" )
+)
+
+6. *Key Concepts*:
+   - Activation functions transform input values to improve learning and data representation.
+   - Names like ReLU reflect terminology adopted by their creators.
+
+=== Video 2: Choosing Activation Functions
+==== 1. *Output Layer*:
+   - The choice of activation depends on the problem type and target labels:
+     - *Binary Classification* (`y` = 0 or 1): Use *sigmoid*.
+       - Reason: Models the probability of `y = 1`, like logistic regression.
+     - *Regression with positive/negative values*: Use *linear*.
+       - Example: Predicting stock price changes.
+     - *Regression with non-negative values*: Use *ReLU*.
+       - Example: House price predictions, as prices cannot be negative.
+
+==== 2. *Hidden Layers*:
+   - *ReLU* is the default and most common choice.
+     - Advantages:
+       - Faster computation (only requires calculating the maximum between 0 and `z`).
+       - Reduces vanishing gradients, speeding up learning.
+     - Comparison to Sigmoid:
+       - Sigmoid has more flat regions in its graph, slowing learning with small gradients.
+
+==== 3. *Why Choose ReLU in Hidden Layers?*
+   - Flat gradient functions slow down gradient descent, affecting training time.
+   - ReLU avoids this, making neural networks more efficient.
+
+==== 4. *Other Activation Functions*:
+   - Less common alternatives:
+     - *TanH*: Similar to sigmoid but zero-centered.
+     - *LeakyReLU*: Variant of ReLU allowing small negative values.
+     - *Swish*, among others.
+   - These can be useful for specific cases, though ReLU suffices for most applications.
+
+==== 5. *Importance of Activation Functions*:
+   - Without activation functions, neural networks cannot model non-linear relationships.
+   - Activation functions enable the network to capture complex patterns in data.
+
+==== *Conclusion*:
+   - *Output Layer*: Choose activation based on problem type (sigmoid, linear, ReLU).
+   - *Hidden Layers*: Use ReLU by default.
+   - Explore other functions for specific cases or advanced research.
+
+=== Video 3: Why Do We Need Activation Functions?
+1. *Issue with Linear Activation Functions:*
+   - Using a linear activation function for all neurons reduces the network to simple linear regression.
+   - Limits the network's ability to learn complex functions.
+
+2. *Illustrative Example:*
+   - A network with one hidden and one output layer using linear activations:
+     - Final output expressed as \(a_2 = wx + b\), a linear function.
+     - Shows that multiple layers with linear activations add no extra complexity.
+
+#figure(
+  image("./images/C02_W02_S03_V03_linear_example.png" )
+)
+
+3. *General Implications:*
+   - A neural network with only linear activations is equivalent to a linear regression model.
+   - Adding a logistic activation in the output layer creates a logistic regression model.
+
+4. *General Rule:*
+   - Avoid linear activation functions in hidden layers.
+   - Use non-linear activations like ReLU to allow learning of complex relationships.
+
+#figure(
+  image("./images/C02_W02_S03_V03_example.png" )
+)
+
+5. *Discussed Applications:*
+   - Neural networks for binary classification (output \(y\) in {0, 1}).
+   - Regression problems (continuous positive/negative values).
+
+=== Section 5: Multiclass Classification
+
+==== Video 1: Multiclass
+
+1. *Clarity and Precision*:
+   - The introduction could be more direct in defining multiclass classification. For example: "Multiclass classification refers to problems where the output variable can take more than two distinct labels."
+   - It is recommended to split long ideas into shorter sentences for better understanding.
+
+2. *Consistent Terminology*:
+   - "and" is used several times to refer to the output, but it is not explained at the beginning of the text. It would be helpful to clarify this at the start: "and represents the output label or category."
+
+3. *Organization of Examples*:
+   - The examples are good but could be organized in a list for easier reading:
+     - Handwritten digit recognition (0 to 9).
+     - Classification of patients with multiple diseases.
+     - Visual inspection of manufacturing defects.
+
+4. *Avoid Redundancy*:
+   - The idea that multiclass classification problems have more than two categories is mentioned multiple times, which could be simplified.
+
+5. *Clear Technical Terms*:
+   - Briefly explain what "softmax regression" is and how it generalizes "logistic regression" before mentioning them.
+
+6. *Transition Between Ideas*:
+   - Transitions between examples and technical explanations could be smoother. For example: "Now let’s look at how this problem is addressed through specific algorithms like logistic regression and its extension, softmax regression."
+
+=== Improved Text Example:
+
+Multiclass classification refers to classification problems where the output variable can take more than two possible labels, rather than just two categories like 0 and 1. For example:
+
+- In handwritten digit recognition, we might want to distinguish between the ten digits (0-9).
+- Diagnosing patients may require identifying if they have one of three or five possible diseases.
+- In visual inspection of manufactured products, like tablets, we might classify defects into categories such as scratches, discoloration, or chips.
+
+Unlike binary classification problems, where we estimate the probability of the output being one of two possible labels (e.g., 0 or 1), in multiclass classification we aim to estimate the probability that it belongs to each of the multiple possible classes. For example, if there are four classes, the model estimates the probabilities that the output label is equal to 1, 2, 3, or 4.
+
+To address this type of problem, a generalization of the logistic regression algorithm, known as softmax regression, is used. This method not only adjusts decision boundaries for two categories but also divides the space into as many regions as there are classes. Additionally, this approach can be integrated with neural networks to solve complex multiclass classification problems.
+
+==== Video 2: Softmax
+
+1. *Basic Definition*:
+   - Softmax regression is a generalization of logistic regression for multiclass classification problems.
+   - While logistic regression works with two possible values (0 and 1), softmax regression is used when there are multiple possible classes (e.g., 1, 2, 3, 4, etc.).
+
+2. *Logistic Regression Functioning*:
+   - \( $z = w \cdot x + b$ \), where \( w \) are the weights, \( x \) the features, and \( b \) the bias.
+   - The sigmoid function \( g(z) \) is then applied to obtain the probability that \( y = 1 \), with \( $P(y = 0) = 1 - P(y = 1$) \).
+
+3. *Extension to Softmax Regression*:
+   - Calculates \( z_j = w_j \cdot x + b_j \) for each class \( j \).
+   - The probability of each class \( a_j \) is estimated using the formula:
+     \[
+     $a_j = \f{e^{z_j}}{\s{k=1}^n e^{z_k}}$
+     \]
+     where \( n \) is the total number of classes.
+
+4. *Important Properties*:
+   - The estimated probabilities (\( a_1, a_2, \ldots, a_n \)) always sum to 1.
+   - For two classes (\( n = 2 \)), softmax regression reduces to logistic regression.
+
+5. *Loss Function*:
+   - The loss for a specific class \( y = j \) is defined as:
+     \[
+     \t{Loss} = -\log(a_j)
+     \]
+   - This encourages the model to maximize the probability \( a_j \) for the correct class, minimizing the loss.
+   - The global cost function is the average of individual losses in the training set.
+
+6. *Loss Visualization*:
+   - If \( a_j \) approaches 1 (high confidence in the correct class), the loss is small.
+   - If \( a_j \) is low, the loss increases significantly.
+
+7. *Practical Application*:
+   - Softmax regression enables building algorithms for multiclass classification.
+   - This model can be trained as a foundation for more advanced neural networks.
+
+8. *Quick Test*:
+   - If the estimated probabilities for three classes are \( a_1 = 0.30 \), \( a_2 = 0.20 \), \( a_3 = 0.15 \), then \( a_4 = 1 - (0.30 + 0.20 + 0.15) = 0.35 \).
+
+==== Video 3: Neural Network with Softmax Output
+
+1. *Softmax Model*: For multiclass classification, the softmax regression model is used in the output layer of a neural network. This allows the network to classify between several possible classes, like digits 0 to 9.
+
+2. *Softmax Output Layer*: The output layer has 10 units for the 10 possible classes. The formula is used to calculate the activations for each output unit (a1, a2, ..., a10) based on inputs (Z1, Z2, ..., Z10).
+
+3. *Probability Calculation*: For each class, the activation of the output layer (a1, a2, ..., a10) is calculated using the softmax formula, providing probability estimates for each output label.
+
+4. *Properties of Softmax*: Unlike other activation functions, the softmax function considers all classes simultaneously. For instance, the activation a1 depends on Z1, Z2, ..., Z10, unlike functions like sigmoid or linear, where each activation only depends on its respective input.
+
+5. *Implementation in TensorFlow*: The implementation in TensorFlow involves creating a neural network with three layers. The output layer uses the softmax activation function. The recommended loss function is `SparseCategoricalCrossEntropy`, which is suitable for multiclass classification problems.
+
+6. *Loss Function*: `SparseCategoricalCrossEntropy` is used because it is a classification in categories (1 through 10), and "sparse" means each input can belong to only one category.
+
+==== Video 4: Improved Implementation of Softmax
+
+1. *Numerical Rounding Issue in Calculations*:
+   - The video discusses how to calculate \( $x = \f{2}{10000}$ \) in two ways: directly and through a more complex expression. The difference in results is due to rounding errors caused by the finite precision of computers when storing floating-point numbers.
+
+2. *Impact of Rounding Errors in TensorFlow*:
+   - Rounding errors can affect the performance of calculations in TensorFlow. Although the cost function for softmax is correctly implemented, it can be improved to reduce these errors, leading to more precise calculations.
+
+3. *Optimization in Logistic Regression*:
+   - In logistic regression, the terms in the loss function are rearranged to improve numerical accuracy. This avoids explicitly calculating certain intermediate values, which can introduce rounding errors.
+
+4. *Applying Ideas in Softmax*:
+   - The same principles of numerical accuracy are applied to the softmax implementation. Instead of calculating activations and losses in separate steps, TensorFlow can rearrange the terms in the loss to calculate it more accurately, especially when handling very small or very large values.
+
+5. *Using the Linear Activation Function*:
+   - To improve numerical accuracy, the activation in the final layer of the neural network is changed from softmax to a linear activation. This also affects how the output of the network is calculated, mapping values from \( z_1 \) to \( $z_{10}$ \).
+
+6. *Implementation in Code*:
+   - The recommended code for a more precise implementation of the softmax loss function is harder to read but improves numerical accuracy by avoiding the use of intermediate logistic functions. The `from_logits=True` parameter is used in TensorFlow to handle this.
+
+7. *Multiclass Classification*:
+   - It explains how to perform multiclass classification with a softmax output layer in a numerically stable way.
+
+==== Video 5: Classification with Multiple Outputs (Optional)
+
+1. *Multiclass Classification vs. Multi-label Classification*:
+   - *Multiclass Classification*: Each input has a single output label, which can be one of several possible categories (e.g., handwritten digit classification).
+   - *Multi-label Classification*: Each input can be associated with multiple labels, meaning multiple categories can appear simultaneously (e.g., in an autonomous vehicle, detecting cars, buses, or pedestrians).
+
+2. *Practical Example*:
+   - In a driver assistance system, questions could be asked about the categories present in an image of the vehicle's surroundings, like "Is there a car?" or "Is there a pedestrian?"
+   - The answers would be multiple possible labels associated with an image, such as a vector: [Car: Yes, Bus: No, Pedestrian: Yes].
+
+3. *Building a Neural Network for Multi-label Classification*:
+   - One approach is to create independent neural networks for each category (e.g., one for cars, one for buses, and one for pedestrians).
+   - Alternatively, a single neural network can be trained to simultaneously detect all labels. This is achieved with a neural network architecture that has an output layer with multiple neurons (one for each class), each using a sigmoid activation function to predict the presence of each category.
+
+4. *Confusion Between Multiclass Classification and Multi-label Classification*:
+   - The differences between these two types of problems are highlighted, and the importance of choosing the appropriate approach for the application is emphasized.
+   - In multi-label classification, several binary classification problems are solved in parallel (e.g., deciding if there is a car, bus, or pedestrian in the image).
