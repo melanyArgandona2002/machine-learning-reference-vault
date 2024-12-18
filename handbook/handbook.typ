@@ -1580,53 +1580,380 @@ The implementation process is similar to that of regularized linear regression. 
 5. *Inference Algorithm*:
    - The network predicts values by sequentially calculating activations layer-by-layer using parameters \( w \) and \( b \) and activations from the previous layer.
 
-==== Video 3: Inference: Making Predictions (Forward Propagation)
+Here’s the translated text for Section 5 in English:
 
-1. *Forward Propagation in Neural Networks*:
-   - An algorithm to perform predictions in a neural network.
-   - Example: handwritten digit recognition (binary classification: digits 0 and 1).
+=== Section 5: TensorFlow Implementation
+==== Video 1: Inference in Code
 
-2. *Motivating Example*:
-   - Input: 8x8 pixel grid (64 intensity values).
-   - Pixel intensity:
-     - 255: bright white.
-     - 0: black.
-     - Intermediate values: shades of gray.
+1. *Introduction to TensorFlow*
+   - TensorFlow is one of the leading frameworks for implementing deep learning algorithms, often used in projects.
 
-3. *Neural Network Structure*:
-   - Input: 64 features (pixel values).
-   - Hidden layers:
-     - First hidden layer: 25 neurons.
-     - Second hidden layer: 15 neurons.
-   - Output layer: 1 neuron (probability of digit being 1 or 0).
+2. *Illustrative Example: Coffee Roasting*
+   - A coffee roasting example is used to illustrate how a neural network makes inferences.
+   - The controlled parameters are:
+     - *Temperature*: The degrees Celsius to which the beans are heated.
+     - *Duration*: The time the beans are roasted.
+   - A good roast is represented with binary labels:
+     - *1*: Good tasting coffee.
+     - *0*: Bad tasting coffee.
 
-#figure(
-  image("./images/C2_W1_S3_V3_handwritten_digit.png" )
-)
+Image: C01_W02_S05_V01_Coffe_example.png
 
-4. *Calculation Sequence*:
-   - *First Hidden Layer*:
-     - Activation vector \( $a^{[1]}$ \) (25 values).
-   - *Second Hidden Layer*:
-     - Activation vector \( $a^{[2]}$ \) (15 values).
-   - *Output Layer*:
-     - Scalar \( $a^{[3]}$ \) for prediction.
+3. *Dataset Features*
+   - Low temperature or insufficient time: Undercooked beans.
+   - High temperature or excessive time: Burnt beans.
+   - Only certain combinations of temperature and duration produce good coffee.
 
 #figure(
-  image("./images/C2_W1_S3_V3_handwritten_digit_15.png" )
+  image("./images/C01_W02_S05_V01_Coffe_build_model.png" )
 )
 
-5. *Forward Propagation*:
-   - Sequential activation calculations from input to output.
-   - Represents the function \( f(x) \) computed by the network.
+4. *Inference in a Neural Network with TensorFlow*
+   - *Input*: Vector `x` with temperature and duration (e.g., `[200, 17]` for 200°C and 17 minutes).
+   - *Layer 1*:
+     - Type: Dense (3 hidden units).
+     - Activation: Sigmoid function.
+     - Output: Activation `a1` (e.g., `[0.2, 0.7, 0.3]`).
+   - *Layer 2*:
+     - Type: Dense (1 unit).
+     - Activation: Sigmoid function.
+     - Output: Activation `a2` (e.g., `0.8`).
+   - *Prediction (`ŷ`)*:
+     - Threshold: `0.5`.
+     - If `a2 ≥ 0.5`, the prediction is `1` (positive roast). If not, it's `0` (negative roast).
 
-6. *Comparison with Backpropagation*:
-   - Forward propagation: used for predictions.
-   - Backpropagation: used for training (learning parameters).
+5. *Key Steps for Inference*
+   - Create the layers with the necessary specifications (type and activation function).
+   - Apply forward propagation:
+     - Calculate activations (`a1`, `a2`, etc.).
+   - Compare the final result with a threshold to make the prediction.
+
+6. *dditional Details*
+   - Use of the TensorFlow library to load parameters (`w` and `b`).
+   - Practical lab examples to explore these details.
 
 #figure(
-  image("./images/C2_W1_S3_V3_propagation.png" )
+  image("./images/C01_W02_S05_V01_model_for_digit.png" )
 )
 
-7. *Designing Network Architectures*:
-   - Typical architecture: more units in initial hidden layers, fewer towards the output.
+7. *Additional Example: Handwritten Digit Classification*
+   - Input `x`: List of pixel intensity values (numeric matrix).
+   - Neural Network:
+     - *Layer 1*: Dense (25 units, sigmoid function).
+     - *Layer 2*: Dense (10 units, sigmoid function).
+     - *Layer 3*: Dense (1 unit, sigmoid function).
+   - Inference similar to the coffee example:
+     - Forward propagation through multiple layers.
+     - Compare the final output with the threshold.
+
+8. *Matrix Structure in TensorFlow*
+   - TensorFlow handles data as numerical matrices (tensors).
+   - It is essential to understand how data is structured and processed in TensorFlow.
+
+==== Video 2: Data in TensorFlow
+
+*Main Topic*
+Representation of data in *NumPy* and *TensorFlow* to implement neural networks within a coherent framework.
+
+*Key Points*
+ *Introduction*
+- *NumPy*: The standard library for linear algebra in Python, created years ago.
+- *TensorFlow*: Created by Google Brain, designed to handle large datasets.
+- Differences in representation conventions between *NumPy* and *TensorFlow*.
+
+#figure(
+  image("./images/C01_W02_S05_V02_feature_vectors.png" )
+)
+
+*Data Representation in TensorFlow and NumPy*
+ *Matrices in NumPy*
+1. *Matrix Definition and Example*:
+   - *Dimensions*: Number of rows x number of columns.
+   - Example:
+     - `2 x 3`: Two rows, three columns.
+     - Code: `x = np.array([[1, 2, 3], [4, 5, 6]])`.
+
+2. *Matrices with Different Dimensions*:
+   - `4 x 2`: Four rows, two columns.
+   - Code: `x = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])`.
+
+3. *Row and Column Vectors*:
+   - *1 x 2*: One row, two columns.
+     - Example: `x = np.array([[200, 17]])`.
+   - *2 x 1*: Two rows, one column.
+     - Example: `x = np.array([[200], [17]])`.
+
+4. *1D Vectors*:
+   - Simplified representation (without rows or columns): `x = np.array([200, 17])`.
+   - Contrast with 2D matrices.
+
+*Matrices and Tensors in TensorFlow*
+1. *Tensors*:
+   - The internal data representation in TensorFlow for computational efficiency.
+   - Example: A `1 x 3` tensor with values `[0.2, 0.7, 0.3]`.
+     - Code: `tf.constant([[0.2, 0.7, 0.3]])`.
+
+2. *Conversion Between TensorFlow and NumPy*:
+   - From tensor to NumPy array: `a1.numpy()`.
+   - Example: `a2.numpy()` converts a `1 x 1` tensor into a NumPy array.
+
+*Code Examples*
+1. *Layer 1: Activations*:
+   - Code: `a1 = layer_1(x)`.
+   - Result: `1 x 3` tensor.
+
+2. *Layer 2: Activations*:
+   - Code: `a2 = layer_2(a1)`.
+   - Result: `1 x 1` tensor.
+
+*Final Reflection*
+- TensorFlow automatically converts NumPy matrices to tensors.
+- Conversions between tensors and matrices are common but add complexity.
+- Despite the differences, both libraries work well together.
+
+==== Video 3: Building a neural network
+1. *Manual Network Building*:
+   - In previous methods, layers were created and connected manually, passing input data through each layer.
+
+2. *Using the Sequential Model*:
+   - TensorFlow provides the sequential model to simplify the process.
+   - This method automatically connects layers to form a neural network.
+   - Example:
+
+     ```python
+     from tensorflow.keras.models import Sequential
+     from tensorflow.keras.layers import Dense
+
+     model = Sequential([
+         Dense(3, activation='sigmoid'),
+         Dense(1, activation='sigmoid')
+     ])
+     ```
+
+3. *Training the Network*:
+   - Training data is structured as matrices (X for features and Y for labels).
+   - Training:
+     ```python
+     model.compile(optimizer='adam', loss='binary_crossentropy')
+     model.fit(X, Y)
+     ```
+
+4. *Predictions with the Model*:
+   - Use the trained model for inference:
+     ```python
+     predictions = model.predict(X_new)
+     ```
+
+5. *Common Conventions*:
+   - Instead of assigning layers to separate variables, they are typically defined directly within the sequential model.
+   - This results in more compact and readable code.
+
+6. *Example Implementations*:
+   - Coffee example: Classifying data using a simple two-layer dense model.
+   - Digit classification example: Similar to the coffee example, but with multiple layers.
+
+7. *Importance of Understanding the Basics*:
+   - Although libraries like TensorFlow simplify development, it is crucial to understand how the underlying algorithms work.
+   - You will learn to implement forward propagation from scratch in Python for a deeper understanding.
+
+8. *Balancing Efficiency and Knowledge*:
+   - Modern libraries allow you to create advanced neural networks with just a few lines of code.
+   - However, it is essential to know the details to diagnose problems and understand what happens behind the scenes.
+
+=== Section 7: Neural network implementation in Python
+
+==== Video 1: Forward prop in a single layer
+
+1. *Activation calculation of the first layer*:
+   - Start with an input vector `x` and implement forward propagation to obtain the activation `a2` in a simple neural network.
+   - Subscript notation is used to indicate different parameter values (e.g., `w2_1` and `b2_1`).
+   - The first value to calculate is the activation `a1_1`, which is obtained by calculating `z1_1` as the dot product between `w1_1` and `x`, adding the bias `b1_1`, and applying the sigmoid function.
+
+2. *Calculation of other activations of the first layer*:
+   - Repeat the process to calculate `a1_2` and `a1_3`, using parameters `w1_2` and `b1_2`, and then applying the sigmoid function.
+   - The results of the three activations (`a1_1`, `a1_2`, `a1_3`) are grouped into a matrix `a1`.
+
+3. *Forward propagation of the second layer*:
+   - The output `a2` is calculated using the parameters of the second layer, `w2_1` and `b2_1`.
+   - Calculate `z2_1` as the dot product between `w2_1` and `a1`, add the bias `b2_1`, and then apply the sigmoid function to obtain `a2_1`.
+
+4. *Implementation with NumPy*:
+   - The entire forward propagation process is implemented using Python and NumPy (`np`).
+
+*Video 2: General implementation of forward propagation*
+
+1. *Implementation of the dense layer*:
+   - Introduce the `dense` function, which takes the activation of the previous layer (`a`), and the parameters of the current layer (`w` and `b`) as inputs.
+   - In the example, we work with three neurons in layer 1. The parameters `w_1, w_2, w_3` are stacked into a 2x3 matrix, where each column represents the weights corresponding to each neuron.
+   - Similarly, the bias terms (`b`) are stacked into a 1D matrix.
+
+2. *Activation calculation*:
+   - The `dense` function generates activations for the current layer. It uses a loop to calculate the activation value `a` for each unit (neuron) using the standard formula: \( z = W \cdot a + b \), followed by the sigmoid function \( a = g(z) \).
+   - This process is repeated for each neuron in the layer.
+
+3. *Code for the `dense` function*:
+   - The code shows how to extract columns from the matrix `W` and how to use the dot product with the activation from the previous layer. Then, biases are added and the sigmoid function is applied to obtain the activation.
+
+4. *Layer composition*:
+   - Explanation of how to combine multiple dense layers sequentially to implement a forward propagation system in a neural network.
+   - From the input features `x`, the activation of the first layer \( a_1 \) is calculated, then the second layer \( a_2 \), and so on until the final output \( a_4 \) in a network with four layers.
+   - Standard algebraic notation is used: matrices `W` are denoted with uppercase letters and vectors with lowercase letters.
+
+5. *Importance of understanding the low-level process*:
+   - Although libraries like TensorFlow or PyTorch are commonly used, it is crucial to understand how they work internally to debug errors and improve performance.
+   - Understanding how to implement forward propagation from scratch helps identify issues when things don't work as expected, allowing developers to fix bugs more quickly.
+
+
+
+*Section 9: Speculations on artificial general intelligence (AGI)*
+
+*Video 1: Is there a path to AGI?*
+
+1. *Distinction between ANI and AGI*:
+   - *ANI (Artificial Narrow Intelligence)*:
+     - Refers to systems that perform specific tasks with great efficiency (e.g., virtual assistants, autonomous cars, search engines, applications in agriculture, factories, etc.).
+     - Advances in ANI have generated significant value in today's society.
+   - *AGI (Artificial General Intelligence)*:
+     - The goal is to create AI systems that can perform any task that a typical human can do.
+     - While ANI has made great strides, AGI has not made significant progress in practice.
+
+2. *The myth of AI progress towards AGI*:
+   - The relationship between ANI progress and AGI is not direct. Progress in ANI does not automatically imply advances in AGI.
+   - The rise of modern deep learning has led some to believe that simulating many neurons could replicate human intelligence, but this idea has proven to be overly simplistic.
+
+3. *Difficulties in attempting to simulate the human brain*:
+   - *Simplicity of artificial neural networks*: Artificial neural networks are much simpler than biological neurons and do not accurately simulate the behavior of the human brain.
+   - *Lack of understanding of the brain*: We still do not fully understand how the brain works, which makes simulating it in a machine an extremely difficult task.
+
+4. *Experiments on brain plasticity*:
+   - *Experiments showing the adaptability of the brain*:
+     - Animal experiments show that areas of the brain, such as the auditory cortex or somatosensory cortex, can learn to process different types of data (e.g., images instead of sounds).
+     - The brain is highly adaptable, suggesting that there could be basic learning algorithms responsible for this plasticity.
+     - Examples include using sensors or devices (e.g., cameras mounted on the forehead) that teach people to "see" with different parts of the body, such as the tongue.
+     - *Human echolocation*: Echolocation experiments have been conducted where humans learn to use sound to "see" in a manner similar to bats or dolphins.
+     - *Haptic belt*: Research has shown that it is possible to teach humans to "feel" direction using devices such as vibrating belts.
+   - The brain's plasticity suggests that a single learning algorithm might be able to process different types of sensory inputs.
+
+5. *Hope of replicating the brain with algorithms*:
+   - If the brain can learn to perform complex tasks (e.g., seeing, hearing, feeling) with different types of data, perhaps there is an underlying algorithm that we can discover and implement in a machine.
+   - Despite progress, the narrator is doubtful that we will ever discover that algorithm and truly replicate the human brain.
+
+6. *Long-term perspective on AGI*:
+   - Working on AGI remains one of the most fascinating problems in science and engineering.
+   - While there is hope that a path to AGI will one day be discovered, the narrator emphasizes that progress will be extremely difficult.
+   - It should not be exaggerated that AGI advancements are near, as we do not fully understand how the human brain works or how to replicate it.
+
+7. *The value of machine learning and neural networks*:
+   - While AGI is still a distant goal, neural networks and machine learning are already powerful tools in current applications.
+
+=== Section 10: Vectorization (optional)
+
+==== Video 1: How neural networks are implemented efficiently
+*Notes on the vectorized implementation of neural networks:*
+
+1. *Reason for the scalability of neural networks:*
+   - Neural networks can be vectorized, allowing for efficient implementation through matrix multiplications.
+   - Parallel computing hardware, such as GPUs and certain CPU functions, excels at performing large matrix multiplications, which has been key to the success and scalability of deep learning.
+
+2. *Implementation of Forward Propagation in a single layer:*
+   - The code shown is a basic implementation of forward propagation in a single layer of a neural network, where:
+     - *X* is the input,
+     - *W* are the neuron weights,
+     - *B* is the bias.
+   - This implementation generates three output numbers by applying the neural network formula.
+
+3. *Vectorized implementation:*
+   - Instead of using a `for` loop to process each neuron separately, the process is vectorized, allowing operations to be performed in parallel.
+   - *X* is defined as a 2D matrix, just like *W* (the weights), and *B* is also converted into a 2D matrix of size 1x3.
+   - Matrix multiplication is performed using `np.matmul`, which is how NumPy performs matrix multiplication.
+   - The simplified code is reduced to a few lines:
+     - *Z* is calculated as the product of the matrices *X* and *W*.
+     - *B* is added to *Z*.
+     - Then, the activation function *g* (sigmoid) is applied to *Z* to obtain *A*, which is the output of the layer.
+
+4. *Advantages of the vectorized implementation:*
+   - The vectorized implementation is more efficient and faster as it avoids iterative loops and allows parallel computation of operations.
+   - The input and output, as well as the parameters *W* and *B*, are now 2D matrices, making forward propagation in a single layer easier.
+
+This vectorized approach is crucial for neural networks to handle large amounts of data and scale efficiently.
+
+==== Video 2: Matrix multiplication
+
+1. *Matrices and Dot Product:*
+   - A matrix is a block or 2D array of numbers.
+   - The dot product between two vectors is calculated by multiplying corresponding elements and summing the results. Example with vectors (1, 2) and (3, 4): \(1 \times 3 + 2 \times 4 = 11\).
+
+2. *Dot Product and Transposition:*
+   - The dot product between two vectors can also be written as the transposition of one vector multiplied by another vector. The transposition of a vector changes its orientation from column to row.
+
+3. *Multiplying a Vector by a Matrix:*
+   - A vector can be multiplied by a matrix, and the result is a new matrix.
+   - Example: The vector (1, 2) multiplied by the matrix \( \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix} \) results in the vector \( (11, 17) \), calculated by performing the dot product between the transposed vector and the columns of the matrix.
+
+4. *Matrix Multiplication:*
+   - Matrix multiplication involves dot products between vectors, but organized in a structured way to form the elements of the resulting matrix.
+   - Example: If A is a matrix with columns \( a_1 \) and \( a_2 \), and W is a matrix, matrix multiplication is calculated by multiplying the rows of \( A^T \) (the transposition of A) with the columns of W.
+
+5. *Matrix Transposition:*
+   - To transpose a matrix, its rows and columns are swapped. This changes the columns of A into the rows of \( A^T \).
+   - Example: The matrix \( A = \begin{pmatrix} 1 & 2 \\ -1 & -2 \end{pmatrix} \) becomes \( A^T = \begin{pmatrix} 1 & -1 \\ 2 & -2 \end{pmatrix} \).
+
+6. *Multiplying \( A^T \) and W:*
+   - The multiplication of \( A^T \) by W is performed in the same way as the dot product, but with the rows of \( A^T \) and the columns of W.
+   - Results from the example: The first element is \( 1 \times 3 + 2 \times 4 = 11 \), the second is \( 1 \times 5 + 2 \times 6 = 17 \), the third is \( -1 \times 3 + -2 \times 4 = -11 \), and the last is \( -1 \times 5 + -2 \times 6 = -17 \).
+
+7. *Generalization:*
+   - Matrix multiplication is a combination of dot products between vectors, organized in a specific way to construct the resulting matrix.
+
+
+
+==== Video 3: Matrix multiplication rules
+
+1. *Matrix Multiplication:*
+   - Matrix A is of size 2x3 (two rows and three columns).
+   - The transposition of matrix A is applied, turning its columns into rows.
+   - Matrix W has four columns and is considered as vectors w1, w2, w3, w4.
+
+2. *Calculating the Product between Matrices:*
+   - To calculate the multiplication between the transposition of A and W, the dot product is performed between the rows of the transposition of A and the columns of W.
+   - Each element of the resulting matrix Z is obtained by multiplying a row of the transposed A by a column of W.
+
+3. *Examples of Calculations:*
+   - Specific examples are given on how to calculate values in the matrix Z using dot products, such as the value in row 1, column 1 of Z being the result of the dot product between the first row of A transposed and the first column of W.
+   - Other examples are analyzed, like the calculation for row 3, column 2, and row 2, column 3.
+
+4. *Matrix Multiplication Requirements:*
+   - Matrix multiplication is only valid if the number of columns of the first matrix (A transposed) is equal to the number of rows of the second matrix (W).
+   - The dimensions of the resulting matrix Z will be the rows of the first transposed matrix (3) and the columns of the second matrix (4).
+
+5. *Matrix Multiplication Properties:*
+   - The matrix product results in a matrix of dimensions determined by the rows of the transposed matrix and the columns of the multiplying matrix.
+
+6. *Application in Vectorized Neural Networks:*
+   - The vectorized implementation of neural networks is based on these matrix multiplication principles.
+   - Vectorization greatly improves the execution speed of neural networks.
+
+==== Video 4: Matrix multiplication code
+
+1. *Initial Concepts:*
+   - Matrix multiplication is analyzed, specifically the transposition of matrix A and its multiplication by matrix W to obtain Z.
+   - In code, the transposition of A is performed with `A.T` or `A.transpose()`, and matrix multiplication with `np.matmul(AT, W)`.
+
+2. *Calculations with Matrices:*
+   - Matrix W is formed with the weights `w_1`, `w_2`, `w_3`, and matrix B with the biases `b_1`, `b_2`, `b_3`.
+   - The calculation of Z as `Z = A.T @ W + B` gives the results 165, -531, and 900, corresponding to the weights of the feature inputs.
+
+3. *Sigmoid Function:*
+   - The sigmoid function is applied to the values of Z to obtain the output values, A, which are [1, 0, 1] after rounding.
+
+4. *Implementation in Code:*
+   - The transposition of A and multiplication with W and B are implemented as `Z = np.matmul(A.T, W) + B`.
+   - The final output of the layer is obtained by applying the activation function `g` to Z: `a_out = g(Z)`.
+
+5. *TensorFlow Conventions:*
+   - In TensorFlow, it is common for individual examples to be in rows of matrix X, rather than transposing X.
+   - This implementation variation is mentioned as a convention, but both forms are correct.
+
+6. *Advantages of Vectorized Implementation:*
+   - Using vectorized operations and efficient matrix multiplication (`matmul`) allows for neural network inference with fewer lines of code and takes advantage of the efficiency of modern computers.
+
